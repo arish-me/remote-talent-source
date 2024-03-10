@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :additional_information, only: [:index, :create, :show]
+  resources :employees
+  post 'additional_information/:id', to: 'additional_information#create', as: 'additional_information'
+  put 'additional_information/:id', to: 'additional_information#create', as: 'additional_information_put'
+  get 'additional_information/:id', to: 'additional_information#show', as: 'additional_information_new'
+
   get 'dashboard', to: 'dashboard#index', as: 'dashboard'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -11,13 +15,5 @@ Rails.application.routes.draw do
     get '/confirmation_sent', to: 'users/confirmations#confirmation_sent', as: 'confirmation_sent'
   end
   root 'home#index'
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get 'up' => 'rails/health#show', as: :rails_health_check
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

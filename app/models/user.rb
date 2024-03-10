@@ -9,7 +9,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :timeoutable, :confirmable, :trackable, :lockable
 
-  enum role: [:user, :employee, :company, :admin]
+  enum role: %i[user employee company admin]
 
   aasm column: 'current_state' do
     state :pending, initial: true
@@ -17,7 +17,7 @@ class User < ApplicationRecord
     state :inactive
 
     event :activate do
-      transitions from: [:pending, :inactive], to: :active
+      transitions from: %i[pending inactive], to: :active
     end
 
     event :deactivate do
