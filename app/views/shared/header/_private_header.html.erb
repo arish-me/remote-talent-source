@@ -1,3 +1,4 @@
+<%if current_user.active?%>
 <%= render partial: 'shared/navs/private_nav'%>
 <div id="layoutSidenav">
    <%= render partial: 'shared/navs/sidenav'%>
@@ -9,6 +10,10 @@
         </main>
     </div>
 </div>
+<%else%>
+ <%= render partial: 'shared/header/inactive_header'%>
+ <%= yield%>
+<%end%>
 
 
 

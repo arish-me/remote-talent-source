@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :additional_information, only: [:index, :create, :show]
   get 'dashboard', to: 'dashboard#index', as: 'dashboard'
   devise_for :users, controllers: {
     registrations: 'users/registrations',

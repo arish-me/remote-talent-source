@@ -2,6 +2,7 @@
 
 module Users
   class RegistrationsController < Devise::RegistrationsController
+    before_action :configure_permitted_parameters
     # POST /resource
     def create
       build_resource(sign_up_params)
@@ -26,8 +27,9 @@ module Users
       end
     end
 
-    def after_sign_up_path_for(_resource)
-      confirmation_sent_path
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:role])
     end
 
     def after_inactive_sign_up_path_for(_resource)
