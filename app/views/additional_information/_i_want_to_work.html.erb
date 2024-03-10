@@ -1,36 +1,41 @@
 <div class="card py-3 mt-5">
-    <div class="card-body">
-      <h5 class="card-title">Looking for work?</h5>
-      <p class="card-text">You need to provide some information, that will help us to find better opportunity for you, by clicking continue you are agree to provide information.</p>
+  <div class="card-body">
+    <h5 class="card-title">Looking for work?</h5>
+    <p class="card-text">
+      You need to provide some information, that will help us to find better
+      opportunity for you, by clicking continue you are agree to provide
+      information.
+    </p>
 
-      <%= form_for(@employee, url: additional_information_path, method: :post) do |f|%>
-      <%= render "shared/error_messages", resource: @employee %>
-        <div class="row gy-3 gy-md-4 ">
-          <div class="col-12">
-            <%= f.label :first_name, class: 'form-label' do %>
-              First Name <span class="text-danger">*</span>
-            <% end %>
-            <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: 'form-control' %>
-          </div>
+    <%= form_for(@employee, url: employee_tab_path(id: current_user.id), method:
+    :post) do |f|%> <%= render "shared/error_messages", resource: @employee %>
+    <div class="row gy-3 gy-md-4">
+      <div class="col-12">
 
-          <div class="col-12">
-            <%= f.label :last_name, class: 'form-label' do %>
-              Last Name <span class="text-danger">*</span>
-            <% end %>
-            <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: 'form-control' %>
-          </div>
+        <%= f.label :first_name, class: 'form-label' do %> First Name
+        <span class="text-danger">*</span>
+        <% end %> <%= f.text_field :first_name, autofocus: true, autocomplete:
+        "first_name", class: 'form-control' %>
+      </div>
 
-          <div class="col-12">
-            <%= f.label :primary_role_id, class: 'form-label' do %>
-              Primary Role <span class="text-danger">*</span>
-            <% end %>
-             <%= f.collection_select :primary_role_id, PrimaryRole.all, :id, :name, { prompt: 'Select a role' }, class: 'form-control' %>
-          </div>
-          <div class="col-12">
-          <div class="d-grid">
-              <%= f.submit "Continue", class: 'btn btn-primary btn-md' %>
-          </div>
+      <div class="col-12">
+        <%= f.label :last_name, class: 'form-label' do %> Last Name
+        <span class="text-danger">*</span>
+        <% end %> <%= f.text_field :last_name, autofocus: true, autocomplete:
+        "last_name", class: 'form-control' %>
+      </div>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <div class="col-12">
+        <%= f.label :primary_role_id, class: 'form-label' do %> Primary Role
+        <span class="text-danger">*</span>
+        <% end %> <%= f.collection_select :primary_role_id, PrimaryRole.all,
+        :id, :name, { prompt: 'Select a role' }, class: 'form-control' %>
+      </div>
+      <div class="col-12">
+        <div class="d-grid">
+          <%= f.submit "Continue", class: 'btn btn-primary btn-md' %>
         </div>
+      </div>
       <%end%>
     </div>
   </div>

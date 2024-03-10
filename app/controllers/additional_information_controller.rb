@@ -1,30 +1,53 @@
 # frozen_string_literal: true
 
 class AdditionalInformationController < ApplicationController
-  def index; end
+  before_action :find_user
 
-  def create
-    @employee = Employee.new(employee_params)
-    respond_to do |format|
-      if @employee.save
-        format.html { redirect_to thank_you_path, notice: 'Thanks! Check your email to confirm your account.' }
-        format.json { render :i_want_to_work, status: :created, location: @employee }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
+  def company
+    if request.method == 'POST'
+      @company = Company.new(company_params)
+      respond_to do |format|
+        if @company.save
+          format.html { redirect_to dashboard_path, notice: 'You are all please complete your profile!' }
+          format.json { render :i_want_to_work, status: :created, location: @company }
+        else
+          format.html { render :company, status: :unprocessable_entity }
+          format.json { render json: @company.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      @company = Company.new
     end
   end
 
-  def new
-    @employee = Employee.new
+  def employee
+    if request.method == 'POST'
+      @employee = Employee.new(employee_params)
+      respond_to do |format|
+        if @employee.save
+          format.html { redirect_to dashboard_path, notice: 'You are all please complete your profile!' }
+          format.json { render :i_want_to_work, status: :created, location: @employee }
+        else
+          format.html { render :employee, status: :unprocessable_entity }
+          format.json { render json: @employee.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      @employee = Employee.new
+    end
   end
 
-  def show
-    @employee = Employee.new
-  end
+  private
 
   def employee_params
-    params.require(:employee).permit(:first_name, :last_name, :primary_role_id)
+    params.require(:employee).permit(:first_name, :last_name, :primary_role_id, :user_id)
+  end
+
+  def company_params
+    params.require(:company).permit(:name, :website, :company_email, :phone, :size, :industry, :user_id)
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end

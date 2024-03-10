@@ -1,19 +1,10 @@
-<%if current_user.active?%>
-<%= render partial: 'shared/navs/private_nav'%>
+<%if current_user.active?%> <%= render partial: 'shared/navs/private_nav'%>
 <div id="layoutSidenav">
-   <%= render partial: 'shared/navs/sidenav'%>
-    <div id="layoutSidenav_content">
-        <main>
-            <div class="container-fluid px-4">
-                <%= yield %>
-            </div>
-        </main>
-    </div>
+  <%= render partial: 'shared/navs/sidenav'%>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4"><%= yield %></div>
+    </main>
+  </div>
 </div>
-<%else%>
- <%= render partial: 'shared/header/inactive_header'%>
-
-<%end%>
-
-
-
+<%else%> <%= render partial: 'shared/header/inactive_header'%> <%end%>

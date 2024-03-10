@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :companies
   resources :employees
-  post 'additional_information/:id', to: 'additional_information#create', as: 'additional_information'
-  put 'additional_information/:id', to: 'additional_information#create', as: 'additional_information_put'
-  get 'additional_information/:id', to: 'additional_information#show', as: 'additional_information_new'
+
+  get 'additional_information/:id/company', to: 'additional_information#company'
+  get 'additional_information/:id/employee', to: 'additional_information#employee'
+  post 'additional_information/:id/employee', to: 'additional_information#employee', as: 'employee_tab'
+  post 'additional_information/:id/company', to: 'additional_information#company', as: 'company_tab'
 
   get 'dashboard', to: 'dashboard#index', as: 'dashboard'
   devise_for :users, controllers: {

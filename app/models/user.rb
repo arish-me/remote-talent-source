@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   enum role: %i[user employee company admin]
 
+  has_one :employee, dependent: :destroy
+
   aasm column: 'current_state' do
     state :pending, initial: true
     state :active
