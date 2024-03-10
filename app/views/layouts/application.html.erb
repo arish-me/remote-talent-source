@@ -8,10 +8,11 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
   </head>
 
-  <body>
-    <%= render partial: 'shared/header' %>
-    <%= yield %>
+  <body class="sb-nav-fixed">
+    <%= render partial: 'shared/header/header' %>
   </body>
 </html>
