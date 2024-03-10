@@ -1,10 +1,12 @@
-<h1>Editing employee</h1>
+<%if current_user.employee?%>
+<%= render "employee_profile", employee: @employee %>
+<%else%>
+  <%= render "form", employee: @employee %>
 
-<%= render "form", employee: @employee %>
+  <br>
 
-<br>
-
-<div>
-  <%= link_to "Show this employee", @employee %> |
-  <%= link_to "Back to employees", employees_path %>
-</div>
+  <div>
+    <%= link_to "Show this employee", @employee %> |
+    <%= link_to "Back to employees", employees_path %>
+  </div>
+<%end%>

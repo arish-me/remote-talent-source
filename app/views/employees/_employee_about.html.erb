@@ -1,0 +1,34 @@
+<div class="row gy-2 gy-md-2">
+  <div class="mb-3">
+    <%= form.label :first_name, class: 'form-label' do %> First Name
+    <span class="text-danger">*</span>
+    <% end %> <%= form.text_field :first_name, autofocus: true, autocomplete:
+    "first_name",class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :last_name, class: 'form-label' do %> Last Name
+    <span class="text-danger">*</span>
+    <% end %> <%= form.text_field :last_name, autofocus: true, autocomplete:
+    "first_name",class: 'form-control' %>
+  </div>
+  <div class="row">
+  <div class="col-md-6 mb-3">
+    <%= form.label :primary_role_id, class: 'form-label' do %>
+      Primary Role <span class="text-danger">*</span>
+    <% end %>
+    <%= form.collection_select :primary_role_id, PrimaryRole.all, :id, :name, { prompt: 'Select a role' }, class: 'form-control' %>
+  </div>
+
+  <div class="col-md-6 mb-3">
+    <%= form.label :experience, class: 'form-label' %>
+    <%= form.select :experience, Employee::EXPERIENCE.map.with_index { |exp, index| [exp.humanize, index] }, {}, class: 'form-control' %>
+  </div>
+</div>
+
+
+
+  <div class="mb-3">
+    <%= form.label :bio, class: 'form-label' do %>Bio <% end %> <%=
+    form.text_area :bio, class: 'form-control', maxlength: 200, rows: 5 %>
+  </div>
+</div>

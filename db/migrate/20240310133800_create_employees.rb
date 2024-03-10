@@ -5,6 +5,8 @@ class CreateEmployees < ActiveRecord::Migration[7.1]
     create_table :employees, id: :uuid do |t|
       t.string :first_name
       t.string :last_name
+      t.string :experience
+      t.text :bio
       t.references :primary_role, null: false, foreign_key: true, type: :uuid
       t.references :user, null: false, foreign_key: true, type: :uuid
 

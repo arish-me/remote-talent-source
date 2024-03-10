@@ -38,8 +38,9 @@ class EmployeesController < ApplicationController
   def update
     respond_to do |format|
       if @employee.update(employee_params)
-        format.html { redirect_to employee_url(@employee), notice: 'Employee was successfully updated.' }
-        format.json { render :show, status: :ok, location: @employee }
+        format.html { redirect_to edit_employee_path(@employee), notice: 'Profile was successfully updated.' }
+        #format.html { render :edit, status: :ok, notice: 'Employee was successfully updated.' }
+        format.json { render :edit, status: :ok, location: @employee }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @employee.errors, status: :unprocessable_entity }
@@ -66,6 +67,6 @@ class EmployeesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def employee_params
-    params.require(:employee).permit(:first_name, :last_name, :primary_role_id)
+    params.require(:employee).permit(:first_name, :last_name, :primary_role_id, :experience, :bio)
   end
 end
