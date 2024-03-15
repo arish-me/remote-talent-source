@@ -16,7 +16,9 @@
     <%= form.label :primary_role_id, class: 'form-label' do %>
       Primary Role <span class="text-danger">*</span>
     <% end %>
-    <%= form.collection_select :primary_role_id, PrimaryRole.all, :id, :name, { prompt: 'Select a role' }, class: 'form-control' %>
+
+    <%= form.select :experience, PrimaryRole.all.map { |role| [role.name.titleize, role.id] }, {}, class: 'form-control' %>
+
   </div>
 
   <div class="col-md-6 mb-3">
@@ -24,11 +26,8 @@
     <%= form.select :experience, Employee::EXPERIENCE.map.with_index { |exp, index| [exp.humanize, index] }, {}, class: 'form-control' %>
   </div>
 </div>
-
-
-
   <div class="mb-3">
     <%= form.label :bio, class: 'form-label' do %>Bio <% end %> <%=
-    form.text_area :bio, class: 'form-control', maxlength: 200, rows: 5 %>
+    form.text_area :bio, class: 'form-control', maxlength: 200, rows: 15 %>
   </div>
 </div>

@@ -2,96 +2,101 @@
 <ol class="breadcrumb mb-4">
   <li class="breadcrumb-item active">Profile</li>
 </ol>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link"
+              id="simple-tab-0"
+              data-bs-toggle="tab"
+              href="#simple-tabpanel-0"
+              role="tab"
+              aria-controls="simple-tabpanel-0"
+              aria-selected="true"
+              >Overview</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link active"
+              id="simple-tab-1"
+              data-bs-toggle="tab"
+              href="#simple-tabpanel-1"
+              role="tab"
+              aria-controls="simple-tabpanel-1"
+              aria-selected="false"
+              >Profile</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link"
+              id="simple-tab-2"
+              data-bs-toggle="tab"
+              href="#simple-tabpanel-2"
+              role="tab"
+              aria-controls="simple-tabpanel-2"
+              aria-selected="false"
+              >Specialties</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link"
+              id="simple-tab-2"
+              data-bs-toggle="tab"
+              href="#simple-tabpanel-2"
+              role="tab"
+              aria-controls="simple-tabpanel-2"
+              aria-selected="false"
+              >Work preferences</a
+            >
+          </li>
 
-<div class="container-fluid">
-  <ul class="nav nav-pills nav-justified">
-    <li class="nav-item" role="presentation">
-      <a
-        class="nav-link active"
-        id="simple-tab-0"
-        data-bs-toggle="tab"
-        href="#simple-tabpanel-0"
-        role="tab"
-        aria-controls="simple-tabpanel-0"
-        aria-selected="true"
-        >Overview</a
-      >
-    </li>
-    <li class="nav-item" role="presentation">
-      <a
-        class="nav-link"
-        id="simple-tab-1"
-        data-bs-toggle="tab"
-        href="#simple-tabpanel-1"
-        role="tab"
-        aria-controls="simple-tabpanel-1"
-        aria-selected="false"
-        >Profile</a
-      >
-    </li>
-    <li class="nav-item" role="presentation">
-      <a
-        class="nav-link"
-        id="simple-tab-2"
-        data-bs-toggle="tab"
-        href="#simple-tabpanel-2"
-        role="tab"
-        aria-controls="simple-tabpanel-2"
-        aria-selected="false"
-        >Resume</a
-      >
-    </li>
-    <li class="nav-item" role="presentation">
-      <a
-        class="nav-link"
-        id="simple-tab-2"
-        data-bs-toggle="tab"
-        href="#simple-tabpanel-2"
-        role="tab"
-        aria-controls="simple-tabpanel-2"
-        aria-selected="false"
-        >Preferences</a
-      >
-    </li>
-
-    <li class="nav-item" role="presentation">
-      <a
-        class="nav-link"
-        id="simple-tab-2"
-        data-bs-toggle="tab"
-        href="#simple-tabpanel-2"
-        role="tab"
-        aria-controls="simple-tabpanel-2"
-        aria-selected="false"
-        >Culture</a
-      >
-    </li>
-  </ul>
-
-  <div class="tab-content pt-5" id="tab-content">
-    <div
-      class="tab-pane active"
-      id="simple-tabpanel-0"
-      role="tabpanel"
-      aria-labelledby="simple-tab-0"
-    >
-      <%= render "profile_form", employee: @employee %>
-    </div>
-    <div
-      class="tab-pane"
-      id="simple-tabpanel-1"
-      role="tabpanel"
-      aria-labelledby="simple-tab-1"
-    >
-      Tab 2 selected
-    </div>
-    <div
-      class="tab-pane"
-      id="simple-tabpanel-2"
-      role="tabpanel"
-      aria-labelledby="simple-tab-2"
-    >
-      Tab 3 selected
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link"
+              id="simple-tab-2"
+              data-bs-toggle="tab"
+              href="#simple-tabpanel-2"
+              role="tab"
+              aria-controls="simple-tabpanel-2"
+              aria-selected="false"
+              >Social Profile</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="card-body tab-content" id="tab-content">
+        <div
+          class="tab-pane"
+          id="simple-tabpanel-0"
+          role="tabpanel"
+          aria-labelledby="simple-tab-0"
+        >
+         Overview Tab
+        </div>
+        <div
+          class="tab-pane active"
+          id="simple-tabpanel-1"
+          role="tabpanel"
+          aria-labelledby="simple-tab-1"
+        >
+          <%= render "profile_form", employee: @employee %>
+        </div>
+        <div
+          class="tab-pane"
+          id="simple-tabpanel-2"
+          role="tabpanel"
+          aria-labelledby="simple-tab-2"
+        >
+          Tab 3 selected
+        </div>
+      </div>
     </div>
   </div>
 </div>
