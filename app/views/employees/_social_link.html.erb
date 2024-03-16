@@ -5,26 +5,28 @@
   </div>
 
   <div class="col-md-8 my-2">
+    <div class="row gy-2 gy-md-2">
     <%= form.fields_for :social_link do |social_link_form| %>
-      <div class="form-group">
-        <%= social_link_form.label :website %>
+      <div class="mb-3">
+        <%= social_link_form.label :website, class: 'form-label' %>
         <%= social_link_form.text_field :website, class: "form-control" %>
       </div>
 
-      <div class="form-group">
-        <%= social_link_form.label :linkedin %>
+      <div class="mb-3">
+        <%= social_link_form.label :linkedin, class: 'form-label' %>
         <%= social_link_form.text_field :linkedin, class: "form-control" %>
       </div>
 
-      <div class="form-group">
-        <%= social_link_form.label :github %>
+      <div class="mb-3">
+        <%= social_link_form.label :github, class: 'form-label' %>
         <%= social_link_form.text_field :github, class: "form-control" %>
       </div>
 
-      <div class="form-group">
-        <%= social_link_form.label :twitter %>
+      <div class="mb-3">
+        <%= social_link_form.label :twitter, class: 'form-label' %>
         <%= social_link_form.text_field :twitter, class: "form-control" %>
       </div>
     <% end %>
+  </div>
   </div>
 </div>
