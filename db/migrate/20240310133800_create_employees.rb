@@ -6,6 +6,7 @@ class CreateEmployees < ActiveRecord::Migration[7.1]
       t.string :first_name
       t.string :last_name
       t.string :experience
+      t.integer :search_status, default: 0
       t.text :bio
       t.references :primary_role, null: false, foreign_key: true, type: :uuid
       t.references :user, null: false, foreign_key: true, type: :uuid

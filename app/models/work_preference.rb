@@ -1,0 +1,2 @@
+class WorkPreference < ApplicationRecord
+end

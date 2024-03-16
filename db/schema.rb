@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_15_152112) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_16_101249) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -28,10 +28,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_152112) do
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
+  create_table "employee_levels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "employee_id", null: false
+    t.uuid "role_level_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_employee_levels_on_employee_id"
+    t.index ["role_level_id"], name: "index_employee_levels_on_role_level_id"
+  end
+
+  create_table "employee_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "employee_id", null: false
+    t.uuid "role_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_employee_roles_on_employee_id"
+    t.index ["role_type_id"], name: "index_employee_roles_on_role_type_id"
+  end
+
   create_table "employees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "experience"
+    t.integer "search_status", default: 0
     t.text "bio"
     t.uuid "primary_role_id", null: false
     t.uuid "user_id", null: false
@@ -52,6 +71,31 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_152112) do
 
   create_table "primary_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "role_levels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "role_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "social_links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "website"
+    t.string "linkedin"
+    t.string "github"
+    t.string "twitter"
+    t.string "gitlab"
+    t.string "stackoverflow"
+    t.integer "source_id", null: false
+    t.string "source_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -83,6 +127,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_152112) do
   end
 
   add_foreign_key "companies", "users"
+  add_foreign_key "employee_levels", "employees"
+  add_foreign_key "employee_levels", "role_levels"
+  add_foreign_key "employee_roles", "employees"
+  add_foreign_key "employee_roles", "role_types"
   add_foreign_key "employees", "primary_roles"
   add_foreign_key "employees", "users"
   add_foreign_key "open_roles", "employees"
