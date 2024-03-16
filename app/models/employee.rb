@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class Employee < ApplicationRecord
+  include Avatarable
   validates_length_of :first_name, :last_name, in: 3..30
+
+  validates_length_of :heading, in: 3..30, on: :update
 
   after_create :update_role
   after_create :activate_user
@@ -16,6 +19,7 @@ class Employee < ApplicationRecord
   has_many :role_level, through: :employee_levels
 
   has_one :social_link, as: :source
+
 
   accepts_nested_attributes_for :open_roles, allow_destroy: true, update_only: true
   accepts_nested_attributes_for :employee_roles, allow_destroy: true, update_only: true

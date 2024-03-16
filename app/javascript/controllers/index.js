@@ -6,3 +6,6 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import FileUploadController from "./file_upload_controller.js"
+application.register("file-upload", FileUploadController)
