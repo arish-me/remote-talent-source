@@ -1,0 +1,45 @@
+<ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link  <%= current_tab == 'overview' ? 'active' : '' %>"
+      id="simple-tab-0"
+      data-bs-toggle="tab"
+      href="#simple-tabpanel-0"
+      role="tab"
+      aria-controls="simple-tabpanel-0"
+      aria-selected="true"
+      >Overview</a
+    >
+  </li>
+  <li class="nav-item" role="presentation">
+    <%= link_to "Profile", edit_employee_path(employee), class: "nav-link #{current_tab == 'profile' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item" role="presentation">
+    <%= link_to "Specialities", employee_specialities_path(employee), class: "nav-link #{current_tab == 'specialities' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link  <%= current_tab == 'work_preferences' ? 'active' : '' %>"
+      id="simple-tab-2"
+      data-bs-toggle="tab"
+      href="#simple-tabpanel-2"
+      role="tab"
+      aria-controls="simple-tabpanel-2"
+      aria-selected="false"
+      >Work preferences</a
+    >
+  </li>
+
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link  <%= current_tab == 'social_profile' ? 'active' : '' %>"
+      id="simple-tab-2"
+      data-bs-toggle="tab"
+      href="#simple-tabpanel-2"
+      role="tab"
+      aria-controls="simple-tabpanel-2"
+      aria-selected="false"
+      >Social Profile</a
+    >
+  </li>
+</ul>

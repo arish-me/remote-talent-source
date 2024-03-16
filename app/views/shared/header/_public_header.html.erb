@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container-fluid">
+        <a href="<%=root_path%>" class='navbar-brand py-2'>
+      <span>
+         <%=image_tag 'logo.png', width: '50px'%>
+      </span>
+      Remote Talent Sourcing
+    </a>
+
+    <!-- Navigation Links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center gap-3">
+        <li class="nav-item">
+          <%=link_to 'Blogs', root_path, class: "p-2 text-dark nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%=link_to 'Services', root_path, class: "p-2 text-dark nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%=link_to 'Our Work', root_path, class: "p-2 text-dark nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%=link_to 'Clients', root_path, class: "p-2 text-dark nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%=link_to 'Careers', root_path, class: "p-2 text-dark nav-link"%>
+        </li>
+        <li class="nav-item">
+          <%=link_to 'Contact', root_path, class: "p-2 text-dark nav-link"%>
+        </li>
+      </ul>
+
+      <!-- Login and Signup Buttons -->
+      <div class="d-flex">
+        <% if user_signed_in? %>
+          <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-danger me-2" %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "btn btn-outline-dark me-2" %>
+          <%= link_to "Signup", new_user_registration_path, class: "btn btn-darl" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<%= yield %>

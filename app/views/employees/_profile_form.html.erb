@@ -1,0 +1,16 @@
+<%= render "shared/messages", object: employee %>
+<div class="row">
+    <div class="col-md-4">
+        <h5>About</h5>
+        <p class="text-muted small">Tell us about yourself so startups know who you are.</p>
+    </div>
+
+    <div class="col-md-8 my-2">
+        <%= form_for employee, :url => {:action => "show"} do |form| %>
+        <%= render partial: 'employee_about', locals: { form: form, employee: employee } %>
+        <div class="form-group d-flex justify-content-start">
+            <%= form.submit "Update Profile", class: 'btn btn-block btn-md btn-dark' %>
+        </div>
+        <% end %>
+    </div>
+</div>

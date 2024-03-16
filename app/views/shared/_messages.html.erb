@@ -1,0 +1,15 @@
+<% if !object.nil? &&  object.errors.any? %>
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+      <% object.errors.full_messages.each do |msg| %>
+        <%= content_tag :li, msg, :id => "error_#{msg}" if msg.is_a?(String) %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if flash.notice.present? %>
+  <div class="alert alert-success" role="alert">
+    <%=flash.notice%>
+  </div>
+<%end%>
