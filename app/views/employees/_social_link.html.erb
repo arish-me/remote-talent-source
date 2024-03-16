@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-4">
+      <h5>Social Profiles</h5>
+      <p class="text-muted small">Where can people learn more about you and your work?</p>
+  </div>
+
+  <div class="col-md-8 my-2">
+    <div class="row gy-2 gy-md-2">
+    <%= form.fields_for :social_link do |social_link_form| %>
+      <div class="mb-3">
+        <%= social_link_form.label :website, class: 'form-label' %>
+        <%= social_link_form.text_field :website, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= social_link_form.label :linkedin, class: 'form-label' %>
+        <%= social_link_form.text_field :linkedin, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= social_link_form.label :github, class: 'form-label' %>
+        <%= social_link_form.text_field :github, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= social_link_form.label :twitter, class: 'form-label' %>
+        <%= social_link_form.text_field :twitter, class: "form-control" %>
+      </div>
+    <% end %>
+  </div>
+  </div>
+</div>

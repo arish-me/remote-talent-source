@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-4">
+      <h5>Work preferences</h5>
+      <p class="text-muted small">What kind of work are you looking for next?</p>
+  </div>
+
+  <div class="col-md-8 my-2">
+    <div class="mb-3">
+      <%= form.label :search_status, class: 'form-label' do %> Search Status
+      <% end %>
+      <%= form.select :search_status, Employee.search_statuses.keys.map { |status| [status.titleize, status] }, { include_blank: '--Select Search Status---' }, class: 'form-control' %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.fields_for :employee_roles do |role_types_fields| %>
+        <%= role_types_fields.label :role_type, class: 'form-label' do %>
+          Role type
+        <% end %>
+        <%= role_types_fields.collection_select :role_type_id, RoleType.all, :id, :name, {}, { class: 'form-control' } %>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.fields_for :employee_levels do |role_types_fields| %>
+        <%= role_types_fields.label :role_level, class: 'form-label' do %>
+          Role type
+        <% end %>
+        <%= role_types_fields.collection_select :role_level_id, RoleLevel.all, :id, :name, {}, { class: 'form-control' } %>
+      <% end %>
+    </div>
+  </div>
+</div>

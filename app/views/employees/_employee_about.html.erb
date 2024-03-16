@@ -1,4 +1,33 @@
+<div class="row">
+  <div class="col-md-4">
+      <h5>About</h5>
+        <p class="text-muted small">Tell us about yourself so startups know who you are.</p>
+  </div>
+<div class="col-md-8 my-2">
 <div class="row gy-2 gy-md-2">
+  <div class="row">
+        <div class="container" data-controller="file-upload" data-file-upload-visibility-class="d-none" data-file-upload-loading-class="opacity-50">
+          <div class="d-flex align-items-center">
+            <div class="position-relative">
+              <%= render AvatarComponent.new(avatarable: employee, variant: :medium, data: { "file-upload-target": "image" }) %>
+              <div data-file-upload-target="activity" class="d-none position-absolute top-50 start-50 translate-middle">
+                <%= inline_svg_tag "icons/outline/refresh.svg", class: "w-8 h-8 text-gray-900 animate-reverse-spin", title: t(".loading") %>
+              </div>
+            </div>
+            <%= form.hidden_field :avatar, value: form.object.avatar.signed_id, id: "employee_avatar_hidden" if form.object.avatar.attached? %>
+            <%= form.file_field :avatar, direct_upload: true, accept: "image/png, image/jpg, image/jpeg", data: { action: "file-upload#select direct-upload:initialize->file-upload#start direct-upload:error->file-upload#error" }, class: "d-none" %>
+            <%= form.label :avatar, employee.avatar.attached? ? t(".change_photo") : t("upload_photo")  , class: "btn btn-sm btn-outline-dark form-label" %>
+          </div>
+
+
+          <div data-file-upload-target="error" class="d-none bg-red-50 border-start border-4 border-red-400 p-4 mt-4">
+            <div class="ms-3">
+              <p class="text-sm text-red-700"><%= t(".something_went_wrong") %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
   <div class="mb-3">
     <%= form.label :first_name, class: 'form-label' do %> First Name
     <span class="text-danger">*</span>
@@ -10,6 +39,14 @@
     <span class="text-danger">*</span>
     <% end %> <%= form.text_field :last_name, autofocus: true, autocomplete:
     "first_name",class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :heading, class: 'form-label' do %> Profile heading
+      <span class="text-danger">*</span>
+    <% end %>
+     <%= form.text_field :heading, autocomplete: "first_name",class: 'form-control' %>
+     <em>Summarize yourself as a developer in a few words.</em>
   </div>
   <div class="row">
   <div class="col-md-6 mb-3">
@@ -26,14 +63,10 @@
   <div class="mb-3">
       <%= form.fields_for :open_roles do |open_role_fields| %>
       <%= form.label :open_roles, class: 'form-label' do %> Open to following roles
-
     <% end %>
       <%= open_role_fields.collection_select :primary_role_id, PrimaryRole.all, :id, :name, {}, { class: 'form-control' } %>
 
     <% end %>
   </div>
-  <div class="mb-3">
-    <%= form.label :bio, class: 'form-label' do %>Bio <% end %> <%=
-    form.text_area :bio, class: 'form-control', maxlength: 200, rows: 15 %>
-  </div>
 </div>
+</div></div>
