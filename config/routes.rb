@@ -2,7 +2,9 @@
 
 Rails.application.routes.draw do
   resources :companies
-  resources :employees
+  resources :employees do
+    resources :specialities
+  end
 
   get 'additional_information/:id/company', to: 'additional_information#company'
   get 'additional_information/:id/employee', to: 'additional_information#employee'

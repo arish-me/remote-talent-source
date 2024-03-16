@@ -16,16 +16,22 @@
     <%= form.label :primary_role_id, class: 'form-label' do %>
       Primary Role <span class="text-danger">*</span>
     <% end %>
-
-    <%= form.select :experience, PrimaryRole.all.map { |role| [role.name.titleize, role.id] }, {}, class: 'form-control' %>
-
+    <%= form.select :primary_role_id, PrimaryRole.all.map { |role| [role.name.titleize, role.id] }, {}, class: 'form-control' %>
   </div>
-
   <div class="col-md-6 mb-3">
     <%= form.label :experience, class: 'form-label' %>
     <%= form.select :experience, Employee::EXPERIENCE.map.with_index { |exp, index| [exp.humanize, index] }, {}, class: 'form-control' %>
   </div>
 </div>
+  <div class="mb-3">
+      <%= form.fields_for :open_roles do |open_role_fields| %>
+      <%= form.label :open_roles, class: 'form-label' do %> Open to following roles
+
+    <% end %>
+      <%= open_role_fields.collection_select :primary_role_id, PrimaryRole.all, :id, :name, {}, { class: 'form-control' } %>
+
+    <% end %>
+  </div>
   <div class="mb-3">
     <%= form.label :bio, class: 'form-label' do %>Bio <% end %> <%=
     form.text_area :bio, class: 'form-control', maxlength: 200, rows: 15 %>

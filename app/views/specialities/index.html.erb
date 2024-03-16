@@ -1,0 +1,24 @@
+<!-- <h1 class="mt-4">Profile</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item active">Profile</li>
+</ol> -->
+<div class="row mt-4">
+  <div class="col-md-4"></div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <%= render partial: 'shared/employee/employee_profile', locals: { employee: current_user.employee, current_tab: 'specialities' } %>
+      </div>
+      <div class="card-body tab-content" id="tab-content">
+        <div
+          class="tab-pane active"
+          id="simple-tabpanel-1"
+          role="tabpanel"
+          aria-labelledby="simple-tab-1"
+        >
+          <%= render partial: 'specialities_form', locals: { employee: current_user.employee } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,7 @@
 
 class EmployeesController < ApplicationController
   before_action :set_employee, only: %i[show edit update destroy]
+  before_action :build_associations, only: %i[edit]
 
   # GET /employees or /employees.json
   def index
@@ -60,6 +61,9 @@ class EmployeesController < ApplicationController
 
   private
 
+  def build_associations
+   @employee.open_roles ||= @employee.open_roles.build
+  end
   # Use callbacks to share common setup or constraints between actions.
   def set_employee
     @employee = Employee.find(params[:id])
@@ -67,6 +71,6 @@ class EmployeesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def employee_params
-    params.require(:employee).permit(:first_name, :last_name, :primary_role_id, :experience, :bio)
+    params.require(:employee).permit(:first_name, :last_name, :primary_role_id, :experience, :bio, open_roles_attributes: [:id, :primary_role_id, :_destroy])
   end
 end

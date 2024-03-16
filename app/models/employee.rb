@@ -6,6 +6,10 @@ class Employee < ApplicationRecord
   validates_length_of :first_name, :last_name, in: 3..30
   after_create :update_role
   after_create :activate_user
+  has_many :open_roles
+  #has_many :primary_roles, through: :open_roles
+
+  accepts_nested_attributes_for :open_roles, allow_destroy: true, update_only: true
 
   private
 

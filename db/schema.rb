@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_10_153851) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_15_152112) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -39,6 +39,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_10_153851) do
     t.datetime "updated_at", null: false
     t.index ["primary_role_id"], name: "index_employees_on_primary_role_id"
     t.index ["user_id"], name: "index_employees_on_user_id"
+  end
+
+  create_table "open_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "primary_role_id", null: false
+    t.uuid "employee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_open_roles_on_employee_id"
+    t.index ["primary_role_id"], name: "index_open_roles_on_primary_role_id"
   end
 
   create_table "primary_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -76,4 +85,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_10_153851) do
   add_foreign_key "companies", "users"
   add_foreign_key "employees", "primary_roles"
   add_foreign_key "employees", "users"
+  add_foreign_key "open_roles", "employees"
+  add_foreign_key "open_roles", "primary_roles"
 end
