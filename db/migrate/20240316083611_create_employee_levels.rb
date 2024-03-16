@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateEmployeeLevels < ActiveRecord::Migration[7.1]
   def change
     create_table :employee_levels, id: :uuid do |t|

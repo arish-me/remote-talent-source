@@ -37,7 +37,7 @@ class Employee < ApplicationRecord
     '7 Year',
     '8 Year',
     '9 Year',
-    '10+ Year',
+    '10+ Year'
   ].freeze
 
   def update_role

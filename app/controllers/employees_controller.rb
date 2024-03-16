@@ -40,7 +40,7 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       if @employee.update(employee_params)
         format.html { redirect_to edit_employee_path(@employee), notice: 'Profile was successfully updated.' }
-        #format.html { render :edit, status: :ok, notice: 'Employee was successfully updated.' }
+        # format.html { render :edit, status: :ok, notice: 'Employee was successfully updated.' }
         format.json { render :edit, status: :ok, location: @employee }
       else
         format.html { render :edit, status: :unprocessable_entity }
