@@ -16,7 +16,7 @@
         <%= role_types_fields.label :role_type, class: 'form-label' do %>
           Role type
         <% end %>
-        <%= role_types_fields.collection_select :role_type_id, RoleType.all, :id, :name, {}, { class: 'form-control' } %>
+        <%= role_types_fields.collection_select :role_type_id, RoleType.all, :id, ->(role_type) { role_type.name.titleize }, {}, { class: 'form-control' } %>
       <% end %>
     </div>
 
@@ -25,7 +25,7 @@
         <%= role_types_fields.label :role_level, class: 'form-label' do %>
           Role type
         <% end %>
-        <%= role_types_fields.collection_select :role_level_id, RoleLevel.all, :id, :name, {}, { class: 'form-control' } %>
+        <%= role_types_fields.collection_select :role_level_id, RoleLevel.all, :id, ->(role_level) { role_level.name.titleize }, {}, { class: 'form-control' } %>
       <% end %>
     </div>
   </div>

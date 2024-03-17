@@ -9,7 +9,7 @@ class Company < ApplicationRecord
 
   validates :company_email, presence: true, format: { with: /\A[^@\s]+@[^@\s]+\z/ },
                             exclusion: { in: FORBIDDEN_EMAIL_DOMAINS, message: 'is not allowed' }
-  validates :size, presence: true
+  validates :size, :bio, presence: true
   after_create :update_role
   after_create :activate_user
 

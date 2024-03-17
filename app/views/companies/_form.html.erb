@@ -1,12 +1,13 @@
-<div class="row">
-  <div class="col-md-12 my-2">
+
+
     <%= form_with(model: company) do |form| %>
       <%= render partial: 'about', locals: { form: form, company: company } %>
       <%= render partial: 'bio', locals: { form: form, company: company } %>
-    <div class="form-group d-flex justify-content-start">
+      <%= form.hidden_field :user_id, value: current_user.id %>
+    <div class="d-flex ">
       <%= form.submit "Update Profile", class: 'btn btn-block btn-md btn-dark'
       %>
     </div>
     <% end %>
-  </div>
-</div>
+
+

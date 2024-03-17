@@ -1,0 +1,47 @@
+<section class="pt-5">
+  <div class="container">
+    <div class="col-sm-12 mx-auto">
+      <div class="section-heading mb-5 text-start">
+        <h4 class="font-weight-bold">
+          What brings you to Remote Talent Source?
+        </h4>
+      </div>
+    </div>
+    <div class="row py-5">
+      <div class="col-md-6">
+      <%= link_to new_employee_path, class: "text-decoration-none" do %>
+        <div class="card service-card box-shadow">
+          <div class="card-header bg-white">
+            <span class="fa fa-user fa-2x p-2" aria-hidden="true"></span>
+            <h4 class="text-left p-2">I'm looking for work</h4>
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              You're a Pasionate developer looking for your next gig.
+            </p>
+            <div class="d-flex justify-content-end align-items-center"></div>
+          </div>
+        </div>
+      <% end %>
+      </div>
+
+      <div class="col-md-6">
+        <%= link_to new_company_path, class: "text-decoration-none" do %>
+        <div class="card service-card box-shadow">
+          <div class="card-header bg-white">
+            <span class="fa fa-users fa-2x p-2" aria-hidden="true"></span>
+            <h4 class="text-left p-2">I'm hiring developers</h4>
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              You're a business looking to hire a freelance, part-time, or
+              full-time developers.
+            </p>
+            <div class="d-flex justify-content-end align-items-center"></div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

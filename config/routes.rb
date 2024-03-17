@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   resources :companies
+  resources :additional_informations
   resources :employees do
     resources :specialities
   end

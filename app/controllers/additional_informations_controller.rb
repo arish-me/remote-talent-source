@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-class AdditionalInformationController < ApplicationController
+class AdditionalInformationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_user
+
+  def new
+  end
 
   def company
     if request.method == 'POST'
@@ -46,9 +48,5 @@ class AdditionalInformationController < ApplicationController
 
   def company_params
     params.require(:company).permit(:name, :website, :company_email, :phone, :size, :industry, :user_id)
-  end
-
-  def find_user
-    @user = User.find(params[:id])
   end
 end
