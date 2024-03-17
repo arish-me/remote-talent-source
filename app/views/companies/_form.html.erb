@@ -1,52 +1,12 @@
-<%= form_with(model: company) do |form| %>
-  <% if company.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
-
-      <ul>
-        <% company.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="row">
+  <div class="col-md-12 my-2">
+    <%= form_with(model: company) do |form| %>
+      <%= render partial: 'about', locals: { form: form, company: company } %>
+      <%= render partial: 'bio', locals: { form: form, company: company } %>
+    <div class="form-group d-flex justify-content-start">
+      <%= form.submit "Update Profile", class: 'btn btn-block btn-md btn-dark'
+      %>
     </div>
-  <% end %>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :company_email, style: "display: block" %>
-    <%= form.text_field :company_email %>
-  </div>
-
-  <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div>
-    <%= form.label :website, style: "display: block" %>
-    <%= form.text_field :website %>
-  </div>
-
-  <div>
-    <%= form.label :size, style: "display: block" %>
-    <%= form.text_field :size %>
-  </div>
-
-  <div>
-    <%= form.label :industry, style: "display: block" %>
-    <%= form.text_field :industry %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

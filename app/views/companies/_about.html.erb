@@ -16,7 +16,7 @@
         >
           <div class="d-flex align-items-center">
             <div class="position-relative">
-              <%= render AvatarComponent.new(avatarable: employee, variant:
+              <%= render AvatarComponent.new(avatarable: company, variant:
               :medium, data: { "file-upload-target": "image" }) %>
               <div
                 data-file-upload-target="activity"
@@ -27,12 +27,12 @@
               </div>
             </div>
             <%= form.hidden_field :avatar, value: form.object.avatar.signed_id,
-            id: "employee_avatar_hidden" if form.object.avatar.attached? %> <%=
+            id: "company_avatar_hidden" if form.object.avatar.attached? %> <%=
             form.file_field :avatar, direct_upload: true, accept: "image/png,
             image/jpg, image/jpeg", data: { action: "file-upload#select
             direct-upload:initialize->file-upload#start
             direct-upload:error->file-upload#error" }, class: "d-none" %> <%=
-            form.label :avatar, employee.avatar.attached? ? t(".change_photo") :
+            form.label :avatar, company.avatar.attached? ? t(".change_photo") :
             t("upload_photo") , class: "btn btn-sm btn-outline-dark form-label"
             %>
           </div>
@@ -51,43 +51,37 @@
       </div>
 
       <div class="mb-3">
-        <%= form.label :first_name, class: 'form-label' do %> First Name
+        <%= form.label :name, class: 'form-label' do %> Company Name
         <span class="text-danger">*</span>
-        <% end %> <%= form.text_field :first_name, autofocus: true,
-        autocomplete: "first_name",class: 'form-control' %>
-      </div>
-      <div class="mb-3">
-        <%= form.label :last_name, class: 'form-label' do %> Last Name
-        <span class="text-danger">*</span>
-        <% end %> <%= form.text_field :last_name, autofocus: true, autocomplete:
-        "first_name",class: 'form-control' %>
+        <% end %> <%= form.text_field :name, autofocus: true, autocomplete:
+        "name",class: 'form-control' %>
       </div>
 
       <div class="mb-3">
-        <%= form.label :heading, class: 'form-label' do %> Profile heading
+        <%= form.label :company_email, class: 'form-label' do %> Company Email
         <span class="text-danger">*</span>
-        <% end %> <%= form.text_field :heading, autocomplete:
-        "first_name",class: 'form-control' %>
-        <em>Summarize yourself as a developer in a few words.</em>
+        <% end %> <%= form.email_field :company_email, autofocus: true,
+        autocomplete: "company_email", class: 'form-control' %>
       </div>
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <%= form.label :primary_role_id, class: 'form-label' do %> Primary
-          Role <span class="text-danger">*</span>
-          <% end %> <%= form.select :primary_role_id, PrimaryRole.all.map {
-          |role| [role.name.titleize, role.id] }, {}, class: 'form-control' %>
-        </div>
-        <div class="col-md-6 mb-3">
-          <%= form.label :experience, class: 'form-label' %> <%= form.select
-          :experience, Employee::EXPERIENCE.map.with_index { |exp, index|
-          [exp.humanize, index] }, {}, class: 'form-control' %>
-        </div>
-      </div>
+
       <div class="mb-3">
-        <%= form.fields_for :open_roles do |open_role_fields| %> <%= form.label
-        :open_roles, class: 'form-label' do %> Open to following roles <% end %>
-        <%= open_role_fields.collection_select :primary_role_id,
-        PrimaryRole.all, :id, :name, {}, { class: 'form-control' } %> <% end %>
+        <%= form.label :phone, class: 'form-label' do %> Phone <% end %> <%=
+        form.text_field :phone, autofocus: true, autocomplete: "phone", class:
+        'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :website, class: 'form-label' do %> Website <% end %> <%=
+        form.text_field :website, autofocus: true, autocomplete: "webiste",
+        class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :size, class: 'form-label' do %> Size of company
+        <span class="text-danger">*</span>
+        <% end %> <%= form.select :size,
+        options_for_select(Company::COMPANY_SIZE.invert.to_a, selected:
+        @company.size), { prompt: 'Select size' }, class: 'form-select' %>
       </div>
     </div>
   </div>

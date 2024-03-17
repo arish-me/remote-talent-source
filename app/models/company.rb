@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Company < ApplicationRecord
+  include Avatarable
   belongs_to :user
   validates_length_of :name, in: 3..30
 
@@ -8,6 +9,7 @@ class Company < ApplicationRecord
 
   validates :company_email, presence: true, format: { with: /\A[^@\s]+@[^@\s]+\z/ },
                             exclusion: { in: FORBIDDEN_EMAIL_DOMAINS, message: 'is not allowed' }
+  validates :size, presence: true
   after_create :update_role
   after_create :activate_user
 

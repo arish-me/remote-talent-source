@@ -10,7 +10,7 @@ class CreateCompanies < ActiveRecord::Migration[7.1]
       t.string :website
       t.string :size
       t.string :industry
-
+      t.text :bio
       t.timestamps
     end
   end

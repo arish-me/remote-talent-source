@@ -9,6 +9,8 @@ body {
     font-size: 14px;
 }
 
-.field_with_errors input.form-control {
+.field_with_errors input.form-control,
+.field_with_errors select.form-select {
   border: 1px solid red;
 }
+

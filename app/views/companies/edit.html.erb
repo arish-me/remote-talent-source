@@ -1,10 +1,8 @@
-<h1>Editing company</h1>
-
-<%= render "form", company: @company %>
-
-<br>
-
-<div>
-  <%= link_to "Show this company", @company %> |
-  <%= link_to "Back to companies", companies_path %>
+<div class="mt-4">
+  <div class="box">
+      <%= render "shared/messages", object: @company %>
+      <div class="row">
+        <div class="col-md-8 my-2"><%= render "form", company: @company %></div>
+      </div>
+  </div>
 </div>
