@@ -19,7 +19,7 @@ class AvatarComponent < ViewComponent::Base
   end
 
   def avatar_image_url
-    return image_path(DEFAULT_AVATAR) unless avatarable&.avatar&.attached?
+    return image_path(DEFAULT_AVATAR) unless avatarable&.avatar&.attached? &&  avatarable&.avatar.record.valid?
 
     url_for variant ? avatarable.avatar.variant(variant) : avatarable.avatar
   end

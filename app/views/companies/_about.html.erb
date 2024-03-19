@@ -26,14 +26,14 @@
                 text-gray-900 animate-reverse-spin", title: t(".loading") %>
               </div>
             </div>
-            <%= form.hidden_field :avatar, value: form.object.avatar.signed_id,
-            id: "company_avatar_hidden" if form.object.avatar.attached? %> <%=
+            <%= form.hidden_field :avatar, value: form.object.avatar.signed_id, id: "company_avatar_hidden" if form.object.avatar.attached? &&  form.object.errors.empty?  %>
+            <%=
             form.file_field :avatar, direct_upload: true, accept: "image/png,
             image/jpg, image/jpeg", data: { action: "file-upload#select
             direct-upload:initialize->file-upload#start
             direct-upload:error->file-upload#error" }, class: "d-none" %> <%=
             form.label :avatar, company.avatar.attached? ? t(".change_photo") :
-            t("upload_logo") , class: "btn btn-sm btn-outline-dark form-label"
+            t("upload_photo") , class: "btn btn-sm btn-outline-dark form-label"
             %>
           </div>
 
@@ -49,7 +49,6 @@
           </div>
         </div>
       </div>
-
       <div class="mb-3">
         <%= form.label :name, class: 'form-label' do %> Company Name
         <span class="text-danger">*</span>
