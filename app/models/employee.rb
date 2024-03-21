@@ -18,13 +18,14 @@ class Employee < ApplicationRecord
   has_many :employee_levels
   has_many :role_level, through: :employee_levels
 
-  has_one :social_link, as: :source
+  has_one :social_link, as: :source, dependent: :destroy
+  has_one :location, as: :source, dependent: :destroy
 
-
-  accepts_nested_attributes_for :open_roles, allow_destroy: true, update_only: true
-  accepts_nested_attributes_for :employee_roles, allow_destroy: true, update_only: true
-  accepts_nested_attributes_for :employee_levels, allow_destroy: true, update_only: true
-  accepts_nested_attributes_for :social_link, update_only: true
+  accepts_nested_attributes_for :open_roles, allow_destroy: true
+  accepts_nested_attributes_for :employee_roles, allow_destroy: true
+  accepts_nested_attributes_for :employee_levels, allow_destroy: true
+  accepts_nested_attributes_for :social_link
+  accepts_nested_attributes_for :location
 
   enum search_status: %i[actively_looking open not_interested invisible]
 

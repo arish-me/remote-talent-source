@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/confirmation_sent', to: 'users/confirmations#confirmation_sent', as: 'confirmation_sent'
   end
+
+  get '/geocode', to: 'locations#search'
+
   root 'home#index'
   get 'up' => 'rails/health#show', as: :rails_health_check
 end

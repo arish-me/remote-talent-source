@@ -15,10 +15,13 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
+    @company.build_location if @company.location.nil?
   end
 
   # GET /companies/1/edit
-  def edit; end
+  def edit
+    #@company.location.build if @company.location.nil?
+  end
 
   # POST /companies or /companies.json
   def create
@@ -65,8 +68,13 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
   end
 
+  def location_attributes
+    %i[city state country address
+      latitude longitude _destroy]
+  end
+
   # Only allow a list of trusted parameters through.
   def company_params
-    params.require(:company).permit(:user_id, :name, :company_email, :phone, :website, :size, :industry, :bio, :avatar)
+    params.require(:company).permit(:user_id, :name, :company_email, :phone, :website, :size, :industry, :bio, :avatar, location_attributes: location_attributes)
   end
 end

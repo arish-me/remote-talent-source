@@ -3,6 +3,7 @@
     <div class="col-md-8 my-2">
         <%= form_for employee, :url => {:action => "show"} do |form| %>
         <%= render partial: 'employee_about', locals: { form: form, employee: employee } %>
+        <%= render partial: 'location', locals: { form: form } %>
         <%= render partial: 'bio', locals: { form: form } %>
         <%= render partial: 'work_preferences', locals: { form: form } %>
         <%= render partial: 'social_link', locals: { form: form } %>

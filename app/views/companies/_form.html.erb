@@ -1,13 +1,11 @@
-
-
-    <%= form_with(model: company) do |form| %>
-      <%= render partial: 'about', locals: { form: form, company: company } %>
-      <%= render partial: 'bio', locals: { form: form, company: company } %>
-      <%= form.hidden_field :user_id, value: current_user.id %>
-    <div class="d-flex ">
-      <%= form.submit "Update Profile", class: 'btn btn-block btn-md btn-dark'
-      %>
-    </div>
-    <% end %>
+<%= form_with(model: company, data: { controller: "places", action: "google-maps-callback@window->places#initAutocomplete" }) do |form| %>
+  <%= render partial: 'about', locals: { form: form, company: company } %>
+  <%= render partial: 'bio', locals: { form: form, company: company } %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <div class="d-flex ">
+    <%= form.submit "Update Profile", class: 'btn btn-block btn-md btn-dark'
+    %>
+  </div>
+<% end %>
 
 

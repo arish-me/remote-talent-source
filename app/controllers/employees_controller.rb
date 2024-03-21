@@ -68,6 +68,7 @@ class EmployeesController < ApplicationController
     @employee.employee_roles.build if @employee.employee_roles.empty?
     @employee.employee_levels.build if @employee.employee_levels.empty?
     @employee.build_social_link if @employee.social_link.nil?
+    @employee.build_location if @employee.location.nil?
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -75,15 +76,20 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
   end
 
+  def location_attributes
+    %i[city state country address
+      latitude longitude _destroy]
+  end
   # Only allow a list of trusted parameters through.
   def employee_params
     params.require(:employee).permit(
       :first_name, :last_name, :primary_role_id, :experience,
-      :bio, :search_status, :heading, :avatar,
+      :bio, :search_status, :heading, :avatar, :user_id,
       open_roles_attributes: %i[id primary_role_id _destroy],
       employee_roles_attributes: %i[id role_type_id _destroy],
-      employee_levels_attributes: %i[id role_level_id destroy],
-      social_link_attributes: %i[id website linkedin github twitter gitlab stackoverflow]
+      employee_levels_attributes: %i[id role_level_id _destroy],
+      social_link_attributes: %i[id website linkedin github twitter gitlab stackoverflow _destroy],
+      location_attributes:
     )
   end
 end

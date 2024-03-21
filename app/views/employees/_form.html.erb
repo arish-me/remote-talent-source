@@ -1,4 +1,4 @@
-<%= form_with(model: employee) do |form| %>
+<%= form_with(model: employee, data: { controller: "places", action: "google-maps-callback@window->places#initAutocomplete" }) do |form| %>
       <%= render partial: 'employee_about', locals: { form: form, employee: employee } %>
       <%= render partial: 'bio', locals: { form: form } %>
       <%= render partial: 'work_preferences', locals: { form: form } %>

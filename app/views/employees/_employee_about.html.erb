@@ -8,6 +8,7 @@
   <div class="col-md-8 my-2">
     <div class="row gy-2 gy-md-2">
       <div class="row">
+        <%= form.hidden_field :user_id, value: current_user.id %>
         <div
           class="container"
           data-controller="file-upload"
@@ -26,8 +27,7 @@
                 text-gray-900 animate-reverse-spin", title: t(".loading") %>
               </div>
             </div>
-            <%= form.hidden_field :avatar, value: form.object.avatar.signed_id,
-            id: "employee_avatar_hidden" if form.object.avatar.attached? %> <%=
+            <%= form.hidden_field :avatar, value: form.object.avatar.signed_id, id: "employee_avatar_hidden" if form.object.avatar.attached? &&  form.object.errors.empty?  %> <%=
             form.file_field :avatar, direct_upload: true, accept: "image/png,
             image/jpg, image/jpeg", data: { action: "file-upload#select
             direct-upload:initialize->file-upload#start
@@ -91,7 +91,10 @@
           <% end %>
           <%= open_role_fields.collection_select :primary_role_id, PrimaryRole.all, :id, :name, {}, { class: 'form-control' } %>
         <% end %>
-</div>
+      </div>
+      <div class="mb-3">
+        <%= render partial: 'location', locals: { form: form } %>
+      </div>
 
     </div>
   </div>
