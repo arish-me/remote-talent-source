@@ -1,10 +1,18 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @employee %>
-
-<div>
-  <%= link_to "Edit this employee", edit_employee_path(@employee) %> |
-  <%= link_to "Back to employees", employees_path %>
-
-  <%= button_to "Destroy this employee", @employee, method: :delete %>
+<div class="row">
+  <div class="col-md-12 box shadow px-4 py-4 my-4 my-2 ">
+    <div class="d-flex justify-content-end">
+      <%= link_to "Edit Profile", edit_employee_path(@employee), class: 'btn btn-block btn-md btn-dark' %>
+    </div>
 </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 box shadow px-4 py-4 my-4 my-2 ">
+
+  <%= render partial: 'public_profile', locals: { employee: @employee }%>
+
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class EmployeesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_employee, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[public_profile]
+  before_action :set_employee, only: %i[show edit update destroy public_profile]
   before_action :build_associations, only: %i[edit]
 
   # GET /employees or /employees.json
@@ -17,6 +17,9 @@ class EmployeesController < ApplicationController
   def new
     @employee = Employee.new
     build_associations
+  end
+
+  def public_profile
   end
 
   # GET /employees/1/edit
