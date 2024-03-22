@@ -23,7 +23,7 @@
     <div class="mb-3">
       <%= form.fields_for :employee_levels do |role_types_fields| %>
         <%= role_types_fields.label :role_level, class: 'form-label' do %>
-          Role type
+          Role Level
         <% end %>
         <%= role_types_fields.collection_select :role_level_id, RoleLevel.all, :id, ->(role_level) { role_level.name.titleize }, {}, { class: 'form-control' } %>
       <% end %>
