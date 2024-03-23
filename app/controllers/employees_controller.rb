@@ -80,7 +80,7 @@ class EmployeesController < ApplicationController
   end
 
   def location_attributes
-    %i[city state country address
+    %i[id city state country address
       latitude longitude _destroy]
   end
   # Only allow a list of trusted parameters through.
@@ -88,9 +88,9 @@ class EmployeesController < ApplicationController
     params.require(:employee).permit(
       :first_name, :last_name, :primary_role_id, :experience,
       :bio, :search_status, :heading, :avatar, :user_id,
-      open_roles_attributes: %i[id primary_role_id _destroy],
-      employee_roles_attributes: %i[id role_type_id _destroy],
-      employee_levels_attributes: %i[id role_level_id _destroy],
+      primary_role_ids: [],
+      role_type_ids: [],
+      role_level_ids: [],
       social_link_attributes: %i[id website linkedin github twitter gitlab stackoverflow _destroy],
       location_attributes:
     )

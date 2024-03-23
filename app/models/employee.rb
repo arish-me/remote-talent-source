@@ -12,9 +12,12 @@ class Employee < ApplicationRecord
   belongs_to :primary_role
   belongs_to :user
 
-  has_many :open_roles
-  has_many :employee_roles
+  has_many :open_roles, dependent: :destroy
+  has_many :primary_roles, through: :open_roles
+
+  has_many :employee_roles, dependent: :destroy
   has_many :role_types, through: :employee_roles
+
   has_many :employee_levels
   has_many :role_level, through: :employee_levels
 

@@ -19,12 +19,10 @@
             class="col-12 col-sm-8 col-md-6 col-lg-4 position-absolute top-0 start-0 translate-middle-y p-4"
           >
             <%= render AvatarComponent.new(avatarable: employee, variant:
-              :medium, data: { "file-upload-target": "image" }) %>
+            :medium, data: { "file-upload-target": "image" }) %>
           </div>
           <div class="col-12 col-md-12 mt-5 pt-2">
-            <h1 class="fw-bold fs-4 py-4">
-              <%= employee.heading%>
-            </h1>
+            <h1 class="fw-bold fs-4 py-4"><%= employee.heading%></h1>
             <h5 class="fw-bold fs-4 py-2">
               <%= employee.first_name%> <%= employee.last_name%>
             </h5>
@@ -108,7 +106,9 @@
         <!-- Information 2 content here -->
         <div class="d-flex align-items-center">
           <i class="fas fa-check-circle text-success"></i>
-          <span class="text-success fw-medium ms-2"><%= employee.search_status.humanize%></span>
+          <span class="text-success fw-medium ms-2"
+            ><%= employee.search_status.humanize%></span
+          >
         </div>
 
         <hr />

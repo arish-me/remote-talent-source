@@ -1,31 +1,49 @@
 <div class="row">
   <div class="col-md-4">
-      <h5>Work preferences</h5>
-      <p class="text-muted small">What kind of work are you looking for next?</p>
+    <h5>Work preferences</h5>
+    <p class="text-muted small">What kind of work are you looking for next?</p>
   </div>
 
   <div class="col-md-8 my-2">
     <div class="mb-3">
-      <%= form.label :search_status, class: 'form-label' do %> Search Status
+      <%= form.label :search_status, class: 'form-label' do %>
+      <div class="d-flex">Search Status</div>
+      <p class="text-sm text-secondary">Select the search status.</p>
+      <% end %> <%= form.collection_radio_buttons(:search_status,
+      Employee.search_statuses.keys, :to_s, :titleize) do |fs| %>
+      <div class="form-check">
+        <%= fs.radio_button(class: "form-check-input") %> <%= fs.label(class:
+        "form-check-label") do %> <%= fs.text %> <% end %>
+      </div>
       <% end %>
-      <%= form.select :search_status, Employee.search_statuses.keys.map { |status| [status.titleize, status] }, { include_blank: '--Select Search Status---' }, class: 'form-control' %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :role_types, class: 'form-label' do %>
+      <div class="d-flex">Role type</div>
+      <p class="text-sm text-secondary">
+        Select all roles that you would consider taking.
+      </p>
+      <% end %> <%= form.collection_check_boxes(:role_type_ids, RoleType.all,
+      :id, :name) do |fs| %>
+      <div class="form-check">
+        <%= fs.check_box(class: "form-check-input") %> <%= fs.label(class:
+        "form-check-label") do %> <%= fs.text.titleize %> <% end %>
+      </div>
+      <% end %>
     </div>
 
     <div class="mb-3">
-      <%= form.fields_for :employee_roles do |role_types_fields| %>
-        <%= role_types_fields.label :role_type, class: 'form-label' do %>
-          Role type
-        <% end %>
-        <%= role_types_fields.collection_select :role_type_id, RoleType.all, :id, ->(role_type) { role_type.name.titleize }, {}, { class: 'form-control' } %>
-      <% end %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.fields_for :employee_levels do |role_types_fields| %>
-        <%= role_types_fields.label :role_level, class: 'form-label' do %>
-          Role Level
-        <% end %>
-        <%= role_types_fields.collection_select :role_level_id, RoleLevel.all, :id, ->(role_level) { role_level.name.titleize }, {}, { class: 'form-control' } %>
+      <%= form.label :employee_levels, class: 'form-label' do %>
+      <div class="d-flex">Role Level</div>
+      <p class="text-sm text-secondary">
+        Select all level that you would consider taking.
+      </p>
+      <% end %> <%= form.collection_check_boxes(:role_level_ids, RoleLevel.all,
+      :id, :name) do |fs| %>
+      <div class="form-check">
+        <%= fs.check_box(class: "form-check-input") %> <%= fs.label(class:
+        "form-check-label") do %> <%= fs.text.titleize %> <% end %>
+      </div>
       <% end %>
     </div>
   </div>

@@ -26,10 +26,11 @@
                 text-gray-900 animate-reverse-spin", title: t(".loading") %>
               </div>
             </div>
-            <%= form.hidden_field :avatar, value: form.object.avatar.signed_id, id: "company_avatar_hidden" if form.object.avatar.attached? &&  form.object.errors.empty?  %>
-            <%=
-            form.file_field :avatar, direct_upload: true, accept: "image/png,
-            image/jpg, image/jpeg", data: { action: "file-upload#select
+            <%= form.hidden_field :avatar, value: form.object.avatar.signed_id,
+            id: "company_avatar_hidden" if form.object.avatar.attached? &&
+            form.object.errors.empty? %> <%= form.file_field :avatar,
+            direct_upload: true, accept: "image/png, image/jpg, image/jpeg",
+            data: { action: "file-upload#select
             direct-upload:initialize->file-upload#start
             direct-upload:error->file-upload#error" }, class: "d-none" %> <%=
             form.label :avatar, company.avatar.attached? ? t(".change_photo") :
