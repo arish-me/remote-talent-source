@@ -5,6 +5,10 @@ class Location < ApplicationRecord
   validates :address, presence: true
   validate :valid_address_format
 
+  def full_address
+    [city, state, country].compact.join(', ')
+  end
+
   private
 
   def valid_address_format

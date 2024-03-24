@@ -19,91 +19,30 @@
             <div
               class="col-12 col-sm-8 col-md-6 col-lg-4 position-absolute top-0 start-0 translate-middle-y p-4"
             >
-              <img
-                class="rounded-circle"
-                src="https://demos.wrappixel.com/free-admin-templates/bootstrap/materialpro-bootstrap-free/assets/images/users/5.jpg"
-                alt="Card image cap"
-                width="150"
-              />
+              <%= render AvatarComponent.new(avatarable: @employee, variant:
+                  :medium, data: { "file-upload-target": "image" }) %>
             </div>
             <div class="col-12 col-md-12 mt-5 pt-2">
               <h1 class="fw-bold fs-4 py-4">
-                Experienced software engineer with a proven track record in
-                high-growth environments, specializing in Ruby on Rails,
-                JavaScript, and database management, adept at leading teams and
-                more.
-              </h1>
+                <%= @employee.heading%>
+            </h1>
               <p class="text-muted">
-                Specializing in Ruby on Rails, JavaScript, and more.
+                <%= @employee.primary_role.name.humanize%>
               </p>
-
+              <button class="btn btn-outline-secondary btn-md">
+                Private Information
+              </button>
               <%= link_to "Hire Me", @employee, class: 'btn btn-block btn-md
               btn-dark' %>
 
               <!-- Placeholder for Private Information Button -->
-              <button class="btn btn-outline-secondary btn-md">
-                Private Information
-              </button>
+
             </div>
           </div>
           <div
             class="row justify-content-center justify-content-md-start my-5 d-none d-sm-block"
           >
-            <p>
-              I’ve always been interested in building (and taking things apart)
-              ever since a young age. LEGO is probably a pretty reasonable
-              starting point, as I am sure many of us have experienced. There’s
-              nothing really that compares to the feeling of seeing something in
-              your imagination and making it come to life in the physical (or
-              virtual) world. The entire process of iteration, trying new things
-              and observing the results were quite formative to my development
-              when I was starting life.  It’s been a goal of mine to never let
-              that spark of curiosity die, fortunately I’ve been successful in
-              the mission to continue approaching problems with the same curious
-              intuition that drove me to try and figure out how and why
-              something worked the way it did. No toy was safe, or anything
-              really - I never limited my scope of “take this apart and figure
-              out how it works” to toys. My dad (who is quite adept at figuring
-              out how things work as well) helped foster and encourage that
-              behavior - all sorts of electronic kits to poke at, observe,
-              tinker with and most importantly - learn.
-            </p>
-
-            <p>
-              I didn’t realize then in my pre-teen years that I was building a
-              solid foundation to place a career on top of, I doubt I recognized
-              that until much later, but before I realized that - a new “toy”
-              had to come into my life. I was about the age of 10 or so when we
-              finally got - the family computer. Immediately my world had
-              changed, sure there were video games to play, but most interesting
-              to me was the idea that I could create things on the computer.
-              Between the early internet and the idea that I could create things
-              to put onto “the internet” to share with others - I quickly became
-              consumed by the idea of building things for the internet.
-            </p>
-
-            <p>
-              As my career developed I eventually found Ruby on Rails and had my
-              world completely changed, this was very early Ruby on Rails 3.0
-              and it was a breath of fresh air. The idea of covering common use
-              cases and pitfalls out of the box and the idea of convention over
-              configuration really clicked well with me. I was blown away with
-              how effective we could be as a small team shipping features with
-              Rails and Ruby. Ruby is a beautiful, readable language that is a
-              dream to write code in. By contrast at the time PHP code felt
-              archaic and messy. It was all in on Ruby on Rails for me.
-            </p>
-
-            <p>
-              Throughout my career I’ve made a point to be proficient at being
-              able to go between the technical side and the business side -
-              whenever you’re developing software for a business you have to
-              understand the business to keep the two sides aligned and heading
-              in the same direction. I can help the business understand the
-              benefits of technical initiatives and I can turn it around and put
-              on my “business” hat when making decisions about the
-              implementations.
-            </p>
+            <%= @employee.bio%>
           </div>
         </div>
 
@@ -114,27 +53,26 @@
           <!-- Information 2 content here -->
           <div class="d-flex align-items-center">
             <i class="fas fa-check-circle text-success"></i>
-            <span class="text-success fw-medium ms-2">Actively looking</span>
+            <span class="text-success fw-medium ms-2"><%= @employee.search_status.humanize%></span>
           </div>
 
           <hr />
 
           <h6 class="text-secondary fw-medium">Interested in roles</h6>
+           <%- @employee.role_types.each do |role_type| %>
+            <div class="d-flex align-items-center">
+              <i class="fas fa-check-circle" title="Full-time employment"></i>
+              <span class="fw-medium ms-2"><%=role_type.name.humanize%></span>
+            </div>
+          <%end%>
 
+         <%- @employee.role_levels.each do |role_level| %>
           <div class="d-flex align-items-center">
-            <i class="fas fa-briefcase" title="Full-time employment"></i>
-            <span class="fw-medium ms-2">Full-time employment</span>
-          </div>
+            <i class="fas fa-check-circle" title="Full-time employment"></i>
+              <span class="fw-medium ms-2"><%=role_level.name.humanize%></span>
+            </div>
+          <%end%>
 
-          <div class="d-flex align-items-center">
-            <i class="fas fa-user-tie" title="Senior"></i>
-            <span class="fw-medium ms-2">Senior</span>
-          </div>
-
-          <div class="d-flex align-items-center">
-            <i class="fas fa-users-cog" title="Principal / Staff"></i>
-            <span class="fw-medium ms-2">Principal / Staff</span>
-          </div>
 
           <a
             class="d-block bg-light border border-2 border-secondary border-dashed rounded-3 py-3 px-4 text-center text-decoration-none"
@@ -146,7 +84,7 @@
               Private information
             </div>
             <div class="text-sm text-muted">
-              Information visible with a business subscription only.
+              Information visible with a business profile only.
             </div>
           </a>
 
@@ -156,7 +94,8 @@
           <h6 class="text-secondary fw-medium">Location</h6>
           <div class="d-flex align-items-center">
             <i class="fas fa-map-marker-alt" title="Location"></i>
-            <span class="fw-medium ms-2">Portland, Oregon</span>
+
+            <span class="fw-medium ms-2"><%= @employee.location.full_address%></span>
           </div>
 
           <!-- Timezone -->
@@ -173,59 +112,7 @@
         class="col-12 col-lg-8 p-4 bg-light order-md-3 order-lg-3 d-lg-none d-md-none"
       >
         <!-- Information 3 content here -->
-        <p>
-          I’ve always been interested in building (and taking things apart) ever
-          since a young age. LEGO is probably a pretty reasonable starting
-          point, as I am sure many of us have experienced. There’s nothing
-          really that compares to the feeling of seeing something in your
-          imagination and making it come to life in the physical (or virtual)
-          world. The entire process of iteration, trying new things and
-          observing the results were quite formative to my development when I
-          was starting life.  It’s been a goal of mine to never let that spark
-          of curiosity die, fortunately I’ve been successful in the mission to
-          continue approaching problems with the same curious intuition that
-          drove me to try and figure out how and why something worked the way it
-          did. No toy was safe, or anything really - I never limited my scope of
-          “take this apart and figure out how it works” to toys. My dad (who is
-          quite adept at figuring out how things work as well) helped foster and
-          encourage that behavior - all sorts of electronic kits to poke at,
-          observe, tinker with and most importantly - learn.
-        </p>
-
-        <p>
-          I didn’t realize then in my pre-teen years that I was building a solid
-          foundation to place a career on top of, I doubt I recognized that
-          until much later, but before I realized that - a new “toy” had to come
-          into my life. I was about the age of 10 or so when we finally got -
-          the family computer. Immediately my world had changed, sure there were
-          video games to play, but most interesting to me was the idea that I
-          could create things on the computer. Between the early internet and
-          the idea that I could create things to put onto “the internet” to
-          share with others - I quickly became consumed by the idea of building
-          things for the internet.
-        </p>
-
-        <p>
-          As my career developed I eventually found Ruby on Rails and had my
-          world completely changed, this was very early Ruby on Rails 3.0 and it
-          was a breath of fresh air. The idea of covering common use cases and
-          pitfalls out of the box and the idea of convention over configuration
-          really clicked well with me. I was blown away with how effective we
-          could be as a small team shipping features with Rails and Ruby. Ruby
-          is a beautiful, readable language that is a dream to write code in. By
-          contrast at the time PHP code felt archaic and messy. It was all in on
-          Ruby on Rails for me.
-        </p>
-
-        <p>
-          Throughout my career I’ve made a point to be proficient at being able
-          to go between the technical side and the business side - whenever
-          you’re developing software for a business you have to understand the
-          business to keep the two sides aligned and heading in the same
-          direction. I can help the business understand the benefits of
-          technical initiatives and I can turn it around and put on my
-          “business” hat when making decisions about the implementations.
-        </p>
+        <%= @employee.bio%>
       </div>
     </div>
   </div>

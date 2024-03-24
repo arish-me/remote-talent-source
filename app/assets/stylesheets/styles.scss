@@ -1,6 +1,6 @@
-// 
+//
 // Styles
-// 
+//
 
 // Import Custom Variables
 @import "variables.scss";
@@ -10,6 +10,7 @@
 
 // Import Custom SCSS
 @import "global.scss";
+@import "mixins.scss";
 
 // Layout
 @import "layout/authentication.scss";
