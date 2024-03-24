@@ -1,9 +1,21 @@
-<%= form_with(model: employee, data: { controller: "places", action: "google-maps-callback@window->places#initAutocomplete" }) do |form| %>
+<div class="container overflow-hidden">
+  <%= form_with(model: employee, data: { controller: "places", action: "google-maps-callback@window->places#initAutocomplete" }) do |form| %>
+  <div class="row gy-5">
+    <div class=" bg-white shadow rounded-3 overflow-hidden p-4 ">
       <%= render partial: 'employee_about', locals: { form: form, employee: employee } %>
+    </div>
+    <div class=" bg-white shadow rounded-3 overflow-hidden p-4">
       <%= render partial: 'bio', locals: { form: form } %>
+    </div>
+    <div class=" bg-white shadow rounded-3 overflow-hidden p-4">
       <%= render partial: 'work_preferences', locals: { form: form } %>
+    </div>
+    <div class=" bg-white shadow rounded-3 overflow-hidden p-4">
       <%= render partial: 'social_link', locals: { form: form } %>
-  <div class="d-flex justify-content-end">
-      <%= form.submit "Update Profile", class: 'btn btn-block btn-md btn-dark' %>
-  </div>
-<% end %>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <%= form.submit "Finish Profile", class: 'btn btn-block btn-md btn-dark' %>
+    </div></div>
+  <% end %>
+</div>

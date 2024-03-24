@@ -1,8 +1,14 @@
-<div class="mt-4">
-  <div class="box">
+<div class="row">
+  <div class="col-md-12 box shadow px-4 py-4 my-4 my-2 bg-light">
+    <div class="d-flex justify-content-between">
+    </div>
+    <div class="my-5">
       <%= render "shared/messages", object: @company %>
-      <div class="row">
-        <div class="col-md-8 my-2"><%= render "form", company: @company %></div>
-      </div>
+      <%= render "form", company: @company %>
+    </div>
   </div>
+  <div class="col-md-2"></div>
 </div>
+
+
+

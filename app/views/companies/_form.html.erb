@@ -1,7 +1,13 @@
+<div class="container overflow-hidden">
 <%= form_with(model: company, data: { controller: "places", action: "google-maps-callback@window->places#initAutocomplete" }) do |form| %>
-  <%= render partial: 'about', locals: { form: form, company: company } %>
-  <%= render partial: 'bio', locals: { form: form, company: company } %>
-  <%= form.hidden_field :user_id, value: current_user.id %>
+  <div class="row gy-5">
+  <div class=" bg-white shadow rounded-3 overflow-hidden p-4 ">
+    <%= render partial: 'about', locals: { form: form, company: company } %>
+  </div>
+  <div class=" bg-white shadow rounded-3 overflow-hidden p-4 ">
+    <%= render partial: 'bio', locals: { form: form, company: company } %>
+  </div>
+    <%= form.hidden_field :user_id, value: current_user.id %>
   <div class="d-flex ">
     <%= form.submit "Update Profile", class: 'btn btn-block btn-md btn-dark'
     %>
