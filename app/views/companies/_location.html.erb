@@ -12,17 +12,17 @@
   </div>
    <div class="row mb-3">
     <div class="col">
-      <%= location_form.text_field :city,
+      <%= location_form.hidden_field :city,
                               data: { "places-target": "city" },
                               class: "form-control",
                               placeholder: "City Name", readonly: true %>
     </div>
     <div class="col">
-      <%= location_form.text_field :state, data: { "places-target": "state" }, class: "form-control" , placeholder: "State Name", readonly: true%>
+      <%= location_form.hidden_field :state, data: { "places-target": "state" }, class: "form-control" , placeholder: "State Name", readonly: true%>
     </div>
 
     <div class="col">
-      <%= location_form.text_field :country, data: { "places-target": "country" }, class: "form-control", placeholder: "Country Name", readonly: true %>
+      <%= location_form.hidden_field :country, data: { "places-target": "country" }, class: "form-control", placeholder: "Country Name", readonly: true %>
     </div>
   </div>
 

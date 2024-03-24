@@ -1,5 +1,5 @@
-<div class="mt-5">
-  <div class="container">
+<div class="mt-5 ">
+  <div class="container mb-3">
     <div class="bg-white shadow rounded-3 overflow-hidden">
       <!-- Placeholder for Cover Image -->
       <div class="ratio ratio-8x8 bg-dark d-none d-md-block"></div>
@@ -30,6 +30,7 @@
                 <%= @employee.primary_role.name.humanize%>
               </p>
               <button class="btn btn-outline-secondary btn-md">
+                <i class="fas fa-lock text-secondary"></i>
                 Private Information
               </button>
               <%= link_to "Hire Me", @employee, class: 'btn btn-block btn-md
@@ -91,19 +92,12 @@
           <hr />
 
           <!-- Location -->
-          <h6 class="text-secondary fw-medium">Location</h6>
-          <div class="d-flex align-items-center">
-            <i class="fas fa-map-marker-alt" title="Location"></i>
-
-            <span class="fw-medium ms-2"><%= @employee.location.full_address%></span>
-          </div>
-
+          <%= render Locations::Component.new(@employee.location) %>
           <!-- Timezone -->
-          <h6 class="text-secondary fw-medium">Timezone</h6>
-          <div class="d-flex align-items-center">
-            <i class="fas fa-clock" title="Timezone"></i>
-            <span class="fw-medium ms-2">Pacific Time (US & Canada) GMT-8</span>
-          </div>
+          <%= render Locations::TimeZoneComponent.new(@employee.location) %>
+
+
+
         </div>
       </div>
 

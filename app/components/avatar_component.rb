@@ -3,11 +3,21 @@ class AvatarComponent < ViewComponent::Base
 
   attr_reader :avatarable, :variant, :classes, :data
 
-  def initialize(avatarable:, variant: nil, classes: nil, data: {})
+  def initialize(avatarable:, variant: nil, classes: nil, width: 150, height: 150, data: {})
     @avatarable = avatarable
     @variant = variant
     @classes = classes
+    @width = width
+    @height = height
     @data = data
+  end
+
+  def width
+    @width
+  end
+
+  def height
+    @height
   end
 
   def classes
