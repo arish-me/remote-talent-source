@@ -4,8 +4,17 @@
 
 import { application } from "./application"
 
+import PlacesAutocomplete from 'stimulus-places-autocomplete'
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
 import FileUploadController from "./file_upload_controller.js"
 application.register("file-upload", FileUploadController)
+application.register('places', PlacesAutocomplete)
+// import PlacesController from "./places_controller.js"
+// application.register("places", PlacesController)
+
+//import PlacesAutocomplete from 'stimulus-places-autocomplete'
+
+//application.register('places', PlacesAutocomplete)

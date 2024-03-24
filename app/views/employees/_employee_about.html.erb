@@ -8,6 +8,7 @@
   <div class="col-md-8 my-2">
     <div class="row gy-2 gy-md-2">
       <div class="row">
+        <%= form.hidden_field :user_id, value: current_user.id %>
         <div
           class="container"
           data-controller="file-upload"
@@ -26,8 +27,7 @@
                 text-gray-900 animate-reverse-spin", title: t(".loading") %>
               </div>
             </div>
-            <%= form.hidden_field :avatar, value: form.object.avatar.signed_id,
-            id: "employee_avatar_hidden" if form.object.avatar.attached? %> <%=
+            <%= form.hidden_field :avatar, value: form.object.avatar.signed_id, id: "employee_avatar_hidden" if form.object.avatar.attached? &&  form.object.errors.empty?  %> <%=
             form.file_field :avatar, direct_upload: true, accept: "image/png,
             image/jpg, image/jpeg", data: { action: "file-upload#select
             direct-upload:initialize->file-upload#start
@@ -70,7 +70,9 @@
         "first_name",class: 'form-control' %>
         <em>Summarize yourself as a developer in a few words.</em>
       </div>
-      <div class="row">
+
+
+        <div class="row">
         <div class="col-md-6 mb-3">
           <%= form.label :primary_role_id, class: 'form-label' do %> Primary
           Role <span class="text-danger">*</span>
@@ -78,17 +80,35 @@
           |role| [role.name.titleize, role.id] }, {}, class: 'form-control' %>
         </div>
         <div class="col-md-6 mb-3">
-          <%= form.label :experience, class: 'form-label' %> <%= form.select
-          :experience, Employee::EXPERIENCE.map.with_index { |exp, index|
-          [exp.humanize, index] }, {}, class: 'form-control' %>
+          <%= form.label :experience, class: 'form-label' %>
+          <%= form.select :experience, Employee::EXPERIENCE.map.with_index { |exp, index| [exp.humanize, index] }, {}, class: 'form-control' %>
         </div>
       </div>
       <div class="mb-3">
-        <%= form.fields_for :open_roles do |open_role_fields| %> <%= form.label
-        :open_roles, class: 'form-label' do %> Open to following roles <% end %>
-        <%= open_role_fields.collection_select :primary_role_id,
-        PrimaryRole.all, :id, :name, {}, { class: 'form-control' } %> <% end %>
+        <%= form.label :open_roles, class: 'form-label' do %>
+          <div class="d-flex">Open Roles</div>
+          <p class="text-sm text-secondary">Select some open roles that you would consider taking.</p>
+        <% end %>
+
+        <div class="row">
+          <% PrimaryRole.all.in_groups_of(2, false) do |roles| %>
+            <div class="col-md-5">
+              <% roles.each do |role| %>
+                <div class="form-check">
+                  <%= check_box_tag "primary_role_ids[]", role.id, form.object.primary_role_ids.include?(role.id), class: "form-check-input" %>
+                  <%= label_tag "primary_role_#{role.id}", role.name.titleize, class: "form-check-label" %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
+
+
+      <div class="mb-3">
+        <%= render partial: 'location', locals: { form: form } %>
+      </div>
+
     </div>
   </div>
 </div>

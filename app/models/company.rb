@@ -6,12 +6,16 @@ class Company < ApplicationRecord
   validates_length_of :name, in: 3..30
 
   FORBIDDEN_EMAIL_DOMAINS = %w[gmail.com hotmail.com yahoo.com].freeze
-
   validates :company_email, presence: true, format: { with: /\A[^@\s]+@[^@\s]+\z/ },
                             exclusion: { in: FORBIDDEN_EMAIL_DOMAINS, message: 'is not allowed' }
-  validates :size, presence: true
+  validates :size, :bio, presence: true
+
   after_create :update_role
   after_create :activate_user
+
+  has_one :location, as: :source, dependent: :destroy
+
+  accepts_nested_attributes_for :location
 
   COMPANY_SIZE = {
     1 => '1-5',

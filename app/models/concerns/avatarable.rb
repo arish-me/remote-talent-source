@@ -5,13 +5,13 @@ module Avatarable
     has_one_attached :avatar do |attachable|
       attachable.variant :thumb, resize_to_limit: [32, 32]
       attachable.variant :thumb_2x, resize_to_limit: [64, 64]
-      attachable.variant :medium, combine_options: { resize: "50x50^", extent: "50x50", gravity: "center" }
+      attachable.variant :medium, resize_to_limit: [128, 128]
       attachable.variant :medium_2x, resize_to_limit: [256, 256]
     end
 
     validates :avatar, content_type: ['image/png', 'image/jpeg', 'image/jpg'],
       max_file_size: 2.megabytes
-    validates :avatar, attached: true, on: :update
+    validates :avatar, attached: true
 
     before_save :anonymize_avatar_filename
 

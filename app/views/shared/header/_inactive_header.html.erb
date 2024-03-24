@@ -1,10 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
         <a href="<%=root_path%>" class='navbar-brand py-2'>
       <span>
-         <%=image_tag 'logo.png', width: '50px'%>
+         <%=image_tag 'remotetalentsource.svg'%>
       </span>
-      Remote Talent Sourcing
     </a>
 
     <!-- Navigation Links -->
@@ -16,7 +15,7 @@
       <!-- Login and Signup Buttons -->
       <div class="d-flex">
         <% if user_signed_in? %>
-          <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-danger me-2" %>
+          <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-danger me-2" %>
         <% else %>
           <%= link_to "Login", new_user_session_path, class: "btn btn-outline-dark me-2" %>
           <%= link_to "Signup", new_user_registration_path, class: "btn btn-darl" %>

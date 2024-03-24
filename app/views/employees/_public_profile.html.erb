@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="bg-white shadow rounded-3 overflow-hidden">
+    <!-- Placeholder for Cover Image -->
+    <div class="ratio ratio-8x8 bg-dark d-none d-md-block"></div>
+
+    <div class="ratio ratio-16x9 bg-dark d-lg-none d-md-none">
+      <!-- Content for desktop and larger devices with a 16:9 aspect ratio -->
+    </div>
+
+    <!-- Profile Content -->
+    <div class="row g-0">
+      <!-- Information 1 -->
+      <div
+        class="col-12 col-md-6 col-lg-8 p-4 position-relative text-center text-md-start"
+      >
+        <!-- Information 1 content here -->
+        <div class="row justify-content-center justify-content-md-start">
+          <div
+            class="col-12 col-sm-8 col-md-6 col-lg-4 position-absolute top-0 start-0 translate-middle-y p-4"
+          >
+            <%= render AvatarComponent.new(avatarable: employee, variant:
+            :medium, data: { "file-upload-target": "image" }) %>
+          </div>
+          <div class="col-12 col-md-12 mt-5 pt-2">
+            <h1 class="fw-bold fs-4 py-4"><%= employee.heading%></h1>
+            <h5 class="fw-bold fs-4 py-2">
+              <%= employee.first_name%> <%= employee.last_name%>
+            </h5>
+            <p class="text-muted">
+              <%= employee.primary_role.name.humanize%>
+            </p>
+
+            <%= link_to "Hire Me", @employee, class: 'btn btn-block btn-md
+            btn-dark' %>
+
+            <!-- Placeholder for Private Information Button -->
+            <button class="btn btn-outline-secondary btn-md">
+              Private Information
+            </button>
+          </div>
+        </div>
+        <div
+          class="row justify-content-center justify-content-md-start my-5 d-none d-sm-block"
+        >
+          <%= employee.bio%>
+        </div>
+      </div>
+
+      <!-- Information 2 -->
+      <div
+        class="col-12 col-md-6 col-lg-4 p-4 order-md-2 order-lg-2 border-start d-flex flex-column gap-3"
+      >
+        <!-- Information 2 content here -->
+        <div class="d-flex align-items-center">
+          <i class="fas fa-check-circle text-success"></i>
+          <span class="text-success fw-medium ms-2"
+            ><%= employee.search_status.humanize%></span
+          >
+        </div>
+
+        <hr />
+
+        <h6 class="text-secondary fw-medium">Interested in roles</h6>
+
+
+        <%- employee.role_types.each do |role_type| %>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-check-circle" title="Full-time employment"></i>
+            <span class="fw-medium ms-2"><%=role_type.name.humanize%></span>
+          </div>
+        <%end%>
+
+         <%- employee.role_levels.each do |role_level| %>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-check-circle" title="Full-time employment"></i>
+            <span class="fw-medium ms-2"><%=role_level.name.humanize%></span>
+          </div>
+        <%end%>
+
+
+        <a
+          class="d-block bg-light border border-2 border-secondary border-dashed rounded-3 py-3 px-4 text-center text-decoration-none"
+          href="/pricing"
+          aria-label="Private Information"
+        >
+          <i class="fas fa-lock fa-2x text-secondary"></i>
+          <div class="mt-2 text-sm fw-medium text-secondary">
+            Private information
+          </div>
+          <div class="text-sm text-muted">
+            Information visible with a business profile only.
+          </div>
+        </a>
+
+        <hr />
+
+        <!-- Location -->
+
+        <%= render Locations::Component.new(@employee.location) %>
+        <!-- Timezone -->
+
+
+
+        <%= render Locations::TimeZoneComponent.new(@employee.location) %>
+
+      </div>
+    </div>
+
+    <!-- Information 3 -->
+    <div
+      class="col-12 col-lg-8 p-4 bg-light order-md-3 order-lg-3 d-lg-none d-md-none"
+    >
+      <!-- Information 3 content here -->
+      <%= employee.bio%>
+    </div>
+  </div>
+</div>

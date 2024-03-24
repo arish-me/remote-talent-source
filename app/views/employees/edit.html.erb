@@ -1,12 +1,16 @@
-<%if current_user.employee?%>
-<%= render "employee_profile", employee: @employee %>
-<%else%>
-  <%= render "form", employee: @employee %>
+<div class="row">
+  <div class="col-md-12 box shadow px-4 py-4 my-4 my-2 bg-light ">
+    <div class="d-flex justify-content-between">
+      <h5 class=" fw-bold">Update your developer profile</h5>
+      <%= link_to "Public Profile", @employee, class: 'btn btn-block btn-md btn-dark' %>
 
-  <br>
-
-  <div>
-    <%= link_to "Show this employee", @employee %> |
-    <%= link_to "Back to employees", employees_path %>
+    </div>
+    <div class="my-5">
+      <%= render "shared/messages", object: @employee %>
+      <%= render "form", employee: @employee %>
+    </div>
   </div>
-<%end%>
+  <div class="col-md-2"></div>
+</div>
+
+

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class EmployeesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_employee, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[public_profile]
+  before_action :set_employee, only: %i[show edit update destroy public_profile]
   before_action :build_associations, only: %i[edit]
 
   # GET /employees or /employees.json
@@ -16,6 +16,10 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   def new
     @employee = Employee.new
+    build_associations
+  end
+
+  def public_profile
   end
 
   # GET /employees/1/edit
@@ -67,6 +71,7 @@ class EmployeesController < ApplicationController
     @employee.employee_roles.build if @employee.employee_roles.empty?
     @employee.employee_levels.build if @employee.employee_levels.empty?
     @employee.build_social_link if @employee.social_link.nil?
+    @employee.build_location if @employee.location.nil?
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -74,15 +79,20 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
   end
 
+  def location_attributes
+    %i[id city state country address
+      latitude longitude _destroy]
+  end
   # Only allow a list of trusted parameters through.
   def employee_params
     params.require(:employee).permit(
       :first_name, :last_name, :primary_role_id, :experience,
-      :bio, :search_status, :heading, :avatar,
-      open_roles_attributes: %i[id primary_role_id _destroy],
-      employee_roles_attributes: %i[id role_type_id _destroy],
-      employee_levels_attributes: %i[id role_level_id destroy],
-      social_link_attributes: %i[id website linkedin github twitter gitlab stackoverflow]
+      :bio, :search_status, :heading, :avatar, :user_id,
+      primary_role_ids: [],
+      role_type_ids: [],
+      role_level_ids: [],
+      social_link_attributes: %i[id website linkedin github twitter gitlab stackoverflow _destroy],
+      location_attributes:
     )
   end
 end

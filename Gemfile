@@ -38,6 +38,7 @@ gem 'redis', '>= 4.0.1'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 gem 'sidekiq'
+gem "geocoder"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
@@ -51,6 +52,7 @@ gem 'bootsnap', require: false
 gem 'image_processing'
 gem 'view_component'
 gem 'inline_svg'
+gem "timezone_finder"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

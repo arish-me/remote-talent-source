@@ -2,10 +2,11 @@
 
 Rails.application.routes.draw do
   resources :companies
+  resources :additional_informations
   resources :employees do
     resources :specialities
   end
-
+  get 'public_profile/:id', to: 'employees#public_profile'
   get 'additional_information/:id/company', to: 'additional_information#company'
   get 'additional_information/:id/employee', to: 'additional_information#employee'
   post 'additional_information/:id/employee', to: 'additional_information#employee', as: 'employee_tab'
@@ -19,6 +20,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/confirmation_sent', to: 'users/confirmations#confirmation_sent', as: 'confirmation_sent'
   end
+
+  get '/geocode', to: 'locations#search'
+
   root 'home#index'
   get 'up' => 'rails/health#show', as: :rails_health_check
 end
