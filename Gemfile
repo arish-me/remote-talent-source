@@ -52,6 +52,7 @@ gem 'bootsnap', require: false
 gem 'image_processing'
 gem 'view_component'
 gem 'inline_svg'
+gem "timezone_finder"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

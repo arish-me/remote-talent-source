@@ -5,8 +5,15 @@ class Location < ApplicationRecord
   validates :address, presence: true
   validate :valid_address_format
 
+  before_save :handle_timezone
+
   def full_address
-    [city, state, country].compact.join(', ')
+    [state, country].compact.join(', ')
+  end
+
+  def handle_timezone
+    self.time_zone = TimezoneFinder.create.timezone_at(lat: latitude.to_d, lng: longitude.to_d)
+    self.utc_offset = ActiveSupport::TimeZone.new(time_zone).utc_offset
   end
 
   private
