@@ -3,8 +3,7 @@
 class AdditionalInformationsController < ApplicationController
   before_action :authenticate_user!
 
-  def new
-  end
+  def new; end
 
   def company
     if request.method == 'POST'

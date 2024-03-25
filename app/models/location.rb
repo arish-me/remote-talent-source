@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Location < ApplicationRecord
-  belongs_to :source, polymorphic: true
+  belongs_to :locatable, polymorphic: true, inverse_of: :locatable
   validates :address, presence: true
   validate :valid_address_format
 
@@ -19,7 +19,9 @@ class Location < ApplicationRecord
   private
 
   def valid_address_format
-    return if address.present? && country.present? && city.present? && state.present? && latitude.present? && longitude.present?
+    if address.present? && country.present? && city.present? && state.present? && latitude.present? && longitude.present?
+      return
+    end
 
     errors.add(:address, :invalid_address_format)
   end

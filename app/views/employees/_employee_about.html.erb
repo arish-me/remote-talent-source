@@ -84,26 +84,23 @@
           <%= form.select :experience, Employee::EXPERIENCE.map.with_index { |exp, index| [exp.humanize, index] }, {}, class: 'form-control' %>
         </div>
       </div>
+
+
       <div class="mb-3">
         <%= form.label :open_roles, class: 'form-label' do %>
-          <div class="d-flex">Open Roles</div>
-          <p class="text-sm text-secondary">Select some open roles that you would consider taking.</p>
+          <div class="d-flex">Open  Roles</div>
+          <p class="text-sm text-secondary">
+            Select roles that you would consider taking.
+          </p>
         <% end %>
 
-        <div class="row">
-          <% PrimaryRole.all.in_groups_of(2, false) do |roles| %>
-            <div class="col-md-5">
-              <% roles.each do |role| %>
-                <div class="form-check">
-                  <%= check_box_tag "primary_role_ids[]", role.id, form.object.primary_role_ids.include?(role.id), class: "form-check-input" %>
-                  <%= label_tag "primary_role_#{role.id}", role.name.titleize, class: "form-check-label" %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
+        <%= form.collection_check_boxes(:primary_role_ids, PrimaryRole.all, :id, :name) do |fs| %>
+          <div class="form-check">
+            <%= fs.check_box(class: "form-check-input") %> <%= fs.label(class:
+            "form-check-label") do %> <%= fs.text.titleize %> <% end %>
+          </div>
+        <% end %>
       </div>
-
 
       <div class="mb-3">
         <%= render partial: 'location', locals: { form: form } %>
