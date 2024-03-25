@@ -7,7 +7,10 @@
   <div class="col-md-8 my-2">
     <div class="mb-3">
       <div class="col-md-8 my-2">
-        <%=form.text_field :scheduling_link, class: 'form-control' %>
+        <div class="input-group mb-3">
+           <span class="input-group-text" id="basic-addon3">https://</span>
+          <%=form.text_field :scheduling_link, class: 'form-control' %>
+        </div>
       </div>
     </div>
   </div>
