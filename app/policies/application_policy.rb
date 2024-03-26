@@ -41,11 +41,19 @@ class ApplicationPolicy
   end
 
   def admin?
-    user&.employee?
+    user&.admin?
   end
 
   def record_owner?
     user == record.user
+  end
+
+  def employee?
+    user.employee?
+  end
+
+  def company?
+    user.company?
   end
 
   class Scope

@@ -1,16 +1,22 @@
-# frozen_string_literal: true
-
-class EmployeePolicy < ApplicationPolicy
+class CompanyPolicy < ApplicationPolicy
   def index?
     admin?
   end
 
+  def create?
+    record_owner? || admin?
+  end
+
   def update?
-    record_owner?
+    record_owner? || admin?
   end
 
   def show?
     record_owner? || admin?
+  end
+
+  def destroy?
+    admin?
   end
 
   class Scope < Scope

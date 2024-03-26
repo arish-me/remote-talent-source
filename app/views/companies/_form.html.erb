@@ -8,7 +8,7 @@
     <%= render partial: 'bio', locals: { form: form, company: company } %>
   </div>
     <%= form.hidden_field :user_id, value: current_user.id %>
-  <div class="d-flex ">
+  <div class="d-flex justify-content-end">
     <%= form.submit "Update Profile", class: 'btn btn-block btn-md btn-dark'
     %>
   </div>

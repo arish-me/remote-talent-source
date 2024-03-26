@@ -1,0 +1,69 @@
+<div class="mt-5">
+  <div class="container mb-3">
+    <div class="bg-white shadow rounded-3 overflow-hidden">
+      <!-- Placeholder for Cover Image -->
+      <div class="ratio ratio-8x8 bg-dark d-none d-md-block"></div>
+
+      <div class="ratio ratio-16x9 bg-dark d-lg-none d-md-none">
+        <!-- Content for desktop and larger devices with a 16:9 aspect ratio -->
+      </div>
+
+      <!-- Profile Content -->
+      <div class="row g-0">
+        <!-- Information 1 -->
+        <div
+          class="col-12 col-md-6 col-lg-8 p-4 position-relative text-center text-md-start"
+        >
+          <!-- Information 1 content here -->
+          <div class="row justify-content-center justify-content-md-start">
+            <div
+              class="col-12 col-sm-8 col-md-6 col-lg-4 position-absolute top-0 start-0 translate-middle-y p-4"
+            >
+              <%= render AvatarComponent.new(avatarable: company, variant:
+              :medium, data: { "file-upload-target": "image" }) %>
+            </div>
+            <div class="col-12 col-md-12 mt-5 pt-2">
+              <h1 class="fw-bold fs-4 py-4"><%= company.name%></h1>
+              <p class="text-muted"><%= company.company_email%></p>
+            </div>
+          </div>
+          <div
+            class="row justify-content-center justify-content-md-start my-5 d-none d-sm-block"
+          >
+            <%= company.bio%>
+          </div>
+        </div>
+
+        <!-- Information 2 -->
+        <div
+          class="col-12 col-md-6 col-lg-4 p-4 order-md-2 order-lg-2 border-start d-flex flex-column gap-3"
+        >
+          <h6 class="text-secondary fw-medium">Website</h6>
+          <div class="d-flex align-items-center">
+            <span class="text-dark fw-medium ms-2"><%= company.website %></span>
+          </div>
+
+          <hr />
+
+          <h6 class="text-secondary fw-medium">Company Size</h6>
+          <div class="d-flex align-items-center">
+            <span class="text-dark fw-medium ms-2"><%= company.size %></span>
+          </div>
+          <hr />
+          <!-- Location -->
+          <%= render Locations::Component.new(company.location) %>
+          <!-- Timezone -->
+          <%= render Locations::TimeZoneComponent.new(company.location) %>
+        </div>
+      </div>
+
+      <!-- Information 3 -->
+      <div
+        class="col-12 col-lg-8 p-4 bg-light order-md-3 order-lg-3 d-lg-none d-md-none"
+      >
+        <!-- Information 3 content here -->
+        <%= company.bio%>
+      </div>
+    </div>
+  </div>
+</div>

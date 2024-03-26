@@ -34,7 +34,7 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-            <%= render AvatarComponent.new(avatarable: current_user.employee, variant:
+            <%= render AvatarComponent.new(avatarable: current_user.employee || current_user.company, variant:
               :medium, width: 40, height: 40, data: { "file-upload-target": "image" }) %>
             </a>
             <ul class="dropdown-menu">

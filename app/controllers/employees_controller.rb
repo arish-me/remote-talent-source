@@ -8,14 +8,18 @@ class EmployeesController < ApplicationController
   # GET /employees or /employees.json
   def index
     @employees = Employee.all
+    authorize current_user
   end
 
   # GET /employees/1 or /employees/1.json
-  def show; end
+  def show
+    authorize @employee
+  end
 
   # GET /employees/new
   def new
     @employee = Employee.new
+    authorize current_user
     build_associations
   end
 
@@ -43,7 +47,7 @@ class EmployeesController < ApplicationController
 
   # PATCH/PUT /employees/1 or /employees/1.json
   def update
-    authorize @employee
+    # authorize @employee
     respond_to do |format|
       if @employee.update(employee_params)
         format.html { redirect_to edit_employee_path(@employee), notice: 'Profile was successfully updated.' }

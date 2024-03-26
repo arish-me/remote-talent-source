@@ -2,10 +2,11 @@
 
 class Employee < ApplicationRecord
   include Avatarable
+  include Employees::RichText
   validates_length_of :first_name, :last_name, in: 3..30
 
   validates_length_of :heading, in: 0..200
-  validates :open_roles, presence: true
+  # validates :open_roles, presence: true
   validates :employee_roles, presence: true
   validates :employee_levels, presence: true
 
@@ -34,12 +35,6 @@ class Employee < ApplicationRecord
   accepts_nested_attributes_for :location, allow_destroy: true
 
   enum search_status: %i[actively_looking open not_interested invisible]
-
-  def assign_params; end
-
-  def at_least_one_open_role
-    errors.add(:primary_roles, 'At least one open role must exist') if primary_roles.empty?
-  end
 
   private
 
