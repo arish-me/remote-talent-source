@@ -1,6 +1,6 @@
 <%= form.fields_for :location do |location_form| %>
   <div class="mb-3">
-    <%= form.label :address, class: 'form-label' do %> Where are you based?
+    <%= location_form.label :address, class: 'form-label' do %> Where are you based?
         <span class="text-danger">*</span>
         <%end%>
     <%= location_form.text_field :address,

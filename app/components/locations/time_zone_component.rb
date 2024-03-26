@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Locations
   class TimeZoneComponent < ApplicationComponent
     attr_reader :utc_offset

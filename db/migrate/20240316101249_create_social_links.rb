@@ -9,8 +9,7 @@ class CreateSocialLinks < ActiveRecord::Migration[7.1]
       t.string :twitter
       t.string :gitlab
       t.string :stackoverflow
-      t.integer :source_id, null: false
-      t.string :source_type, null: false
+      t.references :sociable, polymorphic: true, null: false, type: :uuid
 
       t.timestamps
     end

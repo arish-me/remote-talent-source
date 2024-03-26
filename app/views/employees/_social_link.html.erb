@@ -9,22 +9,34 @@
     <%= form.fields_for :social_link do |social_link_form| %>
       <div class="mb-3">
         <%= social_link_form.label :website, class: 'form-label' %>
-        <%= social_link_form.text_field :website, class: "form-control" %>
+        <div class="input-group mb-3">
+           <span class="input-group-text" id="basic-addon3">https://</span>
+          <%= social_link_form.text_field :website, class: "form-control" %>
+        </div>
       </div>
 
       <div class="mb-3">
         <%= social_link_form.label :linkedin, class: 'form-label' %>
-        <%= social_link_form.text_field :linkedin, class: "form-control" %>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon3">linkedin.com/in/</span>
+          <%= social_link_form.text_field :linkedin, class: "form-control" %>
+        </div>
       </div>
 
       <div class="mb-3">
         <%= social_link_form.label :github, class: 'form-label' %>
-        <%= social_link_form.text_field :github, class: "form-control" %>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon3">github.com/</span>
+          <%= social_link_form.text_field :github, class: "form-control" %>
+          </div>
       </div>
 
       <div class="mb-3">
         <%= social_link_form.label :twitter, class: 'form-label' %>
-        <%= social_link_form.text_field :twitter, class: "form-control" %>
+        <div class="input-group mb-3">
+           <span class="input-group-text" id="basic-addon3">twitter.com/</span>
+          <%= social_link_form.text_field :twitter, class: "form-control" %>
+        </div>
       </div>
     <% end %>
   </div>

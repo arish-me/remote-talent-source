@@ -7,24 +7,29 @@ class CompaniesController < ApplicationController
   # GET /companies or /companies.json
   def index
     @companies = Company.all
+    authorize current_user
   end
 
   # GET /companies/1 or /companies/1.json
-  def show; end
+  def show
+    authorize @company
+  end
 
   # GET /companies/new
   def new
     @company = Company.new
     @company.build_location if @company.location.nil?
+    authorize current_user
   end
 
   # GET /companies/1/edit
   def edit
-    #@company.location.build if @company.location.nil?
+    authorize @company
   end
 
   # POST /companies or /companies.json
   def create
+
     @company = Company.new(company_params)
 
     respond_to do |format|
@@ -40,6 +45,7 @@ class CompaniesController < ApplicationController
 
   # PATCH/PUT /companies/1 or /companies/1.json
   def update
+    authorize @company
     respond_to do |format|
       if @company.update(company_params)
         format.html { redirect_to company_url(@company), notice: 'Company was successfully updated.' }
@@ -53,6 +59,7 @@ class CompaniesController < ApplicationController
 
   # DELETE /companies/1 or /companies/1.json
   def destroy
+    authorize current_user
     @company.destroy!
 
     respond_to do |format|
@@ -70,11 +77,12 @@ class CompaniesController < ApplicationController
 
   def location_attributes
     %i[city state country address
-      latitude longitude _destroy]
+       latitude longitude _destroy]
   end
 
   # Only allow a list of trusted parameters through.
   def company_params
-    params.require(:company).permit(:user_id, :name, :company_email, :phone, :website, :size, :industry, :bio, :avatar, location_attributes: location_attributes)
+    params.require(:company).permit(:user_id, :name, :company_email, :phone, :website, :size, :industry, :bio, :avatar,
+                                    location_attributes:)
   end
 end

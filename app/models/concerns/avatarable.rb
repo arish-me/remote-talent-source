@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Avatarable
   extend ActiveSupport::Concern
 
@@ -10,7 +12,7 @@ module Avatarable
     end
 
     validates :avatar, content_type: ['image/png', 'image/jpeg', 'image/jpg'],
-      max_file_size: 2.megabytes
+                       max_file_size: 2.megabytes
     validates :avatar, attached: true
 
     before_save :anonymize_avatar_filename
@@ -18,9 +20,9 @@ module Avatarable
     private
 
     def anonymize_avatar_filename
-      if avatar.attached?
-        avatar.blob.filename = "avatar#{avatar.filename.extension_with_delimiter}"
-      end
+      return unless avatar.attached?
+
+      avatar.blob.filename = "avatar#{avatar.filename.extension_with_delimiter}"
     end
   end
 end

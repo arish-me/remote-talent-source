@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Locations
   class Component < ApplicationComponent
     def initialize(location)

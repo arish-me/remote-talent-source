@@ -8,22 +8,27 @@ class EmployeesController < ApplicationController
   # GET /employees or /employees.json
   def index
     @employees = Employee.all
+    authorize current_user
   end
 
   # GET /employees/1 or /employees/1.json
-  def show; end
+  def show
+    authorize @employee
+  end
 
   # GET /employees/new
   def new
     @employee = Employee.new
+    authorize current_user
     build_associations
   end
 
-  def public_profile
-  end
+  def public_profile; end
 
   # GET /employees/1/edit
-  def edit; end
+  def edit
+    authorize @employee
+  end
 
   # POST /employees or /employees.json
   def create
@@ -42,6 +47,7 @@ class EmployeesController < ApplicationController
 
   # PATCH/PUT /employees/1 or /employees/1.json
   def update
+    # authorize @employee
     respond_to do |format|
       if @employee.update(employee_params)
         format.html { redirect_to edit_employee_path(@employee), notice: 'Profile was successfully updated.' }
@@ -79,20 +85,19 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
   end
 
-  def location_attributes
-    %i[id city state country address
-      latitude longitude _destroy]
-  end
   # Only allow a list of trusted parameters through.
   def employee_params
     params.require(:employee).permit(
       :first_name, :last_name, :primary_role_id, :experience,
-      :bio, :search_status, :heading, :avatar, :user_id,
+      :bio, :search_status, :heading, :avatar, :user_id, :scheduling_link,
       primary_role_ids: [],
       role_type_ids: [],
       role_level_ids: [],
       social_link_attributes: %i[id website linkedin github twitter gitlab stackoverflow _destroy],
-      location_attributes:
+      location_attributes: %i[
+        id city state country address
+        latitude longitude _destroy
+      ]
     )
   end
 end

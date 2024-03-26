@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 # lib/tasks/import_countries.rake
 
 namespace :import do
-  desc "Import countries from SQL file"
+  desc 'Import countries from SQL file'
   task countries: :environment do
     sql_file = Rails.root.join('lib', 'assets', 'countries.sql')
 
@@ -12,8 +14,8 @@ namespace :import do
 
     sql = File.read(sql_file)
 
-  ActiveRecord::Base.connection.execute(sql)
+    ActiveRecord::Base.connection.execute(sql)
 
-  puts "Countries imported successfully!"
+    puts 'Countries imported successfully!'
   end
 end

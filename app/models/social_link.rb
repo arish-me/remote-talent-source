@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# models/social_link
 class SocialLink < ApplicationRecord
-  belongs_to :source, polymorphic: true
+  include Employees::HasOnlineProfiles
+  belongs_to :sociable, polymorphic: true
 end

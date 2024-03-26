@@ -2,9 +2,13 @@
 
 class Employee < ApplicationRecord
   include Avatarable
+  include Employees::RichText
   validates_length_of :first_name, :last_name, in: 3..30
 
-  #validates_length_of :heading, in: 3..30, on: :update
+  validates_length_of :heading, in: 0..200
+  # validates :open_roles, presence: true
+  validates :employee_roles, presence: true
+  validates :employee_levels, presence: true
 
   after_create :update_role
   after_create :activate_user
@@ -21,14 +25,14 @@ class Employee < ApplicationRecord
   has_many :employee_levels
   has_many :role_levels, through: :employee_levels
 
-  has_one :social_link, as: :source, dependent: :destroy
-  has_one :location, as: :source, dependent: :destroy
+  has_one :social_link, as: :sociable, dependent: :destroy
+  has_one :location, as: :locatable, dependent: :destroy
 
   accepts_nested_attributes_for :open_roles, allow_destroy: true
   accepts_nested_attributes_for :employee_roles, allow_destroy: true
   accepts_nested_attributes_for :employee_levels, allow_destroy: true
-  accepts_nested_attributes_for :social_link
-  accepts_nested_attributes_for :location
+  accepts_nested_attributes_for :social_link, allow_destroy: true
+  accepts_nested_attributes_for :location, allow_destroy: true
 
   enum search_status: %i[actively_looking open not_interested invisible]
 

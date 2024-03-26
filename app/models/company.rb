@@ -13,7 +13,7 @@ class Company < ApplicationRecord
   after_create :update_role
   after_create :activate_user
 
-  has_one :location, as: :source, dependent: :destroy
+  has_one :location, as: :locatable, dependent: :destroy
 
   accepts_nested_attributes_for :location
 
