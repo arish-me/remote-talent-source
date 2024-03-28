@@ -8,5 +8,7 @@ class HomeController < ApplicationController
       # redirect_to employee_tab_path(id: current_user.id)
       redirect_to new_additional_information_path(id: current_user.id)
     end
+
+    @employees = Employee.all
   end
 end
