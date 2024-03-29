@@ -7,6 +7,23 @@ class Location < ApplicationRecord
 
   before_save :handle_timezone
 
+  scope :top_countries, lambda { |limit = ENV.fetch('TOP_COUNTRIES', 5)|
+    group(:country)
+      .where.not(country: nil)
+      .order('count_all DESC')
+      .limit(limit)
+      .count
+      .keys
+  }
+
+  scope :top_utc_offsets, lambda { |limit = ENV.fetch('TOP_UTC_OFFSETS', 5)|
+    group(:utc_offset)
+      .where.not(utc_offset: nil)
+      .order('count_all DESC')
+      .limit(limit)
+      .count
+      .keys
+  }
   def full_address
     [state, country].compact.join(', ')
   end

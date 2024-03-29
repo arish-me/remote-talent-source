@@ -37,3 +37,6 @@ end
 PRIMARY_ROLES.each do |role_name|
   PrimaryRole.find_or_create_by(name: role_name)
 end
+
+@seed = false
+50.times.each { SeedsHelper.create_developer! } if @seed

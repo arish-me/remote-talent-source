@@ -55,7 +55,8 @@ gem 'inline_svg'
 gem 'redcarpet'
 gem 'timezone_finder'
 gem 'view_component'
-
+gem 'pg_search'
+gem 'pagy'
 group :development, :test do
   gem 'faker'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

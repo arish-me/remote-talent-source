@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :hiring
   resources :companies
   resources :additional_informations
   resources :employees do
