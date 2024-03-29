@@ -29,7 +29,6 @@ class CompaniesController < ApplicationController
 
   # POST /companies or /companies.json
   def create
-
     @company = Company.new(company_params)
 
     respond_to do |format|

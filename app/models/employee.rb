@@ -22,7 +22,7 @@ class Employee < ApplicationRecord
   has_many :employee_roles, dependent: :destroy
   has_many :role_types, through: :employee_roles
 
-  has_many :employee_levels
+  has_many :employee_levels, dependent: :destroy
   has_many :role_levels, through: :employee_levels
 
   has_one :social_link, as: :sociable, dependent: :destroy

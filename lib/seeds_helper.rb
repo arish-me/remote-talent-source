@@ -1,0 +1,100 @@
+# frozen_string_literal: true
+
+require 'open-uri'
+module SeedsHelper
+  class << self
+    def create_developer!(attributes = {})
+      first_name = Faker::Name.first_name
+      last_name = Faker::Name.first_name
+      email = "#{first_name.downcase}.#{last_name.downcase}@remotetalentsource.com"
+      user = create_user!(email)
+      location = locations.values.sample
+      attributes = {
+        user:,
+        first_name:,
+        last_name:,
+        primary_role_id: PrimaryRole.all.map(&:id).sample,
+        experience: 5,
+        heading: Faker::Lorem.sentence,
+        bio: Faker::Lorem.paragraph(sentence_count: 10),
+        search_status: Employee.search_statuses.keys.sample,
+        role_type_ids: [RoleType.all.sample.id],
+        role_level_ids: [RoleLevel.all.sample.id],
+        location_attributes: {
+          city: location.city,
+          state: location.state,
+          country: location.country,
+          address: location.address,
+          latitude: location.latitude,
+          longitude: location.longitude
+        },
+        social_link_attributes: social_links
+      }
+      Employee.find_or_create_by!(user:) do |developer|
+        developer.assign_attributes(attributes)
+        attach_developer_avatar(developer)
+        developer.save
+      end
+    end
+
+    def locations
+      location_seeds.map do |name, attrs|
+        [name.to_sym, Location.new(attrs)]
+      end.to_h
+    end
+
+    private
+
+    def create_user!(email, role: 1)
+      attributes = {
+        email:,
+        role:,
+        password: 'password',
+        password_confirmation: 'password',
+        confirmed_at: DateTime.current
+      }
+
+      User.find_or_create_by!(email:) do |user|
+        user.assign_attributes(attributes)
+      end
+    end
+
+    def location_seeds
+      @location_seeds ||= YAML.load_file(Rails.root.join('db', 'seeds', 'locations.yml'))
+    end
+
+    def developer_avatar_urls
+      @developer_avatar_urls ||= YAML.load_file(Rails.root.join('db', 'seeds', 'avatars.yml'))
+                                     .map { |image_id| unsplash_url_for(image_id) }
+    end
+
+    def attach_developer_avatar(record)
+      attach_avatar(record, developer_avatar_urls)
+    end
+
+    def attach_business_avatar(record)
+      attach_avatar(record, business_avatar_urls)
+    end
+
+    def attach_avatar(record, avatars)
+      uri = URI.parse(avatars[record.class.count])
+      file = uri.open
+      record.avatar.attach(io: file, filename: 'avatar.png')
+    end
+
+    def unsplash_url_for(image_id)
+      "https://images.unsplash.com/#{image_id}?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=512"
+    end
+
+    def social_links
+      {
+        website: Faker::Internet.url(host: 'example.com'),
+        linkedin: "linkedin.com/#{Faker::Internet.username(specifier: 1..20)}",
+        github: "github.com/#{Faker::Internet.username(specifier: 1..20)}",
+        twitter: Faker::Internet.username(specifier: 1..15),
+        gitlab: "gitlab.com/#{Faker::Internet.username(specifier: 1..20)}",
+        stackoverflow: "stackoverflow.com/users/#{Faker::Number.number(digits: 5)}"
+      }
+    end
+  end
+end

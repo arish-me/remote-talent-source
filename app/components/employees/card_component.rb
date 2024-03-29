@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 module Employees
   class CardComponent < ApplicationComponent
     with_collection_parameter :employee
-
-    private attr_reader :employee, :highlight_featured
 
     def initialize(employee:, highlight_featured: false)
       @employee = employee
@@ -19,5 +19,9 @@ module Employees
     def highlight?
       false
     end
+
+    private
+
+    attr_reader :employee, :highlight_featured
   end
 end

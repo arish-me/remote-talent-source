@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def user_not_authorized
-    flash[:alert] = I18n.t("errors.unauthorized")
+    flash[:alert] = I18n.t('errors.unauthorized')
     redirect_back_or_to root_path, allow_other_host: false
   rescue ActionController::Redirecting::UnsafeRedirectError
     redirect_to root_path

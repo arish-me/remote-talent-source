@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :employees do
     resources :specialities
   end
-  get 'public_profile/:id', to: 'employees#public_profile'
+  get 'talentsource/:id', to: 'employees#public_profile', as: 'public_profile'
   get 'additional_information/:id/company', to: 'additional_information#company'
   get 'additional_information/:id/employee', to: 'additional_information#employee'
   post 'additional_information/:id/employee', to: 'additional_information#employee', as: 'employee_tab'
