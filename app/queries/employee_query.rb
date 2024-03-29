@@ -76,7 +76,7 @@ class EmployeeQuery
 
   def query_and_paginate
     @_records = Employee.includes(:role_types, :role_levels)
-    # sort_records
+    sort_records
     country_filter_records
     # utc_offset_filter_records
     role_type_filter_records
@@ -124,11 +124,11 @@ class EmployeeQuery
   end
 
   def sort_records
-    # if sort == :freshest
-    #   @_records.merge!(Developer.recently_updated_first)
-    # else
-    #   @_records.merge!(Developer.newest_first)
-    # end
+    if sort == :mostviwed
+      @_records.merge!(Employee.recently_updated_first)
+    else
+      @_records.merge!(Employee.newest_first)
+    end
   end
 
   def country_filter_records
@@ -137,7 +137,7 @@ class EmployeeQuery
 
   def utc_offset_filter_records
     if utc_offsets.any?
-      @_records.merge!(Developer.filter_by_utc_offsets(utc_offsets))
+      @_records.merge!(Employee.filter_by_utc_offsets(utc_offsets))
     end
   end
 

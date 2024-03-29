@@ -35,19 +35,26 @@ class Employee < ApplicationRecord
   accepts_nested_attributes_for :social_link, allow_destroy: true
   accepts_nested_attributes_for :location, allow_destroy: true
 
-  scope :filter_by_role_levels, ->(role_levels) do
+  scope :filter_by_role_levels, lambda { |role_levels|
     joins(:employee_levels).where(employee_levels: { role_level_id: role_levels })
-  end
+  }
 
-  scope :filter_by_role_types, ->(role_types) do
+  scope :filter_by_role_types, lambda { |role_types|
     joins(:employee_roles).where(employee_roles: { role_type_id: role_types })
-  end
+  }
 
-  scope :filter_by_countries, ->(countries) do
-    joins(:location).where(locations: {country: countries})
-  end
+  scope :filter_by_countries, lambda { |countries|
+    joins(:location).where(locations: { country: countries })
+  }
 
-  pg_search_scope :filter_by_search_query, against: [:bio, :heading]
+  scope :filter_by_utc_offsets, lambda { |utc_offsets|
+    joins(:location).where(locations: { utc_offset: utc_offsets })
+  }
+
+  scope :newest_first, -> { order(created_at: :desc) }
+  scope :recently_updated_first, -> { order(updated_at: :desc) }
+
+  pg_search_scope :filter_by_search_query, against: %i[bio heading]
 
   enum search_status: %i[actively_looking open not_interested invisible]
 

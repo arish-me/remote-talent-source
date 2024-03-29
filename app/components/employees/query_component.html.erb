@@ -1,0 +1,148 @@
+<%= form_with url: hiring_index_path, method: :get do |form| %>
+<div class="accordion overflow-hidden" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item border-0">
+    <h2 class="accordion-header bg-light" id="panelsStayOpen-headingOne">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#panelsStayOpen-collapseOne"
+        aria-expanded="true"
+        aria-controls="panelsStayOpen-collapseOne"
+      >
+        Role Types
+      </button>
+    </h2>
+    <div
+      id="panelsStayOpen-collapseOne"
+      class="accordion-collapse collapse show"
+      aria-labelledby="panelsStayOpen-headingOne"
+    >
+      <div class="accordion-body">
+        <div class="d-flex align-items-center">
+          <div class="mb-3">
+            <%= form.collection_check_boxes(:role_types, role_types, :first,
+            :last, {include_hidden: false}) do |fs| %>
+            <div class="form-check">
+              <%= fs.check_box(checked: role_type_selected?(fs.object), class:
+              "form-check-input") %> <%= fs.label(class: "form-check-label") do
+              %> <%= fs.text.titleize %> <% end %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item border-0">
+    <h2 class="accordion-header bg-light" id="panelsStayOpen-headingOne">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#panelsStayOpen-collapseTwo"
+        aria-expanded="true"
+        aria-controls="panelsStayOpen-collapseTwo"
+      >
+        Role Level
+      </button>
+    </h2>
+    <div
+      id="panelsStayOpen-collapseTwo"
+      class="accordion-collapse collapse show"
+      aria-labelledby="panelsStayOpen-headingTwo"
+    >
+      <div class="accordion-body">
+        <div class="d-flex align-items-center">
+          <div class="mb-3">
+            <%= form.collection_check_boxes(:role_levels, role_levels, :first,
+            :last, {include_hidden: false}) do |fs| %>
+            <div class="form-check">
+              <%= fs.check_box(checked: role_level_selected?(fs.object),class:
+              "form-check-input") %> <%= fs.label(class: "form-check-label") do
+              %> <%= fs.text.titleize %> <% end %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item border-0">
+    <h2 class="accordion-header bg-light" id="panelsStayOpen-headingOne">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#panelsStayOpen-collapseThird"
+        aria-expanded="true"
+        aria-controls="panelsStayOpen-collapseThird"
+      >
+        Countries
+      </button>
+    </h2>
+    <div
+      id="panelsStayOpen-collapseThird"
+      class="accordion-collapse collapse show"
+      aria-labelledby="panelsStayOpen-headingThird"
+    >
+      <div class="accordion-body">
+        <div class="d-flex align-items-center">
+          <div class="mb-3">
+            <%= form.collection_check_boxes(:countries, top_countries, :first,
+            :last, {include_hidden: false}) do |fs| %>
+            <div class="form-check">
+              <%= fs.check_box(checked: country_selected?(fs.object),class:
+              "form-check-input") %> <%= fs.label(class: "form-check-label") do
+              %> <%= fs.text.titleize %> <% end %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item border-0">
+    <h2 class="accordion-header bg-light" id="panelsStayOpen-headingOne">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#panelsStayOpen-collapseFourth"
+        aria-expanded="true"
+        aria-controls="panelsStayOpen-collapseFourth"
+      >
+        Timezone
+      </button>
+    </h2>
+    <div
+      id="panelsStayOpen-collapseFourth"
+      class="accordion-collapse collapse show"
+      aria-labelledby="panelsStayOpen-headingFourth"
+    >
+      <div class="accordion-body">
+        <div class="d-flex align-items-center">
+          <div class="mb-3">
+            <%= form.collection_check_boxes(:utc_offsets, time_zones, :first,
+            :last, {include_hidden: false}) do |fs| %>
+            <div class="form-check">
+              <%= fs.check_box(checked: time_zone_selected?(fs.object),class:
+              "form-check-input") %> <%= fs.label(class: "form-check-label") do
+              %> <%= fs.text %> <% end %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <%= submit_tag "Apply", name: nil, class: "btn btn-block btn-md btn-dark" %>
+    <%= link_to "Clear", hiring_index_path, class: "btn btn-block btn-md
+    btn-outline-dark" %>
+  </div>
+</div>
+<% end %>
