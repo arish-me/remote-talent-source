@@ -13,8 +13,8 @@ module Employees
         :page,
         :include_not_interested,
         :sort,
-        { role_level_ids: [],
-          role_type_ids: [],
+        { role_levels: [],
+          role_types: [],
           badges: [],
           utc_offsets: [],
           countries: [] }

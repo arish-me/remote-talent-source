@@ -11,8 +11,9 @@ class HiringController < ApplicationController
 
   def query_params
     permitted = policy(%i[employees query]).permitted_attributes
-    params.permit(permitted).tap do |whitelisted|
-      whitelisted[:role_type_ids].reject!(&:empty?) if whitelisted[:role_type_ids].is_a?(Array)
-    end
+    params.permit(permitted)
+    # params.permit(permitted).tap do |whitelisted|
+    #   whitelisted[:role_type_ids].reject!(&:empty?) if whitelisted[:role_type_ids].is_a?(Array)
+    # end
   end
 end

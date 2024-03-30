@@ -13,8 +13,8 @@ class EmployeeQuery
     @specialty_ids = options.delete(:specialty_ids)
     @countries = options.delete(:countries)
     @utc_offsets = options.delete(:utc_offsets)
-    @role_types = options.delete(:role_type_ids)
-    @role_levels = options.delete(:role_level_ids)
+    @role_types = options.delete(:role_types)
+    @role_levels = options.delete(:role_levels)
     @badges = options.delete(:badges)
     @include_not_interested = options.delete(:include_not_interested)
     @search_query = options.delete(:search_query)
@@ -24,6 +24,10 @@ class EmployeeQuery
   def filters
     @filters = { sort:, utc_offsets:, role_types:, role_levels:, include_not_interested:, search_query:, countries:,
                  badges: }
+  end
+
+  def pagy
+    @pagy ||= query_and_paginate.first
   end
 
   def records
@@ -74,13 +78,13 @@ class EmployeeQuery
     ActiveModel::Type::Boolean.new.cast(@include_not_interested)
   end
 
-  private
+  #private
 
   def query_and_paginate
     @_records = Employee.includes(:role_types, :role_levels)
     sort_records
     country_filter_records
-    # utc_offset_filter_records
+    utc_offset_filter_records
     role_type_filter_records
     role_level_filter_records
     # search_status_filter_records

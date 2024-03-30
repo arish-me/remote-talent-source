@@ -61,7 +61,7 @@
       <!-- Developers::CountComponent -->
 
       <% if @query.records.any? %>
-        <%= render Employees::CardComponent.with_collection(@query.records) %>
+
 
         <% if @paywall_results %>
           <!-- Developers::CardComponent with records -->
@@ -70,7 +70,14 @@
              <!-- SubscriptionCTAComponent -->
            </div>
         <% else %>
-          <!-- PagyPaginatorComponent -->
+          <%= render PagyPaginatorComponent.new(id: "employees", pagy: @query.pagy, url_array: [:employees], container_classes: "divide-y divide-gray-200", options: @query.filters) do |component| %>
+            <% component.loading_icon do %>
+              <div class="py-4">
+                <%= render LoadingComponent.new %>
+              </div>
+            <% end %>
+            <%= render Employees::CardComponent.with_collection(@query.records) %>
+          <% end %>
         <% end %>
       <% else %>
         <!-- EmptyStateComponent -->
