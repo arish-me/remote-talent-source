@@ -5,10 +5,10 @@
 
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
     <li>
-      <%= link_to "Newest", hiring_index_path(sort: "newest"), class: "dropdown-item", remote: true %>
+      <%= render SortButtonComponent.new(title: "Newest", name: :sort, sort_type: :newest, active: sort === :newest) %>
     </li>
     <li>
-      <%= link_to "Most Viewed", hiring_index_path(sort: "mostviewed"), class: "dropdown-item", remote: true %>
+      <%= render SortButtonComponent.new(title: "Most Viewed", name: :sort, sort_type: :mostviewed, active: sort === :mostviewed) %>
     </li>
   </ul>
 </div>

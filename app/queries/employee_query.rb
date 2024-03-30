@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class EmployeeQuery
   include Pagy::Backend
 
-  alias_method :build_pagy, :pagy
+  alias build_pagy pagy
   attr_reader :options
 
   def initialize(options = {})
@@ -20,9 +22,9 @@ class EmployeeQuery
   end
 
   def filters
-    @filters = {sort:, utc_offsets:, role_types:, role_levels:, include_not_interested:, search_query:, countries:, badges:}
+    @filters = { sort:, utc_offsets:, role_types:, role_levels:, include_not_interested:, search_query:, countries:,
+                 badges: }
   end
-
 
   def records
     @records ||= query_and_paginate.last
@@ -37,7 +39,7 @@ class EmployeeQuery
   end
 
   def sort
-    @sort.to_s.downcase.to_sym == :newest ? :newest : :freshest
+    @sort.to_s.downcase.to_sym == :newest ? :newest : :mostviewed
   end
 
   def countries
@@ -105,22 +107,23 @@ class EmployeeQuery
 
   def badges_filter_records
     badges.each do |badge|
-      if badge == :high_response_rate
+      case badge
+      when :high_response_rate
         @_records.merge!(Developer.high_response_rate)
-      elsif badge == :source_contributor
+      when :source_contributor
         @_records.merge!(Developer.source_contributor)
-      elsif badge == :recently_added
+      when :recently_added
         @_records.merge!(Developer.recently_added)
-      elsif badge == :recently_updated
+      when :recently_updated
         @_records.merge!(Developer.recently_updated)
       end
     end
   end
 
   def specialty_filter_records
-    if specialty_ids.any?
-      @_records.merge!(Developer.with_specialty_ids(specialty_ids))
-    end
+    return unless specialty_ids.any?
+
+    @_records.merge!(Developer.with_specialty_ids(specialty_ids))
   end
 
   def sort_records
@@ -136,9 +139,9 @@ class EmployeeQuery
   end
 
   def utc_offset_filter_records
-    if utc_offsets.any?
-      @_records.merge!(Employee.filter_by_utc_offsets(utc_offsets))
-    end
+    return unless utc_offsets.any?
+
+    @_records.merge!(Employee.filter_by_utc_offsets(utc_offsets))
   end
 
   def role_type_filter_records

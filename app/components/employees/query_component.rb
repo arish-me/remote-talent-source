@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Employees
   class QueryComponent < ApplicationComponent
     attr_reader :query, :user, :form_id

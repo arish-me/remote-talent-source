@@ -1,13 +1,13 @@
-class SortButtonComponent < ApplicationComponent
-  attr_reader :title, :value, :form_id
+# frozen_string_literal: true
 
-  def initialize(title:, name:, value:, active:, form_id:, scope: nil)
+class SortButtonComponent < ApplicationComponent
+  attr_reader :title, :sort_type
+
+  def initialize(title:, name:, sort_type:, active:)
     @title = title
     @name = name
-    @value = value
+    @sort_type = sort_type
     @active = active
-    @form_id = form_id
-    @scope = scope
   end
 
   def name
@@ -20,5 +20,9 @@ class SortButtonComponent < ApplicationComponent
 
   def active?
     !!@active
+  end
+
+  def active_class
+    active? ? 'active' : ''
   end
 end

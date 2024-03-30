@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Employees
   class QueryPolicy < ApplicationPolicy
     def permitted_attributes
@@ -11,18 +13,18 @@ module Employees
         :page,
         :include_not_interested,
         :sort,
-        role_level_ids: [],
-        role_type_ids: [],
-        badges: [],
-        utc_offsets: [],
-        countries: []
+        { role_level_ids: [],
+          role_type_ids: [],
+          badges: [],
+          utc_offsets: [],
+          countries: [] }
       ]
     end
 
     def paywalled_attributes
       [
         :search_query,
-        specialty_ids: []
+        { specialty_ids: [] }
       ]
     end
   end
