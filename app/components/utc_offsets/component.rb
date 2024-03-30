@@ -18,6 +18,7 @@ module UtcOffsets
 
     def utc_offset
       utc_offset = @utc_offset.fdiv(60 * 60)
+
       return if utc_offset.zero?
 
       number_with_precision(utc_offset, precision: 1, strip_insignificant_zeros: true).to_i

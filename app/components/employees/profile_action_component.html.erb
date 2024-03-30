@@ -1,0 +1,11 @@
+<div class="mt-4 d-flex gap-3 md:mt-0">
+  <% if update_profile? %> <%= link_to edit_employee_path(user.employee), class:
+  "btn btn-primary d-inline-flex align-items-center" do %>
+  <i class="fas fa-plus me-2"></i>
+  <!-- Adding margin to the right -->
+  <%= t(".edit_profile") %> <% end %> <% else %> <%= link_to new_employee_path,
+  class: "btn btn-primary d-inline-flex align-items-center" do %>
+  <i class="fas fa-plus me-2"></i>
+  <!-- Adding margin to the right -->
+  <%= t(".add_profile") %> <% end %> <% end %>
+</div>

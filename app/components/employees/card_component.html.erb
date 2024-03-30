@@ -1,0 +1,26 @@
+<%= link_to public_profile_path(employee), class: "text-decoration-none developer-card-link" do %>
+<div class="developer-card bg-white rounded-1 overflow-hidden p-4 ">
+  <div class="d-flex position-relative">
+    <div class="bd-placeholder-img flex-shrink-0 me-3">
+      <%= render AvatarComponent.new(avatarable: employee, variant: :medium) %>
+    </div>
+    <div class="px-2">
+      <div class="d-flex justify-content-between border-bottom py-2 mb-3">
+        <h4 class="mt-0 py-2"><%= hero %></h4>
+        <div class="d-flex align-items-center">
+          <i class="fas fa-check-circle text-success"></i>
+          <span class="text-success fw-medium ms-2"
+            ><%= employee.search_status.humanize%></span
+          >
+        </div>
+      </div>
+
+      <p class="line-clamp-3 break-words"><%= employee.plain_text_bio %></p>
+
+      <div class="d-flex justify-content-end">
+        <a href="#" class="btn btn-primary">Hire Me</a>
+      </div>
+    </div>
+  </div>
+</div>
+<%end %>

@@ -4,7 +4,14 @@
 
 import { application } from "./application"
 
+
 import PlacesAutocomplete from 'stimulus-places-autocomplete'
+
+import AccessibilityController from "./accessibility_controller.js"
+application.register("accessibility", AccessibilityController)
+
+import Forms__KeyboardSubmitController from "./keyboard_submit_controller.js"
+application.register("forms--keyboard-submit", Forms__KeyboardSubmitController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)

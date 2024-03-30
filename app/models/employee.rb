@@ -3,6 +3,7 @@
 class Employee < ApplicationRecord
   include Avatarable
   include Employees::RichText
+  include PgSearch::Model
   validates_length_of :first_name, :last_name, in: 3..30
 
   validates_length_of :heading, in: 0..200
@@ -22,7 +23,7 @@ class Employee < ApplicationRecord
   has_many :employee_roles, dependent: :destroy
   has_many :role_types, through: :employee_roles
 
-  has_many :employee_levels
+  has_many :employee_levels, dependent: :destroy
   has_many :role_levels, through: :employee_levels
 
   has_one :social_link, as: :sociable, dependent: :destroy
@@ -33,6 +34,27 @@ class Employee < ApplicationRecord
   accepts_nested_attributes_for :employee_levels, allow_destroy: true
   accepts_nested_attributes_for :social_link, allow_destroy: true
   accepts_nested_attributes_for :location, allow_destroy: true
+
+  scope :filter_by_role_levels, lambda { |role_levels|
+    joins(:employee_levels).where(employee_levels: { role_level_id: role_levels })
+  }
+
+  scope :filter_by_role_types, lambda { |role_types|
+    joins(:employee_roles).where(employee_roles: { role_type_id: role_types })
+  }
+
+  scope :filter_by_countries, lambda { |countries|
+    joins(:location).where(locations: { country: countries })
+  }
+
+  scope :filter_by_utc_offsets, lambda { |utc_offsets|
+    joins(:location).where(locations: { utc_offset: utc_offsets })
+  }
+
+  scope :newest_first, -> { order(created_at: :desc) }
+  scope :recently_updated_first, -> { order(updated_at: :desc) }
+
+  pg_search_scope :filter_by_search_query, against: %i[bio heading]
 
   enum search_status: %i[actively_looking open not_interested invisible]
 

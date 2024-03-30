@@ -52,11 +52,13 @@ gem 'bootsnap', require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'image_processing'
 gem 'inline_svg'
+gem 'pagy'
+gem 'pg_search'
 gem 'redcarpet'
 gem 'timezone_finder'
 gem 'view_component'
-
 group :development, :test do
+  gem 'faker'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
 end

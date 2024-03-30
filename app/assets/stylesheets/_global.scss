@@ -31,6 +31,14 @@ body {
 
 }
 
+.developer-card:hover{
+  background: #F9FAFB !important;
+}
+
+.developer-card-link, .developer-card-link * {
+  color: inherit; /* Or any color you prefer */
+  text-decoration: none !important;
+}
 
 .ratio-8x8 {
     --bs-aspect-ratio: 17.25%;
@@ -43,4 +51,17 @@ section{
     background: #fff;  /* fallback for old browsers */
     padding:30px 0;
 }
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
+
 
