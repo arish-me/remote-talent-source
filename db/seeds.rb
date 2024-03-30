@@ -40,3 +40,18 @@ end
 
 @seed = false
 50.times.each { SeedsHelper.create_developer! } if @seed
+
+
+email = "admin@example.com"
+attributes = {
+  email:,
+  password: "admin@example.com",
+  password_confirmation: "admin@example.com",
+  confirmed_at: DateTime.current,
+  role: 3
+}
+
+User.find_or_create_by!(email:) do |user|
+  user.assign_attributes(attributes)
+end
+

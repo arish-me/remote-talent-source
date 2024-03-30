@@ -57,6 +57,7 @@ gem 'pg_search'
 gem 'redcarpet'
 gem 'timezone_finder'
 gem 'view_component'
+gem "pretender"
 group :development, :test do
   gem 'faker'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

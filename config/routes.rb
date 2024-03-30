@@ -22,7 +22,11 @@ Rails.application.routes.draw do
     get '/confirmation_sent', to: 'users/confirmations#confirmation_sent', as: 'confirmation_sent'
   end
 
-  get '/geocode', to: 'locations#search'
+  # admin
+  namespace :admin do
+    resource :impersonate, only: [:create, :destroy]
+    resources :users, only: [:index]
+  end
 
   root 'home#index'
   get 'up' => 'rails/health#show', as: :rails_health_check

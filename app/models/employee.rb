@@ -58,6 +58,10 @@ class Employee < ApplicationRecord
 
   enum search_status: %i[actively_looking open not_interested invisible]
 
+  def name
+    first_name + ' ' + last_name
+  end
+
   private
 
   EXPERIENCE = [
