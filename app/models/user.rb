@@ -27,4 +27,10 @@ class User < ApplicationRecord
       transitions from: :active, to: :inactive
     end
   end
+
+  scope :search, ->(query) do
+    query = "%#{query}%"
+    left_outer_joins(:employee, :company)
+      .where("email ILIKE ?", query)
+  end
 end

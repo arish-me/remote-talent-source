@@ -1,0 +1,56 @@
+<%= render Admin::ContainerComponent.new do %>
+<div class="card bg-light">
+  <div class="card-header">
+    <h5 class="card-title">Users</h5>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Email</th>
+            <th>Employee</th>
+            <th>Company</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <%- @users.each_with_index do |user, index|%>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= user.email %></td>
+              <td>
+                <% if (employee = user.employee) %>
+                  <div class="d-flex ">
+                    <%= render AvatarComponent.new(avatarable: employee, variant: :thumb, classes: "rounded", width: 50, height: 50) %>
+                    <div class="ms-2 my-2">
+                      <%= user.employee.name %>
+                    </div>
+                  </div>
+                <% end %>
+              </td>
+              <td>
+                <% if (company = user.company) %>
+                  <div class="d-flex ">
+                    <%= render AvatarComponent.new(avatarable: company, variant: :thumb, classes: "rounded", width: 50, height: 50) %>
+                    <div class="ms-2 my-2">
+                      <%= user.company.name %>
+                    </div>
+                  </div>
+                <% end %>
+              </td>
+              <td>
+                <%= render Admin::BasicLinkPostComponent.new(t(".impersonate"), admin_impersonate_path, name: :email, value: user.email) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%== pagy_nav @pagy %>
+  </div>
+</div>
+
+<% end %>

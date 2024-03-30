@@ -1,5 +1,6 @@
 <%if user_signed_in? %>
-  <%= render partial: 'shared/header/private_header' %>
+  <%= render partial: 'shared/header/private_header' if current_user.employee? || current_user.company? %>
+  <%= render partial: 'shared/header/admin_header' if current_user.admin? %>
 <%else%>
   <%= render partial: 'shared/header/public_header' %>
 <%end%>

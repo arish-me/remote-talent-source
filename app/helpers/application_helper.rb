@@ -4,6 +4,8 @@ module ApplicationHelper
   def profile_link
     if current_user.employee?
       edit_employee_path(current_user.employee)
+    elsif current_user.admin?
+
     else
       edit_company_path(current_user.company)
     end
