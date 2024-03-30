@@ -22,3 +22,8 @@ application.register('places', PlacesAutocomplete)
 
 import ToastController from "./toast_controller.js"
 application.register("toast", ToastController)
+
+
+import ActionTextController from "./action_text_controller.js"
+application.register("action-text", ActionTextController)
+
