@@ -27,3 +27,6 @@ application.register("toast", ToastController)
 import ActionTextController from "./action_text_controller.js"
 application.register("action-text", ActionTextController)
 
+import ChoicesController from "./choices_controller.js"
+application.register("choices", ChoicesController)
+

@@ -8,40 +8,29 @@
   <div class="col-md-8 my-2">
     <div class="row gy-2 gy-md-2">
       <div class="row">
-        <div
-          class="container"
-          data-controller="file-upload"
-          data-file-upload-visibility-class="d-none"
-          data-file-upload-loading-class="opacity-50"
-        >
+        <div class="container" data-controller="file-upload" data-file-upload-visibility-class="d-none"
+          data-file-upload-loading-class="opacity-50">
           <div class="d-flex align-items-center">
             <div class="position-relative">
-              <%= render AvatarComponent.new(avatarable: company, variant:
-              :medium, data: { "file-upload-target": "image" }) %>
-              <div
-                data-file-upload-target="activity"
-                class="d-none position-absolute top-50 start-50 translate-middle"
-              >
-                <%= inline_svg_tag "icons/outline/refresh.svg", class: "w-8 h-8
-                text-gray-900 animate-reverse-spin", title: t(".loading") %>
-              </div>
+              <%= render AvatarComponent.new(avatarable: company, variant: :medium, data: { "file-upload-target"
+                : "image" }) %>
+                <div data-file-upload-target="activity"
+                  class="d-none position-absolute top-50 start-50 translate-middle">
+                  <%= inline_svg_tag "icons/outline/refresh.svg" , class: "w-8 h-8
+                text-gray-900 animate-reverse-spin" , title: t(".loading") %>
+                </div>
             </div>
-            <%= form.hidden_field :avatar, value: form.object.avatar.signed_id,
-            id: "company_avatar_hidden" if form.object.avatar.attached? &&
-            form.object.errors.empty? %> <%= form.file_field :avatar,
-            direct_upload: true, accept: "image/png, image/jpg, image/jpeg",
-            data: { action: "file-upload#select
+            <%= form.hidden_field :avatar, value: form.object.avatar.signed_id, id: "company_avatar_hidden" if
+              form.object.avatar.attached? && form.object.errors.empty? %>
+              <%= form.file_field :avatar, direct_upload: true, accept: "image/png, image/jpg, image/jpeg" , data: {
+                action: "file-upload#select
             direct-upload:initialize->file-upload#start
-            direct-upload:error->file-upload#error" }, class: "d-none" %> <%=
-            form.label :avatar, company.avatar.attached? ? t(".change_photo") :
-            t("upload_photo") , class: "btn btn-sm btn-outline-dark form-label"
-            %>
+            direct-upload:error->file-upload#error" }, class: "d-none" %>
+                <%= form.label :avatar, company.avatar.attached? ? t(".change_photo") : t("upload_photo") ,
+                  class: "btn btn-sm btn-outline-dark form-label" %>
           </div>
 
-          <div
-            data-file-upload-target="error"
-            class="d-none bg-red-50 border-start border-4 border-red-400 p-4 mt-4"
-          >
+          <div data-file-upload-target="error" class="d-none bg-red-50 border-start border-4 border-red-400 p-4 mt-4">
             <div class="ms-3">
               <p class="text-sm text-red-700">
                 <%= t(".something_went_wrong") %>
@@ -52,37 +41,36 @@
       </div>
       <div class="mb-3">
         <%= form.label :name, class: 'form-label' do %> Company Name
-        <span class="text-danger">*</span>
-        <% end %> <%= form.text_field :name, autofocus: true, autocomplete:
-        "name",class: 'form-control' %>
+          <span class="text-danger">*</span>
+          <% end %>
+            <%= form.text_field :name, autofocus: true, autocomplete: "name" ,class: 'form-control' %>
       </div>
 
       <div class="mb-3">
         <%= form.label :company_email, class: 'form-label' do %> Company Email
-        <span class="text-danger">*</span>
-        <% end %> <%= form.email_field :company_email, autofocus: true,
-        autocomplete: "company_email", class: 'form-control' %>
+          <span class="text-danger">*</span>
+          <% end %>
+            <%= form.email_field :company_email, autofocus: true, autocomplete: "company_email" , class: 'form-control'
+              %>
       </div>
-      <%= render partial: 'location', locals: {form: form} %>
-      <div class="mb-3">
-        <%= form.label :phone, class: 'form-label' do %> Phone <% end %> <%=
-        form.text_field :phone, autofocus: true, autocomplete: "phone", class:
-        'form-control' %>
-      </div>
+      <%= render partial: 'location' , locals: {form: form} %>
+        <div class="mb-3">
+          <%= form.label :phone, class: 'form-label' do %> Phone <% end %>
+              <%= form.text_field :phone, autofocus: true, autocomplete: "phone" , class: 'form-control' %>
+        </div>
 
-      <div class="mb-3">
-        <%= form.label :website, class: 'form-label' do %> Website <% end %> <%=
-        form.text_field :website, autofocus: true, autocomplete: "webiste",
-        class: 'form-control' %>
-      </div>
+        <div class="mb-3">
+          <%= form.label :website, class: 'form-label' do %> Website <% end %>
+              <%= form.text_field :website, autofocus: true, autocomplete: "webiste" , class: 'form-control' %>
+        </div>
 
-      <div class="mb-3">
-        <%= form.label :size, class: 'form-label' do %> Size of company
-        <span class="text-danger">*</span>
-        <% end %> <%= form.select :size,
-        options_for_select(Company::COMPANY_SIZE.invert.to_a, selected:
-        @company.size), { prompt: 'Select size' }, class: 'form-select' %>
-      </div>
+        <div class="mb-3">
+          <%= form.label :size, class: 'form-label' do %> Size of company
+            <span class="text-danger">*</span>
+            <% end %>
+              <%= form.select :size, options_for_select(Company::COMPANY_SIZE.invert.to_a, selected: @company.size), {
+                prompt: 'Select size' }, class: 'form-select' %>
+        </div>
     </div>
   </div>
 </div>
