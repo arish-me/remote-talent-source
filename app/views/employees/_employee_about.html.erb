@@ -9,74 +9,8 @@
     <div class="row gy-2 gy-md-2">
       <div class="row">
         <%= form.hidden_field :user_id, value: current_user.id %>
-        <%if false %>
-        <div
 
-          class="container"
-          data-controller="file-upload"
-          data-file-upload-visibility-class="d-none"
-          data-file-upload-loading-class="opacity-50"
-        >
-          <div class="d-flex align-items-center">
-            <div class="position-relative">
-              <%= render AvatarComponent.new(
-                avatarable: employee,
-                variant: :medium,
-                data: {
-                  "file-upload-target": "image",
-                },
-              ) %>
-              <div
-                data-file-upload-target="activity"
-                class="
-                  d-none position-absolute top-50 start-50 translate-middle
-                "
-              >
-                <%= inline_svg_tag "icons/outline/refresh.svg",
-                class:
-                  "w-8 h-8
-                                text-gray-900 animate-reverse-spin",
-                title: t(".loading") %>
-              </div>
-            </div>
-            <%= if form.object.avatar.attached? && form.object.errors.empty?
-              form.hidden_field :avatar,
-                                value: form.object.avatar.signed_id,
-                                id: "employee_avatar_hidden"
-            end %>
-            <%= form.file_field :avatar,
-                            direct_upload: true,
-                            accept:
-                              "image/png,
-                        image/jpg, image/jpeg",
-                            data: {
-                              action:
-                                "file-upload#select
-                        direct-upload:initialize->file-upload#start
-                        direct-upload:error->file-upload#error",
-                            },
-                            class: "d-none" %>
-            <%= form.label :avatar,
-                       employee.avatar.attached? ? t(".change_photo") : t("upload_photo"),
-                       class: "btn btn-sm btn-outline-dark form-label" %>
-          </div>
-
-          <div
-            data-file-upload-target="error"
-            class="
-              d-none bg-red-50 border-start border-4 border-red-400 p-4 mt-4
-            "
-          >
-            <div class="ms-3">
-              <p class="text-sm text-red-700">
-                <%= t(".something_went_wrong") %>
-              </p>
-            </div>
-          </div>
-        </div>
-      <% end %>
-
-      <%= render partial: 'avatar', locals: {form: form, employee: employee }%>
+        <%= render partial: 'avatar', locals: {form: form, employee: employee }%>
 
       </div>
 

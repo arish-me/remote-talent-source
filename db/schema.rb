@@ -57,6 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_193210) do
     t.uuid "user_id", null: false
     t.string "name"
     t.string "company_email"
+    t.string "subtitle"
     t.string "phone"
     t.string "website"
     t.string "size"

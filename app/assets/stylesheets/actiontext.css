@@ -29,3 +29,7 @@
   padding: 0 !important;
   max-width: 100% !important;
 }
+
+.trix-max-height {
+    min-height: 300px; /* Adjust the max-height value as needed */
+}

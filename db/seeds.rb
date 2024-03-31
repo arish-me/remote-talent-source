@@ -48,7 +48,8 @@ attributes = {
   password: "admin@example.com",
   password_confirmation: "admin@example.com",
   confirmed_at: DateTime.current,
-  role: 3
+  role: 3,
+  current_state: 'active'
 }
 
 User.find_or_create_by!(email:) do |user|
