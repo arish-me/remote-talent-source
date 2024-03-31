@@ -60,6 +60,7 @@ gem 'view_component'
 gem "pretender"
 group :development, :test do
   gem 'faker'
+  gem 'rubocop'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
 end
@@ -67,8 +68,11 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'letter_opener'
-  gem 'rubocop'
+  #gem 'rubocop'
   gem 'web-console'
+  gem "erb-formatter", "~> 0.7.2"
+
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
@@ -77,3 +81,5 @@ group :development do
 end
 
 gem 'devise', '~> 4.9'
+
+

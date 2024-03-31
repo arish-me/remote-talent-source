@@ -16,14 +16,14 @@ class AvatarComponent < ViewComponent::Base
 
   def classes
     [
-      @classes || 'h-50 w-50 rounded-circle',
+      @classes || 'h-32 w-32 rounded-circle',
       'object-fit-cover',
       'bg-gray-300'
     ]
   end
 
   def avatar_image_url
-    return image_path(DEFAULT_AVATAR) unless avatarable&.avatar&.attached? && avatarable&.avatar&.record&.valid?
+    return image_path(DEFAULT_AVATAR) unless avatarable&.avatar&.attached?
 
     url_for variant ? avatarable.avatar.variant(variant) : avatarable.avatar
   end

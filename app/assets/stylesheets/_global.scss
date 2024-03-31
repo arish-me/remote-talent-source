@@ -5,7 +5,7 @@
 html,
 body {
     height: 100%;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: "Inter var";
     font-size: 14px;
 }
 
@@ -15,7 +15,7 @@ body {
   border: 1px solid red;
 }
 
-
+ .trix-button-group--file-tools { display: none !important; }
 .service-card{
   border-radius: 4px;
   background: #fff;

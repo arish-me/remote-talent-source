@@ -9,100 +9,83 @@
     <div class="row gy-2 gy-md-2">
       <div class="row">
         <%= form.hidden_field :user_id, value: current_user.id %>
-        <div
-          class="container"
-          data-controller="file-upload"
-          data-file-upload-visibility-class="d-none"
-          data-file-upload-loading-class="opacity-50"
-        >
-          <div class="d-flex align-items-center">
-            <div class="position-relative">
-              <%= render AvatarComponent.new(avatarable: employee, variant:
-              :medium, data: { "file-upload-target": "image" }) %>
-              <div
-                data-file-upload-target="activity"
-                class="d-none position-absolute top-50 start-50 translate-middle"
-              >
-                <%= inline_svg_tag "icons/outline/refresh.svg", class: "w-8 h-8
-                text-gray-900 animate-reverse-spin", title: t(".loading") %>
-              </div>
-            </div>
-            <%= form.hidden_field :avatar, value: form.object.avatar.signed_id, id: "employee_avatar_hidden" if form.object.avatar.attached? &&  form.object.errors.empty?  %> <%=
-            form.file_field :avatar, direct_upload: true, accept: "image/png,
-            image/jpg, image/jpeg", data: { action: "file-upload#select
-            direct-upload:initialize->file-upload#start
-            direct-upload:error->file-upload#error" }, class: "d-none" %> <%=
-            form.label :avatar, employee.avatar.attached? ? t(".change_photo") :
-            t("upload_photo") , class: "btn btn-sm btn-outline-dark form-label"
-            %>
-          </div>
 
-          <div
-            data-file-upload-target="error"
-            class="d-none bg-red-50 border-start border-4 border-red-400 p-4 mt-4"
-          >
-            <div class="ms-3">
-              <p class="text-sm text-red-700">
-                <%= t(".something_went_wrong") %>
-              </p>
-            </div>
-          </div>
-        </div>
+        <%= render partial: 'avatar', locals: {form: form, employee: employee }%>
+
       </div>
 
       <div class="mb-3">
-        <%= form.label :first_name, class: 'form-label' do %> First Name
-        <span class="text-danger">*</span>
-        <% end %> <%= form.text_field :first_name, autofocus: true,
-        autocomplete: "first_name",class: 'form-control' %>
+        <%= form.label :first_name, class: 'form-label' do %>
+          First Name
+          <span class="text-danger">*</span>
+        <% end %>
+        <%= form.text_field :first_name,
+                        autofocus: true,
+                        autocomplete: "first_name",
+                        class: "form-control" %>
       </div>
       <div class="mb-3">
-        <%= form.label :last_name, class: 'form-label' do %> Last Name
-        <span class="text-danger">*</span>
-        <% end %> <%= form.text_field :last_name, autofocus: true, autocomplete:
-        "first_name",class: 'form-control' %>
+        <%= form.label :last_name, class: 'form-label' do %>
+          Last Name
+          <span class="text-danger">*</span>
+        <% end %>
+        <%= form.text_field :last_name,
+                        autofocus: true,
+                        autocomplete: "first_name",
+                        class: "form-control" %>
       </div>
 
       <div class="mb-3">
-        <%= form.label :heading, class: 'form-label' do %> Profile heading
-        <span class="text-danger">*</span>
-        <% end %> <%= form.text_field :heading, autocomplete:
-        "first_name",class: 'form-control' %>
+        <%= form.label :heading, class: 'form-label' do %>
+          Profile heading
+          <span class="text-danger">*</span>
+        <% end %>
+        <%= form.text_field :heading, autocomplete: "first_name", class: "form-control" %>
         <em>Summarize yourself as a developer in a few words.</em>
       </div>
 
-
-        <div class="row">
+      <div class="row">
         <div class="col-md-6 mb-3">
-          <%= form.label :primary_role_id, class: 'form-label' do %> Primary
-          Role <span class="text-danger">*</span>
-          <% end %> <%= form.select :primary_role_id, PrimaryRole.all.map {
-          |role| [role.name.titleize, role.id] }, {}, class: 'form-control' %>
+          <%= form.label :primary_role_id, class: 'form-label' do %>
+            Primary Role
+            <span class="text-danger">*</span>
+          <% end %>
+          <%= form.select :primary_role_id,
+                      PrimaryRole.all.map { |role| [role.name.titleize, role.id] },
+                      {},
+                      class: "form-control" , data: { controller: "choices" } %>
         </div>
         <div class="col-md-6 mb-3">
-          <%= form.label :experience, class: 'form-label' %>
-          <%= form.select :experience, Employee::EXPERIENCE.map.with_index { |exp, index| [exp.humanize, index] }, {}, class: 'form-control' %>
+          <%= form.label :experience, class: "form-label" %>
+          <%= form.select :experience,
+                      Employee::EXPERIENCE.map.with_index { |exp, index|
+                        [exp.humanize, index]
+                      },
+                      {},
+                      class: "form-control" , data: { controller: "choices" } %>
         </div>
       </div>
-      <div class="mb-3">
-      <%= form.label :open_roles, class: 'form-label' do %>
-      <div class="d-flex">open_roles</div>
-      <p class="text-sm text-secondary">
-        Select all level that you would consider taking.
-      </p>
-      <% end %> <%= form.collection_check_boxes(:primary_role_ids, PrimaryRole.all,
-      :id, :name) do |fs| %>
-      <div class="form-check">
-        <%= fs.check_box(class: "form-check-input") %> <%= fs.label(class:
-        "form-check-label") do %> <%= fs.text.titleize %> <% end %>
-      </div>
-      <% end %>
-    </div>
 
 
 
       <div class="mb-3">
-        <%= render partial: 'location', locals: { form: form } %>
+        <%= form.label :open_roles, class: 'form-label' do %>
+          <div class="d-flex">Open Roles</div>
+          <p class="text-sm text-secondary">
+            Select at most 3 roles that you would consider taking.
+          </p>
+        <% end %>
+
+        <%= form.select :primary_role_ids,
+                        PrimaryRole.all.map { |role| [role.name.titleize, role.id] },
+                        {},
+                        { multiple: true, class: "form-select", data: { controller: "choices" } } %>
+      </div>
+
+
+
+      <div class="mb-3">
+        <%= render partial: "location", locals: { form: form } %>
       </div>
 
     </div>

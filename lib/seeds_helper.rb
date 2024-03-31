@@ -16,7 +16,6 @@ module SeedsHelper
         primary_role_id: PrimaryRole.all.map(&:id).sample,
         experience: 5,
         heading: Faker::Lorem.sentence,
-        bio: Faker::Lorem.paragraph(sentence_count: 10),
         search_status: Employee.search_statuses.keys.sample,
         role_type_ids: [RoleType.all.sample.id],
         role_level_ids: [RoleLevel.all.sample.id],
@@ -30,8 +29,11 @@ module SeedsHelper
         },
         social_link_attributes: social_links
       }
+      bio_content = Faker::Lorem.paragraph(sentence_count: 50)
+      #bio = ActionText::Content.new(body: bio_content)
       Employee.find_or_create_by!(user:) do |developer|
         developer.assign_attributes(attributes)
+        developer.bio = bio_content
         attach_developer_avatar(developer)
         developer.save
       end

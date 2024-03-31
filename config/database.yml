@@ -79,6 +79,6 @@ test:
 #
 production:
   <<: *default
-  database: remote_talent_source_production
-  username: remote_talent_source
-  password: <%= ENV["REMOTE_TALENT_SOURCE_DATABASE_PASSWORD"] %>
+  database: <%= ENV["DATABASE_NAME"] %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSSWORD"] %>
