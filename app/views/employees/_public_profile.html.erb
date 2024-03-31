@@ -52,10 +52,7 @@
       >
         <!-- Information 2 content here -->
         <div class="d-flex align-items-center">
-          <i class="fas fa-check-circle text-success"></i>
-          <span class="text-success fw-medium ms-2"
-            ><%= employee.search_status.humanize%></span
-          >
+          <%= render Employees::SearchStatusComponent.new(employee: employee) %>
         </div>
 
         <hr />

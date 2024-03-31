@@ -56,7 +56,7 @@ class Employee < ApplicationRecord
 
   pg_search_scope :filter_by_search_query, against: %i[bio heading]
 
-  enum search_status: %i[actively_looking open not_interested invisible]
+  enum search_status: %i[ready_to_interview open_to_offers closed_to_offers not_interested invisible]
   has_rich_text :bio
   def name
     first_name + ' ' + last_name

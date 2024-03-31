@@ -8,18 +8,13 @@
       <div class="d-flex justify-content-between border-bottom py-2 mb-3">
         <h4 class="mt-0 py-2"><%= hero %></h4>
         <div class="d-flex align-items-center">
-          <i class="fas fa-check-circle text-success"></i>
-          <span class="text-success fw-medium ms-2"
-            ><%= employee.search_status.humanize%></span
-          >
+          <%= render Employees::SearchStatusComponent.new(employee: employee) %>
         </div>
       </div>
 
       <p class="line-clamp-3 break-words"><%= employee.bio.to_plain_text %></p>
 
-      <div class="d-flex justify-content-end">
-        <a href="#" class="btn btn-primary">Hire Me</a>
-      </div>
+
     </div>
   </div>
 </div>
