@@ -18,7 +18,10 @@
     </div>
 
     <div class="d-flex justify-content-end">
-      <%= form.submit "Finish Profile", class: 'btn btn-block btn-md btn-dark' %>
+      <%= form.submit "Finish Profile",
+                class: 'btn btn-block btn-md btn-dark',
+                data: {  controller: "forms--keyboard-submit", action: "form-submit#submit", form_submit_target: "submit" } %>
+
     </div></div>
   <% end %>
 </div>

@@ -4,6 +4,8 @@ import "./controllers"
 import * as bootstrap from "bootstrap"
 import "trix"
 import "@rails/actiontext"
+import * as ActiveStorage from "@rails/activestorage"
+ActiveStorage.start();
 
 window.initAutocomplete = function () {
   const event = new Event('google-maps-callback', {

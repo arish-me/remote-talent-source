@@ -1,12 +1,14 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["submit"]
+  static targets = ["submit"];
 
-  submit(event) {
-    if ((event.ctrlKey == true || event.metaKey == true) && event.code == "Enter") {
-      event.preventDefault()
-      this.submitTarget.click()
-    }
+  connect() {
+    this.originalLabel = this.submitTarget.value;
+  }
+
+  submit() {
+    this.submitTarget.disabled = true;
+    this.submitTarget.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Processing...";
   }
 }

@@ -24,6 +24,10 @@ export default class extends Controller {
     this.errorTarget.classList.add(this.visibilityClass)
   }
 
+  submit(event) {
+    event.preventDefault();
+  }
+
   error(event) {
     event.preventDefault()
 

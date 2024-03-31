@@ -24,7 +24,7 @@
               <td>
                 <% if (employee = user.employee) %>
                   <div class="d-flex ">
-                    <%= render AvatarComponent.new(avatarable: employee, variant: :thumb, classes: "rounded", width: 50, height: 50) %>
+                    <%= render AvatarComponent.new(avatarable: employee, variant: :thumb, classes: "rounded", width: 50, height: 50, classes: "h-9 w-9 rounded-circle") %>
                     <div class="ms-2 my-2">
                       <%= user.employee.name %>
                     </div>
@@ -34,7 +34,7 @@
               <td>
                 <% if (company = user.company) %>
                   <div class="d-flex ">
-                    <%= render AvatarComponent.new(avatarable: company, variant: :thumb, classes: "rounded", width: 50, height: 50) %>
+                    <%= render AvatarComponent.new(avatarable: company, variant: :thumb, classes: "rounded", width: 50, height: 50, classes: "h-9 w-9 rounded-circle") %>
                     <div class="ms-2 my-2">
                       <%= user.company.name %>
                     </div>

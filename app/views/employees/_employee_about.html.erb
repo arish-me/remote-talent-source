@@ -9,7 +9,9 @@
     <div class="row gy-2 gy-md-2">
       <div class="row">
         <%= form.hidden_field :user_id, value: current_user.id %>
+        <%if false %>
         <div
+
           class="container"
           data-controller="file-upload"
           data-file-upload-visibility-class="d-none"
@@ -72,6 +74,10 @@
             </div>
           </div>
         </div>
+      <% end %>
+
+      <%= render partial: 'avatar', locals: {form: form, employee: employee }%>
+
       </div>
 
       <div class="mb-3">

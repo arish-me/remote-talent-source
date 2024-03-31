@@ -32,7 +32,8 @@ class EmployeesController < ApplicationController
 
   # POST /employees or /employees.json
   def create
-    @employee = Employee.new(employee_params)
+    @employee = current_user.build_employee(employee_params)
+    #@employee = Employee.new(employee_params)
 
     respond_to do |format|
       if @employee.save
@@ -47,7 +48,7 @@ class EmployeesController < ApplicationController
 
   # PATCH/PUT /employees/1 or /employees/1.json
   def update
-    # authorize @employee
+    authorize @employee
     respond_to do |format|
       if @employee.update(employee_params)
         format.html { redirect_to edit_employee_path(@employee), notice: 'Profile was successfully updated.' }
