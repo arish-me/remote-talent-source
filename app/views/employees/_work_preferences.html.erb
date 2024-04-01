@@ -7,7 +7,7 @@
   <div class="col-md-8 my-2">
     <div class="mb-3">
       <%= form.label :search_status, class: 'form-label' do %>
-      <div class="d-flex">Search Status</div>
+      <div class="d-flex">Job Search Status</div>
       <p class="text-sm text-secondary">Select the search status.</p>
       <% end %> <%= form.collection_radio_buttons(:search_status,
       Employee.search_statuses.keys, :to_s, :titleize) do |fs| %>
@@ -19,7 +19,7 @@
     </div>
     <div class="mb-3">
       <%= form.label :role_types, class: 'form-label' do %>
-      <div class="d-flex">Role type</div>
+      <div class="d-flex">Open to the following job types</div>
       <p class="text-sm text-secondary">
         Select all roles that you would consider taking.
       </p>
@@ -34,7 +34,7 @@
 
     <div class="mb-3">
       <%= form.label :employee_levels, class: 'form-label' do %>
-      <div class="d-flex">Role Level</div>
+      <div class="d-flex">Job Level</div>
       <p class="text-sm text-secondary">
         Select all level that you would consider taking.
       </p>

@@ -41,7 +41,6 @@ end
 @seed = false
 50.times.each { SeedsHelper.create_developer! } if @seed
 
-
 email = "admin@example.com"
 attributes = {
   email:,
