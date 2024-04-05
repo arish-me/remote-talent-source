@@ -29,11 +29,15 @@ class Employee < ApplicationRecord
   has_one :social_link, as: :sociable, dependent: :destroy
   has_one :location, as: :locatable, dependent: :destroy
 
+  has_many :skillables, as: :skillable
+  has_many :skills, through: :skillables
+
   accepts_nested_attributes_for :open_roles, allow_destroy: true
   accepts_nested_attributes_for :employee_roles, allow_destroy: true
   accepts_nested_attributes_for :employee_levels, allow_destroy: true
   accepts_nested_attributes_for :social_link, allow_destroy: true
   accepts_nested_attributes_for :location, allow_destroy: true
+  accepts_nested_attributes_for :skills, allow_destroy: true
 
   scope :filter_by_role_levels, lambda { |role_levels|
     joins(:employee_levels).where(employee_levels: { role_level_id: role_levels })

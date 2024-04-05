@@ -79,6 +79,7 @@ class EmployeesController < ApplicationController
     @employee.employee_levels.build if @employee.employee_levels.empty?
     @employee.build_social_link if @employee.social_link.nil?
     @employee.build_location if @employee.location.nil?
+    @employee.skillables.build if @employee.skills.empty?
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -94,6 +95,7 @@ class EmployeesController < ApplicationController
       primary_role_ids: [],
       role_type_ids: [],
       role_level_ids: [],
+      skill_ids: [],
       social_link_attributes: %i[id website linkedin github twitter gitlab stackoverflow _destroy],
       location_attributes: %i[
         id city state country address
