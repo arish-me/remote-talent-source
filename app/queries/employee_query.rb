@@ -78,7 +78,7 @@ class EmployeeQuery
     ActiveModel::Type::Boolean.new.cast(@include_not_interested)
   end
 
-  #private
+  # private
 
   def query_and_paginate
     @_records = Employee.includes(:role_types, :role_levels)

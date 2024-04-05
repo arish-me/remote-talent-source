@@ -33,7 +33,7 @@ class EmployeesController < ApplicationController
   # POST /employees or /employees.json
   def create
     @employee = current_user.build_employee(employee_params)
-    #@employee = Employee.new(employee_params)
+    # @employee = Employee.new(employee_params)
 
     respond_to do |format|
       if @employee.save

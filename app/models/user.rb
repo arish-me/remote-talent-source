@@ -28,9 +28,9 @@ class User < ApplicationRecord
     end
   end
 
-  scope :search, ->(query) do
+  scope :search, lambda { |query|
     query = "%#{query}%"
     left_outer_joins(:employee, :company)
-      .where("email ILIKE ?", query)
-  end
+      .where('email ILIKE ?', query)
+  }
 end

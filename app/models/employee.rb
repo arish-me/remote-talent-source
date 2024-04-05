@@ -2,7 +2,7 @@
 
 class Employee < ApplicationRecord
   include Avatarable
-  #include Employees::RichText
+  # include Employees::RichText
   include PgSearch::Model
   validates_length_of :first_name, :last_name, in: 3..30
 
@@ -59,7 +59,7 @@ class Employee < ApplicationRecord
   enum search_status: %i[ready_to_interview open_to_offers closed_to_offers not_interested invisible]
   has_rich_text :bio
   def name
-    first_name + ' ' + last_name
+    "#{first_name} #{last_name}"
   end
 
   private

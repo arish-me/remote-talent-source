@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin
   class LabeledAvatarComponent < ApplicationComponent
     attr_reader :avatarable, :title, :path, :subtitle

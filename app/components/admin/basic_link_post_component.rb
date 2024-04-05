@@ -1,7 +1,7 @@
+# frozen_string_literal: true
+
 module Admin
   class BasicLinkPostComponent < ApplicationComponent
-    private attr_reader :title, :path, :name, :value
-
     def initialize(title, path, name:, value:)
       @title = title
       @path = path
@@ -10,7 +10,11 @@ module Admin
     end
 
     def call
-      button_to(title, path, {class: "btn btn-primary", params: {name => value}})
+      button_to(title, path, { class: 'btn btn-primary', params: { name => value } })
     end
+
+    private
+
+    attr_reader :title, :path, :name, :value
   end
 end

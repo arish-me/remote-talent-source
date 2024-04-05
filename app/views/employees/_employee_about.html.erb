@@ -51,9 +51,9 @@
             <span class="text-danger">*</span>
           <% end %>
           <%= form.select :primary_role_id,
-                      PrimaryRole.all.map { |role| [role.name.titleize, role.id] },
-                      {},
-                      class: "form-control" , data: { controller: "choices" } %>
+                    grouped_options_for_select(primary_roles_grouped),
+                    {},
+                    class: "form-control choices", data: { controller: "choices" } %>
         </div>
         <div class="col-md-6 mb-3">
           <%= form.label :experience, class: "form-label" %>
@@ -77,7 +77,7 @@
         <% end %>
 
         <%= form.select :primary_role_ids,
-                        PrimaryRole.all.map { |role| [role.name.titleize, role.id] },
+                        grouped_options_for_select(primary_roles_grouped),
                         {},
                         { multiple: true, class: "form-select", data: { controller: "choices" } } %>
       </div>

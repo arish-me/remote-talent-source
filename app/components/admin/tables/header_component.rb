@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin
   module Tables
     class HeaderComponent < ApplicationComponent
@@ -12,8 +14,8 @@ module Admin
       end
 
       def call
-        tag.th title || content, scope: "col", title: tooltip,
-        class: class_names("px-6 py-3 text-uppercase text-gray-500 fw-medium fs-6", align_class)
+        tag.th title || content, scope: 'col', title: tooltip,
+                                 class: class_names('px-6 py-3 text-uppercase text-gray-500 fw-medium fs-6', align_class)
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin
   class UsersController < ApplicationController
     include Pagy::Backend
@@ -11,8 +13,8 @@ module Admin
 
     def users(query)
       User.search(query)
-        .includes(employee: {avatar_attachment: :blob}, company: {avatar_attachment: :blob})
-        .order(:email)
+          .includes(employee: { avatar_attachment: :blob }, company: { avatar_attachment: :blob })
+          .order(:email)
     end
   end
 end
