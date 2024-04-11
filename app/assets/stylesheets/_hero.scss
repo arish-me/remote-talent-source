@@ -1,0 +1,22 @@
+.background-image-container {
+  background-image: url('assets/hero/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.background-image-container::before {
+  content: '';
+  display: block;
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.7); /* White with 70% opacity */
+  z-index: 0;
+}
+
+.background-image-container > .row {
+  position: relative;
+  z-index: 1;
+}

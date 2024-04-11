@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_30_193210) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_05_184009) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -53,6 +53,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_193210) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "name"
@@ -62,7 +68,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_193210) do
     t.string "website"
     t.string "size"
     t.string "industry"
-    t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_companies_on_user_id"
@@ -94,7 +99,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_193210) do
     t.string "heading"
     t.string "phone"
     t.integer "search_status", default: 0
-    t.text "bio"
     t.uuid "primary_role_id", null: false
     t.uuid "user_id", null: false
     t.datetime "created_at", null: false
@@ -134,6 +138,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_193210) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "category_id", null: false
+    t.index ["category_id"], name: "index_primary_roles_on_category_id"
   end
 
   create_table "role_levels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -146,6 +152,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_193210) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "skillables", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "skillable_type", null: false
+    t.uuid "skillable_id", null: false
+    t.uuid "skill_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_skillables_on_skill_id"
+    t.index ["skillable_type", "skillable_id"], name: "index_skillables_on_skillable"
+  end
+
+  create_table "skills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_skills_on_category_id"
   end
 
   create_table "social_links", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -199,4 +223,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_30_193210) do
   add_foreign_key "employees", "users"
   add_foreign_key "open_roles", "employees"
   add_foreign_key "open_roles", "primary_roles"
+  add_foreign_key "primary_roles", "categories"
+  add_foreign_key "skillables", "skills"
+  add_foreign_key "skills", "categories"
 end

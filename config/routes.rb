@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   # admin
   namespace :admin do
-    resource :impersonate, only: [:create, :destroy]
+    resource :impersonate, only: %i[create destroy]
     resources :users, only: [:index]
   end
 

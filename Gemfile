@@ -54,10 +54,10 @@ gem 'image_processing'
 gem 'inline_svg'
 gem 'pagy'
 gem 'pg_search'
+gem 'pretender'
 gem 'redcarpet'
 gem 'timezone_finder'
 gem 'view_component'
-gem "pretender"
 group :development, :test do
   gem 'faker'
   gem 'rubocop'
@@ -68,10 +68,9 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'letter_opener'
-  #gem 'rubocop'
+  # gem 'rubocop'
+  gem 'erb-formatter', '~> 0.7.2'
   gem 'web-console'
-  gem "erb-formatter", "~> 0.7.2"
-
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -81,5 +80,3 @@ group :development do
 end
 
 gem 'devise', '~> 4.9'
-
-

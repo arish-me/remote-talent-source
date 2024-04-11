@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PagyPaginatorComponent < ApplicationComponent
   include PagyHelper
   include Pagy::Frontend
@@ -21,7 +23,7 @@ class PagyPaginatorComponent < ApplicationComponent
     if @url_array.last.is_a?(Hash)
       @url_array.last[:page] = @pagy.next
     else
-      @url_array << {page: @pagy.next}
+      @url_array << { page: @pagy.next }
     end
   end
 end

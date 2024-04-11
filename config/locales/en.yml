@@ -50,6 +50,7 @@ en:
   impersonating_banner_component:
     cta: Sign out
     title: Signed in as %{email}
+  employee_bio_placeholder: Share a bit about your work experience, Projects you have completed, and area of expertise.
   admin:
     users:
       index:
