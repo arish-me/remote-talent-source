@@ -31,19 +31,11 @@
             </p>
             <p class="text-muted"><b>Experience:</b> <%= Employee::EXPERIENCE.key(employee.experience.to_i) %></p>
 
-            <%= link_to "https://github.com/your_username", target: "_blank" do %>
-  <i class="fab fa-github"></i>
-<% end %>
-
-<%= link_to "https://www.linkedin.com/in/your_profile", target: "_blank" do %>
-  <i class="fab fa-linkedin"></i>
-<% end %>
-
-<%= link_to "https://your_scheduling_link", target: "_blank" do %>
-  <i class="fas fa-calendar-alt"></i>
-<% end %>
-
-
+            <%= render Employees::SocialLinkComponent.new(employee.social_link.github, :github) %>
+            <%= render Employees::SocialLinkComponent.new(employee.social_link.linkedin, :linkedin) %>
+            <%= render Employees::SocialLinkComponent.new(employee.social_link.twitter, :twitter) %>
+            <%= render Employees::SocialLinkComponent.new(employee.social_link.website, :website) %>
+            <%= render Employees::SocialLinkComponent.new(employee.scheduling_link, :calendar) %>
 
           </div>
         </div>
@@ -82,25 +74,29 @@
           </div>
         <%end%>
 
-
-        <a
-          class="d-block bg-light border border-2 border-secondary border-dashed rounded-3 py-3 px-4 text-center text-decoration-none"
-          href="/pricing"
-          aria-label="Private Information"
-        >
-          <i class="fas fa-lock fa-2x text-secondary"></i>
-          <div class="mt-2 text-sm fw-medium text-secondary">
-            Private information
-          </div>
-          <div class="text-sm text-muted">
-            Information visible with a business profile only.
-          </div>
-        </a>
-
         <hr />
 
+        <h6 class="text-secondary fw-medium">Open Roles</h6>
+        <div class="row">
+          <div class="col">
+            <%- employee.primary_roles.each do |primary_role| %>
+              <span class="badge rounded-pill bg-dark"><%= primary_role.name%></span>
+            <% end %>
+          </div>
+        </div>
 
+        <hr />
+        <h6 class="text-secondary fw-medium">Skills</h6>
 
+        <div class="row">
+          <div class="col">
+            <%- employee.skills.each do |skill| %>
+              <span class="badge rounded-pill bg-dark"><%= skill.name%></span>
+            <% end %>
+          </div>
+        </div>
+
+        <hr />
         <!-- Location -->
         <%= render Locations::Component.new(@employee.location) %>
         <!-- Timezone -->
