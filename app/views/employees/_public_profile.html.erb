@@ -26,17 +26,25 @@
             <h5 class="fw-bold fs-4 py-2">
               <%= employee.first_name%> <%= employee.last_name%>
             </h5>
-            <p class="text-muted">
+            <p class="text-muted"><b>Primary Role:</b>
               <%= employee.primary_role.name.humanize%>
             </p>
+            <p class="text-muted"><b>Experience:</b> <%= Employee::EXPERIENCE.key(employee.experience.to_i) %></p>
 
-            <%= link_to "Hire Me", @employee, class: 'btn btn-block btn-md
-            btn-dark' %>
+            <%= link_to "https://github.com/your_username", target: "_blank" do %>
+  <i class="fab fa-github"></i>
+<% end %>
 
-            <!-- Placeholder for Private Information Button -->
-            <button class="btn btn-outline-secondary btn-md">
-              Private Information
-            </button>
+<%= link_to "https://www.linkedin.com/in/your_profile", target: "_blank" do %>
+  <i class="fab fa-linkedin"></i>
+<% end %>
+
+<%= link_to "https://your_scheduling_link", target: "_blank" do %>
+  <i class="fas fa-calendar-alt"></i>
+<% end %>
+
+
+
           </div>
         </div>
         <div
@@ -90,6 +98,8 @@
         </a>
 
         <hr />
+
+
 
         <!-- Location -->
         <%= render Locations::Component.new(@employee.location) %>

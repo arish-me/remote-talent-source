@@ -1,0 +1,8 @@
+<%unless skills.blank? %>
+<turbo-frame id="skills-frame">
+<div class="mb-3">
+        <%= hidden_field_tag 'employee[skill_ids][]' %>
+        <%= select_tag 'employee[skill_ids][]', options_from_collection_for_select(skills, 'id', 'name', skills.map(&:id)), { multiple: true, class: 'form-select', data: { controller: "choices" } } %>
+      </div>
+</turbo-frame>
+<% end %>

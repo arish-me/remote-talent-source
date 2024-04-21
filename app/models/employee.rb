@@ -2,6 +2,7 @@
 
 class Employee < ApplicationRecord
   include Avatarable
+  include Employees::HasOnlineProfiles
   # include Employees::RichText
   include PgSearch::Model
   validates_length_of :first_name, :last_name, in: 3..30
@@ -68,19 +69,19 @@ class Employee < ApplicationRecord
 
   private
 
-  EXPERIENCE = [
-    '< 1 Year',
-    '1 Year',
-    '2 Year',
-    '3 Year',
-    '4 Year',
-    '5 Year',
-    '6 Year ',
-    '7 Year',
-    '8 Year',
-    '9 Year',
-    '10+ Year'
-  ].freeze
+  EXPERIENCE = {
+    '< 1 Year' => 0,
+    '1 Years' => 1,
+    '2 Years' => 2,
+    '3 Years' => 3,
+    '4 Years' => 4,
+    '5 Years' => 5,
+    '6 Years' => 6,
+    '7 Years' => 7,
+    '8 Years' => 8,
+    '9 Years' => 9,
+    '10+ Years' => 10
+  }.freeze
 
   def update_role
     user.update_without_password(role: 'employee')

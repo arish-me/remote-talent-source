@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :employees do
     resources :specialities
   end
+  resources :skills
   get 'talentsource/:id', to: 'employees#public_profile', as: 'public_profile'
   get 'additional_information/:id/company', to: 'additional_information#company'
   get 'additional_information/:id/employee', to: 'additional_information#employee'

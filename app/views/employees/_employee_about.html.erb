@@ -58,12 +58,13 @@
         <div class="col-md-6 mb-3">
           <%= form.label :experience, class: "form-label" %>
           <%= form.select :experience,
-                      Employee::EXPERIENCE.map.with_index { |exp, index|
-                        [exp.humanize, index]
-                      },
-                      {},
-                      class: "form-control" , data: { controller: "choices" } %>
+                          Employee::EXPERIENCE.map { |exp, index|
+                            [exp.humanize, index]
+                          },
+                          {},
+                          class: "form-control", data: { controller: "choices" } %>
         </div>
+
       </div>
 
 
@@ -75,19 +76,18 @@
             Select at most 3 roles that you would consider taking.
           </p>
         <% end %>
-
+        <div data-controller="skills">
         <%= form.select :primary_role_ids,
-                        grouped_options_for_select(primary_roles_grouped),
+                        grouped_options_for_select(primary_roles_grouped, employee.primary_role_ids),
                         {},
-                        { multiple: true, class: "form-select", data: { controller: "choices" } } %>
+                        { multiple: true, class: "form-select", data: { controller: 'choices skills', target: "skills.openRoles", action: "change->skills#onChange" } } %>
+        </div>
       </div>
 
-      <div class="mb-3">
-        <%= form.label :skills, class: 'form-label' do %>
-          Select Skills
-        <% end %>
-        <%= form.select :skill_ids, Skill.all.map { |s| [s.name, s.id] }, {}, { multiple: true, class: 'form-select', data: { controller: "choices" } } %>
-      </div>
+      <turbo-frame id="skills-frame">
+        <%= render partial: "skills/skills", locals: { skills: employee.skills, form: form } %>
+      </turbo-frame>
+
 
       <div class="mb-3">
         <%= render partial: "location", locals: { form: form } %>

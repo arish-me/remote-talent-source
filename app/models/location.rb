@@ -25,7 +25,7 @@ class Location < ApplicationRecord
       .keys
   }
   def full_address
-    [state, country].compact.join(', ')
+    [city, state, country].compact.join(', ')
   end
 
   def handle_timezone

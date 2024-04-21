@@ -30,3 +30,6 @@ application.register("action-text", ActionTextController)
 import ChoicesController from "./choices_controller.js"
 application.register("choices", ChoicesController)
 
+import SkillsController from "./skills_controller.js"
+application.register("skills", SkillsController)
+
