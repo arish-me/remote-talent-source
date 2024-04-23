@@ -21,6 +21,8 @@ class Employee < ApplicationRecord
   has_many :open_roles, dependent: :destroy
   has_many :primary_roles, through: :open_roles
 
+  has_many :categories, through: :primary_roles
+
   has_many :employee_roles, dependent: :destroy
   has_many :role_types, through: :employee_roles
 
@@ -50,6 +52,10 @@ class Employee < ApplicationRecord
 
   scope :filter_by_countries, lambda { |countries|
     joins(:location).where(locations: { country: countries })
+  }
+
+  scope :filter_by_categories, lambda { |categories|
+    joins(:categories).where(categories: { id: categories })
   }
 
   scope :filter_by_utc_offsets, lambda { |utc_offsets|

@@ -12,6 +12,7 @@ class EmployeeQuery
     @sort = options.delete(:sort)
     @specialty_ids = options.delete(:specialty_ids)
     @countries = options.delete(:countries)
+    @categories = options.delete(:categories)
     @utc_offsets = options.delete(:utc_offsets)
     @role_types = options.delete(:role_types)
     @role_levels = options.delete(:role_levels)
@@ -48,6 +49,10 @@ class EmployeeQuery
 
   def countries
     @countries.to_a.reject(&:blank?)
+  end
+
+  def categories
+    @categories.to_a.reject(&:blank?)
   end
 
   def specialty_ids
@@ -87,6 +92,7 @@ class EmployeeQuery
     utc_offset_filter_records
     role_type_filter_records
     role_level_filter_records
+    category_filter_records
     # search_status_filter_records
     # search_query_filter_records
     # badges_filter_records
@@ -140,6 +146,10 @@ class EmployeeQuery
 
   def country_filter_records
     @_records.merge!(Employee.filter_by_countries(countries)) if countries.any?
+  end
+
+  def category_filter_records
+    @_records.merge!(Employee.filter_by_categories(categories)) if categories.any?
   end
 
   def utc_offset_filter_records

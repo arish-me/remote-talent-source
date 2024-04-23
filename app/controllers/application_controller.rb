@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
       new_additional_information_path
     elsif resource.active? && current_user.admin?
       dashboard_path
-    else
-      dashboard_path
+    elsif resource.employee && resource.active?
+      employee_path(current_user.employee)
     end
   end
 end

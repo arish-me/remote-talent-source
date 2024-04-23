@@ -17,6 +17,7 @@ module Employees
           role_types: [],
           badges: [],
           utc_offsets: [],
+          categories: [],
           countries: [] }
       ]
     end

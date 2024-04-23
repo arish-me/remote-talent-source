@@ -69,8 +69,9 @@
     </div>
   </div>
 
+
   <div class="accordion-item border-0">
-    <h2 class="accordion-header bg-light" id="panelsStayOpen-headingOne">
+    <h2 class="accordion-header bg-light" id="panelsStayOpen-headingThird">
       <button
         class="accordion-button"
         type="button"
@@ -79,13 +80,49 @@
         aria-expanded="true"
         aria-controls="panelsStayOpen-collapseThird"
       >
-        Countries
+        Categories
       </button>
     </h2>
     <div
       id="panelsStayOpen-collapseThird"
       class="accordion-collapse collapse show"
       aria-labelledby="panelsStayOpen-headingThird"
+    >
+      <div class="accordion-body">
+        <div class="d-flex align-items-center">
+          <div class="mb-3">
+            <%= form.collection_check_boxes(:categories, categories, :first,
+            :last, {include_hidden: false}) do |fs| %>
+            <div class="form-check">
+              <%= fs.check_box(checked: categories_selected?(fs.object),class:
+              "form-check-input") %> <%= fs.label(class: "form-check-label") do
+              %> <%= fs.text.titleize %> <% end %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="accordion-item border-0">
+    <h2 class="accordion-header bg-light" id="panelsStayOpen-headingFourth">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#panelsStayOpen-collapseFourth"
+        aria-expanded="true"
+        aria-controls="panelsStayOpen-collapseFourth"
+      >
+        Countries
+      </button>
+    </h2>
+    <div
+      id="panelsStayOpen-collapseFourth"
+      class="accordion-collapse collapse show"
+      aria-labelledby="panelsStayOpen-headingFourth"
     >
       <div class="accordion-body">
         <div class="d-flex align-items-center">
@@ -105,22 +142,22 @@
   </div>
 
   <div class="accordion-item border-0">
-    <h2 class="accordion-header bg-light" id="panelsStayOpen-headingOne">
+    <h2 class="accordion-header bg-light" id="panelsStayOpen-headingFifth">
       <button
         class="accordion-button"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#panelsStayOpen-collapseFourth"
+        data-bs-target="#panelsStayOpen-collapseFifth"
         aria-expanded="true"
-        aria-controls="panelsStayOpen-collapseFourth"
+        aria-controls="panelsStayOpen-collapseFifth"
       >
         Timezone
       </button>
     </h2>
     <div
-      id="panelsStayOpen-collapseFourth"
+      id="panelsStayOpen-collapseFifth"
       class="accordion-collapse collapse show"
-      aria-labelledby="panelsStayOpen-headingFourth"
+      aria-labelledby="panelsStayOpen-headingFifth"
     >
       <div class="accordion-body">
         <div class="d-flex align-items-center">
@@ -139,7 +176,7 @@
     </div>
   </div>
 
-  <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between py-2">
     <%= submit_tag "Apply", name: nil, class: "btn btn-block btn-md btn-dark" %>
     <%= link_to "Clear", hiring_index_path, class: "btn btn-block btn-md
     btn-outline-dark" %>

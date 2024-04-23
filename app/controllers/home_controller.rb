@@ -2,13 +2,13 @@
 
 class HomeController < ApplicationController
   def index
-    if current_user&.active?
-      redirect_to dashboard_path
-    elsif current_user&.pending?
-      # redirect_to employee_tab_path(id: current_user.id)
+    return unless current_user
+
+    if current_user.active?
+      redirect_to dashboard_path if current_user.admin?
+      redirect_to employee_path(current_user.employee) if current_user.employee?
+    elsif current_user.pending?
       redirect_to new_additional_information_path(id: current_user.id)
     end
-
-    @employees = Employee.all
   end
 end

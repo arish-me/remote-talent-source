@@ -49,6 +49,10 @@ module Employees
       query.role_levels.map(&:to_s).include?(role_level_pair.first)
     end
 
+    def categories_selected?(categories_pair)
+      query.categories.map(&:to_s).include?(categories_pair.first)
+    end
+
     def role_levels
       # i18n-tasks-use t('activerecord.attributes.role_level.c_level')
       # i18n-tasks-use t('activerecord.attributes.role_level.junior')
@@ -56,6 +60,10 @@ module Employees
       # i18n-tasks-use t('activerecord.attributes.role_level.principal')
       # i18n-tasks-use t('activerecord.attributes.role_level.senior')
       RoleLevel.all.map { |role| [role.id, role.name.titleize] }
+    end
+
+    def categories
+      Category.all.map { |category| [category.id, category.name.titleize] }
     end
 
     def badge_selected?(badge_pair)
