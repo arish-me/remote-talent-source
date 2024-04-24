@@ -79,9 +79,9 @@ class Employee < ApplicationRecord
   private
 
   def bio_minimum_length
-    if bio.body.to_plain_text.length < 200
-      errors.add(:bio, "must be at least 200 characters long")
-    end
+    return unless bio.body.to_plain_text.length < 200
+
+    errors.add(:bio, 'must be at least 200 characters long')
   end
 
   EXPERIENCE = {

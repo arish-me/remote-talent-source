@@ -3,7 +3,7 @@
 class EmployeesController < ApplicationController
   before_action :authenticate_user!, except: %i[public_profile]
   before_action :set_employee, only: %i[show edit update destroy public_profile]
-  before_action :build_associations, only: %i[edit]
+  before_action :build_associations, only: %i[edit new]
 
   # GET /employees or /employees.json
   def index
@@ -20,7 +20,6 @@ class EmployeesController < ApplicationController
   def new
     @employee = Employee.new
     authorize current_user
-    build_associations
   end
 
   def public_profile; end

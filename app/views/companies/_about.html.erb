@@ -2,7 +2,7 @@
   <div class="col-md-4">
     <h5>About</h5>
     <p class="text-muted small">
-      Tell us about yourself so startups know who you are.
+      Tell us about yourself so employees know who you are.
     </p>
   </div>
   <div class="col-md-8 my-2">
@@ -24,24 +24,53 @@
             <%= form.email_field :company_email, autofocus: true, autocomplete: "company_email" , class: 'form-control'
               %>
       </div>
-      <%= render partial: 'location' , locals: {form: form} %>
-        <div class="mb-3">
+
+      <div class="mb-3">
+        <%= form.fields_for :company_industry do |industry_form| %>
+          <%= industry_form.label :industry_id, class: 'form-label' do %>
+            Industry
+            <span class="text-danger">*</span>
+          <% end %>
+          <%= industry_form.select :industry_id,
+                    options_for_select(Industry.all.map { |industry| [industry.name, industry.id] }, industry_form.object.industry_id),
+                    {},
+                    class: "form-control choices", data: { controller: "choices" } %>
+        <% end %>
+      </div>
+
+       <div class="mb-3">
+        <%= form.label :company_specialities, class: 'form-label' do %>
+          <div class="d-flex">Specialities</div>
+          <p class="text-sm text-secondary">
+            select your company specialities
+          </p>
+        <% end %>
+
+        <%= form.select :speciality_ids,
+                        options_for_select(Speciality.all.map { |industry| [industry.name, industry.id] }, @company.speciality_ids),
+                        {},
+                        { multiple: true, class: "form-select", data: { controller: 'choices'} } %>
+
+      </div>
+
+      <div class="mb-3">
           <%= form.label :phone, class: 'form-label' do %> Phone <% end %>
               <%= form.text_field :phone, autofocus: true, autocomplete: "phone" , class: 'form-control' %>
         </div>
+      <div class="mb-3">
+        <%= form.label :website, class: 'form-label' do %> Website <% end %>
+            <%= form.text_field :website, autofocus: true, autocomplete: "webiste" , class: 'form-control' %>
+      </div>
 
-        <div class="mb-3">
-          <%= form.label :website, class: 'form-label' do %> Website <% end %>
-              <%= form.text_field :website, autofocus: true, autocomplete: "webiste" , class: 'form-control' %>
-        </div>
+      <div class="mb-3">
+        <%= form.label :size, class: 'form-label' do %> Size of company
+          <span class="text-danger">*</span>
+          <% end %>
+            <%= form.select :size, options_for_select(Company::COMPANY_SIZE.invert.to_a, selected: @company.size), {
+              prompt: 'Select size' }, class: 'form-select' %>
+      </div>
 
-        <div class="mb-3">
-          <%= form.label :size, class: 'form-label' do %> Size of company
-            <span class="text-danger">*</span>
-            <% end %>
-              <%= form.select :size, options_for_select(Company::COMPANY_SIZE.invert.to_a, selected: @company.size), {
-                prompt: 'Select size' }, class: 'form-select' %>
-        </div>
+      <%= render partial: 'location' , locals: {form: form} %>
     </div>
   </div>
 </div>

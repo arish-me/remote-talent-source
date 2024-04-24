@@ -3,6 +3,7 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_company, only: %i[show edit update destroy]
+  before_action :build_associations, only: %i[edit new]
 
   # GET /companies or /companies.json
   def index
@@ -18,7 +19,6 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
-    @company.build_location if @company.location.nil?
     authorize current_user
   end
 
@@ -67,6 +67,12 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def build_associations
+    @company.build_location if @company.location.nil?
+    @company.build_company_industry if @company.company_industry.nil?
+    @company.company_specialities.build if @company.company_specialities.empty?
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -81,7 +87,22 @@ class CompaniesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def company_params
-    params.require(:company).permit(:user_id, :name, :company_email, :phone, :website, :size, :industry, :bio, :avatar,
-                                    location_attributes:)
+    params.require(:company).permit(
+      :user_id,
+      :name,
+      :company_email,
+      :phone,
+      :website,
+      :size,
+      :industry,
+      :bio,
+      :avatar,
+      speciality_ids: [],
+      company_industry_attributes: %i[id  industry_id _destroy],
+      location_attributes: %i[
+        id city state country address
+        latitude longitude _destroy
+      ]
+    )
   end
 end

@@ -12,7 +12,6 @@ class CreateCompanies < ActiveRecord::Migration[7.1]
       t.string :website
       t.string :size
       t.string :public_url
-      t.integer :industry
       t.timestamps
     end
   end
