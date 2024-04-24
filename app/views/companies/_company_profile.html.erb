@@ -47,7 +47,7 @@
 
           <h6 class="text-secondary fw-medium">Company Size</h6>
           <div class="d-flex align-items-center">
-            <span class="text-dark fw-medium ms-2"><%= company.size %></span>
+            <span class="text-dark fw-medium ms-2"><%= Company::COMPANY_SIZE[company.size.to_i] %> employees</span>
           </div>
           <hr />
           <!-- Location -->

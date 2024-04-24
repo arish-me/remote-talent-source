@@ -26,6 +26,23 @@ ROLE_LEVEL = %w[
   c_level
 ].freeze
 
+COMPANY_TYPE =
+  %w[Information Technology & Services
+     Computer Software
+     Internet
+     Financial Services
+     Hospital & Health Care
+     Retail
+     Education Management
+     Marketing & Advertising
+     Construction
+     Automotive
+     Telecommunications
+     Pharmaceuticals
+     Oil & Energy
+     Media Production
+     Consumer Goods].freeze
+
 categories = [
   'Software Engineer',
   'Quality Engineer',
@@ -144,6 +161,10 @@ end
 
 ROLE_LEVEL.each do |role_type|
   RoleLevel.find_or_create_by(name: role_type)
+end
+
+COMPANY_TYPE.each do |company_type|
+  Speciality.find_or_create_by(name: company_type)
 end
 
 @seed = false

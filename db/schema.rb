@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_05_184009) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_24_114121) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -63,11 +63,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_05_184009) do
     t.uuid "user_id", null: false
     t.string "name"
     t.string "company_email"
-    t.string "subtitle"
+    t.string "tagline"
+    t.integer "founded"
     t.string "phone"
     t.string "website"
     t.string "size"
-    t.string "industry"
+    t.string "public_url"
+    t.integer "industry"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_companies_on_user_id"
@@ -98,6 +100,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_05_184009) do
     t.string "experience"
     t.string "heading"
     t.string "phone"
+    t.string "public_url"
     t.integer "search_status", default: 0
     t.uuid "primary_role_id", null: false
     t.uuid "user_id", null: false
@@ -105,6 +108,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_05_184009) do
     t.datetime "updated_at", null: false
     t.index ["primary_role_id"], name: "index_employees_on_primary_role_id"
     t.index ["user_id"], name: "index_employees_on_user_id"
+  end
+
+  create_table "industries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -184,6 +193,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_05_184009) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sociable_type", "sociable_id"], name: "index_social_links_on_sociable"
+  end
+
+  create_table "specialities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
