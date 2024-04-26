@@ -69,11 +69,20 @@ class Employee < ApplicationRecord
 
   enum search_status: %i[ready_to_interview open_to_offers closed_to_offers not_interested invisible]
   has_rich_text :bio
+
+  validate :bio_minimum_length
+
   def name
     "#{first_name} #{last_name}"
   end
 
   private
+
+  def bio_minimum_length
+    return unless bio.body.to_plain_text.length < 200
+
+    errors.add(:bio, 'must be at least 200 characters long')
+  end
 
   EXPERIENCE = {
     '< 1 Year' => 0,

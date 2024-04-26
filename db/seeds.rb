@@ -26,6 +26,48 @@ ROLE_LEVEL = %w[
   c_level
 ].freeze
 
+industry_options = [
+  'Information Technology',
+  'Healthcare',
+  'Education',
+  'Finance',
+  'Hospitality',
+  'Retail',
+  'Manufacturing',
+  'Automotive',
+  'Telecommunications',
+  'Construction',
+  'Media & Entertainment',
+  'Transportation',
+  'Energy',
+  'Agriculture',
+  'Real Estate',
+  'Legal Services',
+  'Consulting',
+  'Marketing & Advertising',
+  'Food & Beverage',
+  'Pharmaceuticals'
+]
+
+speciality_options = [
+  "IT",
+  "Engineering",
+  "Sales",
+  "Executive",
+  "Technical",
+  "Financial",
+  "Accounting",
+  "Engineering",
+  "Scientific",
+  "Mortgage",
+  "Construction",
+  "Operational",
+  "Manufacturing",
+  "BioTech",
+  "Life Sciences",
+  "Healthcare",
+]
+
 categories = [
   'Software Engineer',
   'Quality Engineer',
@@ -144,6 +186,14 @@ end
 
 ROLE_LEVEL.each do |role_type|
   RoleLevel.find_or_create_by(name: role_type)
+end
+
+industry_options.each do |industry|
+  Industry.find_or_create_by(name: industry)
+end
+
+speciality_options.each do |speciality|
+  Speciality.find_or_create_by(name: speciality)
 end
 
 @seed = false

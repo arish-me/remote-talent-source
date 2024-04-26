@@ -3,7 +3,7 @@
 class Company < ApplicationRecord
   include Avatarable
   belongs_to :user
-  validates_length_of :name, in: 3..30
+  validates_length_of :name, in: 3..100
 
   FORBIDDEN_EMAIL_DOMAINS = %w[gmail.com hotmail.com yahoo.com].freeze
   validates :company_email, presence: true, format: { with: /\A[^@\s]+@[^@\s]+\z/ },
@@ -14,8 +14,16 @@ class Company < ApplicationRecord
   after_create :activate_user
 
   has_one :location, as: :locatable, dependent: :destroy
+  has_one :company_industry, dependent: :destroy
+  has_one :industry, through: :company_industry
 
-  accepts_nested_attributes_for :location
+  has_many :company_specialities, dependent: :destroy
+  has_many :specialities, through: :company_specialities
+
+  has_rich_text :bio
+  accepts_nested_attributes_for :location, allow_destroy: true
+  accepts_nested_attributes_for :company_industry, allow_destroy: true
+  accepts_nested_attributes_for :company_specialities, allow_destroy: true
 
   COMPANY_SIZE = {
     1 => '1-5',
@@ -35,3 +43,10 @@ class Company < ApplicationRecord
     user.activate!
   end
 end
+
+# Attr to be added
+
+# Year founded
+# Specialties
+# tagline
+# public_url

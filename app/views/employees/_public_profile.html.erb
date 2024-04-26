@@ -31,12 +31,11 @@
             </p>
             <p class="text-muted"><b>Experience:</b> <%= Employee::EXPERIENCE.key(employee.experience.to_i) %></p>
 
-            <%= render Employees::SocialLinkComponent.new(employee.social_link.github, :github) %>
-            <%= render Employees::SocialLinkComponent.new(employee.social_link.linkedin, :linkedin) %>
-            <%= render Employees::SocialLinkComponent.new(employee.social_link.twitter, :twitter) %>
-            <%= render Employees::SocialLinkComponent.new(employee.social_link.website, :website) %>
-            <%= render Employees::SocialLinkComponent.new(employee.scheduling_link, :calendar) %>
-
+            <%= render Employees::SocialLinkComponent.new(employee.social_link&.github, :github) %>
+            <%= render Employees::SocialLinkComponent.new(employee.social_link&.linkedin, :linkedin) %>
+            <%= render Employees::SocialLinkComponent.new(employee.social_link&.twitter, :twitter) %>
+            <%= render Employees::SocialLinkComponent.new(employee.social_link&.website, :website) %>
+            <%= render Employees::SocialLinkComponent.new(employee&.scheduling_link, :calendar) %>
           </div>
         </div>
         <div
