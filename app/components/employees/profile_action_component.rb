@@ -11,5 +11,9 @@ module Employees
     def update_profile?
       user&.employee
     end
+
+    def hide_button?
+      !user&.company
+    end
   end
 end

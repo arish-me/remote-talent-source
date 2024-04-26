@@ -1,3 +1,4 @@
+<%if hide_button? %>
 <div class="mt-4 d-flex gap-3 md:mt-0">
   <% if update_profile? %> <%= link_to edit_employee_path(user.employee), class:
   "btn btn-primary d-inline-flex align-items-center" do %>
@@ -9,3 +10,4 @@
   <!-- Adding margin to the right -->
   <%= t(".add_profile") %> <% end %> <% end %>
 </div>
+<% end %>
