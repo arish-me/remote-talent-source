@@ -19,6 +19,8 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   def new
     @employee = Employee.new
+    @employee.build_social_link if @employee.social_link.nil?
+    @employee.build_location if @employee.location.nil?
     authorize current_user
   end
 

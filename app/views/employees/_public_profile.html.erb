@@ -36,7 +36,6 @@
             <%= render Employees::SocialLinkComponent.new(employee.social_link&.twitter, :twitter) %>
             <%= render Employees::SocialLinkComponent.new(employee.social_link&.website, :website) %>
             <%= render Employees::SocialLinkComponent.new(employee&.scheduling_link, :calendar) %>
-
           </div>
         </div>
         <div

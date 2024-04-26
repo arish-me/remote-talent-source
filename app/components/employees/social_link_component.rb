@@ -29,6 +29,8 @@ module Employees
         "https://www.linkedin.com/in/#{handle}"
       when :stack_overflow
         "https://stackoverflow.com/users/#{handle}"
+      when :calendar
+        "https://#{handle}"
       end
     end
 
