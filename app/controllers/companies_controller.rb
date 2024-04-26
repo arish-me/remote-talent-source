@@ -98,7 +98,7 @@ class CompaniesController < ApplicationController
       :bio,
       :avatar,
       speciality_ids: [],
-      company_industry_attributes: %i[id  industry_id _destroy],
+      company_industry_attributes: %i[id industry_id _destroy],
       location_attributes: %i[
         id city state country address
         latitude longitude _destroy
