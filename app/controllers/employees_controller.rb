@@ -3,7 +3,7 @@
 class EmployeesController < ApplicationController
   before_action :authenticate_user!, except: %i[public_profile]
   before_action :set_employee, only: %i[show edit update destroy public_profile]
-  before_action :build_associations, only: %i[edit new]
+  before_action :build_associations, only: %i[edit]
 
   # GET /employees or /employees.json
   def index

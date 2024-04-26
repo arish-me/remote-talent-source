@@ -15,7 +15,7 @@ class Company < ApplicationRecord
 
   has_one :location, as: :locatable, dependent: :destroy
   has_one :company_industry, dependent: :destroy
-  has_one :industry, dependent: :destroy
+  has_one :industry, through: :company_industry
 
   has_many :company_specialities, dependent: :destroy
   has_many :specialities, through: :company_specialities
