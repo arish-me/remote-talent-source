@@ -73,17 +73,20 @@
             </div>
           <%end%>
 
-
-          <%= link_to employee_path(@employee),
-            class: "d-block bg-light border border-2 border-secondary border-dashed rounded-3 py-3 px-4 text-center text-decoration-none",
-            aria: { label: "Private Information" } do %>
-            <i class="fas fa-lock fa-2x text-secondary"></i>
-            <div class="mt-2 text-sm fw-medium text-secondary">
-              Private information
-            </div>
-            <div class="text-sm text-muted">
-              Information visible with a business profile only.
-            </div>
+          <%if current_user&.company? %>
+            <%= render partial: 'private_information', locals: { employee: @employee} %>
+          <% else %>
+            <%= link_to employee_path(@employee),
+              class: "d-block bg-light border border-2 border-secondary border-dashed rounded-3 py-3 px-4 text-center text-decoration-none",
+              aria: { label: "Private Information" } do %>
+              <i class="fas fa-lock fa-2x text-secondary"></i>
+              <div class="mt-2 text-sm fw-medium text-secondary">
+                Private information
+              </div>
+              <div class="text-sm text-muted">
+                Information visible with a business profile only.
+              </div>
+            <% end %>
           <% end %>
 
           <hr />

@@ -1,0 +1,35 @@
+<%- employee.role_types.each do |role_type| %>
+  <div class="d-flex align-items-center">
+    <i class="fas fa-check-circle" title="Full-time employment"></i>
+    <span class="fw-medium ms-2"><%=role_type.name.humanize%></span>
+  </div>
+<%end%>
+
+ <%- employee.role_levels.each do |role_level| %>
+  <div class="d-flex align-items-center">
+    <i class="fas fa-check-circle" title="Full-time employment"></i>
+    <span class="fw-medium ms-2"><%=role_level.name.humanize%></span>
+  </div>
+<%end%>
+
+<hr />
+
+<h6 class="text-secondary fw-medium">Open Roles</h6>
+<div class="row">
+  <div class="col">
+    <%- employee.primary_roles.each do |primary_role| %>
+      <span class="badge rounded-pill bg-dark"><%= primary_role.name%></span>
+    <% end %>
+  </div>
+</div>
+
+<hr />
+<h6 class="text-secondary fw-medium">Skills</h6>
+
+<div class="row">
+  <div class="col">
+    <%- employee.skills.each do |skill| %>
+      <span class="badge rounded-pill bg-dark"><%= skill.name%></span>
+    <% end %>
+  </div>
+</div>
