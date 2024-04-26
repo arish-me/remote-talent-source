@@ -22,15 +22,26 @@
 
       <div class="d-none d-md-block">
         <%= render Employees::QuerySortButtonComponent.new(query: @query, user: current_user, form_id: "developer-filters-desktop") %>
-
       </div>
 
-      <div class="d-flex justify-content-end align-items-center d-md-none">
-        <%= render Employees::QuerySortButtonComponent.new(query: @query, user: current_user, form_id: "developer-filters-mobile", scope: "developer-filters-mobile") %>
-        <button type="button" data-bs-toggle="collapse" data-bs-target="#filtersMobile" aria-expanded="false" class="btn btn-link text-secondary">
 
-          <span class="visually-hidden"><%= t("developers.query_component.filters") %></span>
-        </button>
+
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filters</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <%= render 'role_level_filter' %>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end align-items-center gap-2 d-md-none">
+        <%= render Employees::QuerySortButtonComponent.new(query: @query, user: current_user, form_id: "developer-filters-mobile", scope: "developer-filters-mobile") %>
+          <button class="btn btn-primary mr-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <i class="fa-solid fa-filter"></i> Filters
+          </button>
+
       </div>
     </div>
   </div>

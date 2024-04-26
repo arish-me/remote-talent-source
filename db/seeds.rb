@@ -50,22 +50,22 @@ industry_options = [
 ]
 
 speciality_options = [
-  "IT",
-  "Engineering",
-  "Sales",
-  "Executive",
-  "Technical",
-  "Financial",
-  "Accounting",
-  "Engineering",
-  "Scientific",
-  "Mortgage",
-  "Construction",
-  "Operational",
-  "Manufacturing",
-  "BioTech",
-  "Life Sciences",
-  "Healthcare",
+  'IT',
+  'Engineering',
+  'Sales',
+  'Executive',
+  'Technical',
+  'Financial',
+  'Accounting',
+  'Engineering',
+  'Scientific',
+  'Mortgage',
+  'Construction',
+  'Operational',
+  'Manufacturing',
+  'BioTech',
+  'Life Sciences',
+  'Healthcare'
 ]
 
 categories = [
@@ -199,11 +199,11 @@ end
 @seed = false
 50.times.each { SeedsHelper.create_developer! } if @seed
 
-email = 'admin@example.com'
+email = 'support@remotetalentsource.com'
 attributes = {
   email:,
-  password: 'admin@example.com',
-  password_confirmation: 'admin@example.com',
+  password: 'Password123!',
+  password_confirmation: 'Password123!',
   confirmed_at: DateTime.current,
   role: 3,
   current_state: 'active'

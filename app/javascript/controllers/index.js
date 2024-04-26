@@ -6,6 +6,13 @@ import { application } from "./application"
 
 
 import PlacesAutocomplete from 'stimulus-places-autocomplete'
+import Dialog from '@stimulus-components/dialog'
+
+application.register('places', PlacesAutocomplete)
+
+import DialogController from "./dialog_controller.js"
+
+application.register('dialog', DialogController)
 
 import AccessibilityController from "./accessibility_controller.js"
 application.register("accessibility", AccessibilityController)
@@ -18,7 +25,6 @@ application.register("hello", HelloController)
 
 import FileUploadController from "./file_upload_controller.js"
 application.register("file-upload", FileUploadController)
-application.register('places', PlacesAutocomplete)
 
 import ToastController from "./toast_controller.js"
 application.register("toast", ToastController)
