@@ -1,0 +1,36 @@
+<%= render Admin::ContainerComponent.new do %>
+<div class="card bg-light mt-5">
+
+  <div class="card-header">
+    <div class="d-flex justify-content-between">
+      <h5 class="card-title">Services</h5>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Object</th>
+            <th>Count</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%- @hash.each_with_index do |hash, index|%>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= hash.first.capitalize %></td>
+              <td><%= hash.last %></td>
+
+              <td><%= link_to "#{action_humanize(hash.first)} #{hash.first.capitalize}", admin_services_path(service: hash.first), class: "add", data: { turbo_method: :post, turbo_confirm: 'Are you sure?' }, remote: true %>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% end %>

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :primary_roles
     resources :skills
+    resources :services
   end
 
   root 'home#index'

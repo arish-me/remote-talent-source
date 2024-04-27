@@ -51,7 +51,7 @@ module SeedsHelper
       user = create_user!(email, role: 2)
 
       name = Faker::Name.name
-      company_email = Faker::Internet.email(name: name, separators: ['+'])
+      company_email = Faker::Internet.email(name:, separators: ['+'])
       tagline = Faker::Lorem.sentence
       founded = Faker::Date.between(from: '2014-09-23', to: '2014-09-25').year.to_s
       location = locations.values.sample
@@ -149,12 +149,11 @@ module SeedsHelper
     def generate_name(min_length, max_length)
       name = ''
       loop do
-        name = Faker::Name.send([:first_name, :last_name].sample)
+        name = Faker::Name.send(%i[first_name last_name].sample)
         break if name.length >= min_length && name.length <= max_length
       end
       name
     end
-
 
     def social_links
       {

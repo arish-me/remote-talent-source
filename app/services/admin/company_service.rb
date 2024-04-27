@@ -3,6 +3,7 @@
 module Admin
   class CompanyService
     attr_reader :count
+
     def initialize(count = 1)
       @count = count
     end
