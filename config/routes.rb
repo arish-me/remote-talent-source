@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resource :impersonate, only: %i[create destroy]
     resources :users, only: [:index]
+    resources :categories
   end
 
   root 'home#index'
