@@ -2,13 +2,13 @@
 
 module Admin
   class ApplicationController < ApplicationController
-    # before_action :authenticate_user!
-    # before_action :require_admin!
+    before_action :authenticate_user!
+    before_action :require_admin!
 
-    # protected
+    protected
 
-    # def require_admin!
-    #   redirect_to root_path unless true_user.admin?
-    # end
+    def require_admin!
+      redirect_to root_path unless true_user.admin?
+    end
   end
 end

@@ -4,11 +4,13 @@ require 'open-uri'
 module SeedsHelper
   class << self
     def create_developer!(attributes = {})
-      first_name = Faker::Name.first_name
-      last_name = Faker::Name.first_name
+      first_name = generate_name(3, 30)
+      last_name = generate_name(3, 30)
       email = "#{first_name.downcase}.#{last_name.downcase}@remotetalentsource.com"
       user = create_user!(email)
       location = locations.values.sample
+      open_roles = PrimaryRole.order('RANDOM()').limit(2)
+      skills = Skill.where(category_id: open_roles.pluck(:category_id))
       attributes = {
         user:,
         first_name:,
@@ -19,6 +21,8 @@ module SeedsHelper
         search_status: Employee.search_statuses.keys.sample,
         role_type_ids: [RoleType.all.sample.id],
         role_level_ids: [RoleLevel.all.sample.id],
+        primary_role_ids: open_roles.ids,
+        skill_ids: skills.pluck(:id),
         location_attributes: {
           city: location.city,
           state: location.state,
@@ -27,6 +31,7 @@ module SeedsHelper
           latitude: location.latitude,
           longitude: location.longitude
         },
+
         social_link_attributes: social_links
       }
       bio_content = Faker::Lorem.paragraph(sentence_count: 50)
@@ -87,6 +92,16 @@ module SeedsHelper
     def unsplash_url_for(image_id)
       "https://images.unsplash.com/#{image_id}?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=512"
     end
+
+    def generate_name(min_length, max_length)
+      name = ''
+      loop do
+        name = Faker::Name.send([:first_name, :last_name].sample)
+        break if name.length >= min_length && name.length <= max_length
+      end
+      name
+    end
+
 
     def social_links
       {
