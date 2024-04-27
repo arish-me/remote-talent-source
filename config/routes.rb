@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     resource :impersonate, only: %i[create destroy]
     resources :users, only: [:index]
     resources :categories
+    resources :primary_roles
+    resources :skills
   end
 
   root 'home#index'
