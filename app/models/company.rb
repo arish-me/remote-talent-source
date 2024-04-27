@@ -2,7 +2,7 @@
 
 class Company < ApplicationRecord
   include Avatarable
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
   validates_length_of :name, in: 3..100
 
   FORBIDDEN_EMAIL_DOMAINS = %w[gmail.com hotmail.com yahoo.com].freeze

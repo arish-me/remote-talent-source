@@ -16,7 +16,7 @@ class Employee < ApplicationRecord
   after_create :activate_user
 
   belongs_to :primary_role
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
 
   has_many :open_roles, dependent: :destroy
   has_many :primary_roles, through: :open_roles
@@ -79,7 +79,7 @@ class Employee < ApplicationRecord
   private
 
   def bio_minimum_length
-    return unless bio.body.to_plain_text.length < 200
+    return unless bio.body.present? && bio.body.to_plain_text.length < 200
 
     errors.add(:bio, 'must be at least 200 characters long')
   end
