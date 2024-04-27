@@ -44,6 +44,54 @@ module SeedsHelper
       end
     end
 
+    def create_company!(attributes = {})
+      first_name = generate_name(3, 30)
+      last_name = generate_name(3, 30)
+      email = "#{first_name.downcase}.#{last_name.downcase}@remotetalentsource.com"
+      user = create_user!(email, role: 2)
+
+      name = Faker::Name.name
+      company_email = Faker::Internet.email(name: name, separators: ['+'])
+      tagline = Faker::Lorem.sentence
+      founded = Faker::Date.between(from: '2014-09-23', to: '2014-09-25').year.to_s
+      location = locations.values.sample
+      phone = Faker::PhoneNumber.cell_phone_in_e164
+      website = Faker::Internet.domain_name
+      size =  Company::COMPANY_SIZE[Company::COMPANY_SIZE.keys.sample]
+      industry = Industry.all.sample
+      specialities = Speciality.order('RANDOM()').limit(2)
+      bio_content = Faker::Lorem.paragraph(sentence_count: 50)
+      attributes = {
+        user:,
+        name:,
+        tagline:,
+        company_email:,
+        phone:,
+        website:,
+        size:,
+        founded:,
+        location_attributes: {
+          city: location.city,
+          state: location.state,
+          country: location.country,
+          address: location.address,
+          latitude: location.latitude,
+          longitude: location.longitude
+        },
+        company_industry_attributes: {
+          industry_id: industry.id
+        },
+        speciality_ids: specialities.ids
+      }
+
+      Company.find_or_create_by!(user:) do |company|
+        company.assign_attributes(attributes)
+        company.bio = bio_content
+        attach_business_avatar(company)
+        company.save
+      end
+    end
+
     def locations
       location_seeds.map do |name, attrs|
         [name.to_sym, Location.new(attrs)]
@@ -73,6 +121,11 @@ module SeedsHelper
     def developer_avatar_urls
       @developer_avatar_urls ||= YAML.load_file(Rails.root.join('db', 'seeds', 'avatars.yml'))
                                      .map { |image_id| unsplash_url_for(image_id) }
+    end
+
+    def business_avatar_urls
+      @business_avatar_urls ||= YAML.load_file(Rails.root.join('db', 'seeds', 'business_avatars.yml'))
+                                    .map { |image_id| unsplash_url_for(image_id) }
     end
 
     def attach_developer_avatar(record)

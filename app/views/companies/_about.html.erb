@@ -18,11 +18,29 @@
       </div>
 
       <div class="mb-3">
+        <%= form.label :tagline, class: 'form-label' do %> Tagline
+          <span class="text-danger">*</span>
+          <% end %>
+            <%= form.text_field :tagline, autofocus: true, autocomplete: "tagline" ,class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
         <%= form.label :company_email, class: 'form-label' do %> Company Email
           <span class="text-danger">*</span>
           <% end %>
             <%= form.email_field :company_email, autofocus: true, autocomplete: "company_email" , class: 'form-control'
               %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :founded, class: 'form-label' do %>
+          Founded Year
+          <span class="text-danger">*</span>
+        <% end %>
+        <%= form.select :founded,
+                  (2000..Time.now.year).map { |year| [year, year] },
+                  {},
+                  class: "form-control choices", data: { controller: "choices" } %>
       </div>
 
       <div class="mb-3">

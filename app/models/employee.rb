@@ -16,7 +16,7 @@ class Employee < ApplicationRecord
   after_create :activate_user
 
   belongs_to :primary_role
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
 
   has_many :open_roles, dependent: :destroy
   has_many :primary_roles, through: :open_roles

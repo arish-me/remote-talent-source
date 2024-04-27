@@ -3,7 +3,7 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_company, only: %i[show edit update destroy]
-  before_action :build_associations, only: %i[edit new]
+  before_action :build_associations, only: %i[edit]
 
   # GET /companies or /companies.json
   def index
@@ -19,6 +19,8 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
+    @company.build_location if @company.location.nil?
+    @company.build_company_industry if @company.company_industry.nil?
     authorize current_user
   end
 
@@ -68,7 +70,6 @@ class CompaniesController < ApplicationController
   end
 
   def build_associations
-    @company.build_location if @company.location.nil?
     @company.build_company_industry if @company.company_industry.nil?
     @company.company_specialities.build if @company.company_specialities.empty?
   end
@@ -90,11 +91,12 @@ class CompaniesController < ApplicationController
     params.require(:company).permit(
       :user_id,
       :name,
+      :tagline,
       :company_email,
       :phone,
       :website,
       :size,
-      :industry,
+      :founded,
       :bio,
       :avatar,
       speciality_ids: [],
