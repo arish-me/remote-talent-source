@@ -2,11 +2,14 @@
 
 Rails.application.routes.draw do
   resources :hiring
-  resources :companies
   resources :additional_informations
   resources :employees do
     resources :specialities
   end
+
+  resources :companies
+  resources :jobs
+
   resources :skills
   get 'talentsource/:id', to: 'employees#public_profile', as: 'public_profile'
   get 'additional_information/:id/company', to: 'additional_information#company'
