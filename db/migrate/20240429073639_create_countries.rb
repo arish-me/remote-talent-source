@@ -12,6 +12,5 @@ class CreateCountries < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
-    add_reference :jobs, :country, null: false, foreign_key: true, type: :uuid
   end
 end

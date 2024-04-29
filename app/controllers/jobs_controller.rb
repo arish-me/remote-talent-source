@@ -66,7 +66,7 @@ class JobsController < ApplicationController
       :apply_type,
       :apply_url,
       :description,
-      :country_id,
+      country_ids: [],
       company_role_attributes: %i[id role_type_id company_id _destroy],
       preferred_location_attributes: %i[id name location_type_id],
       salary_attributes: %i[id min max salary_type currency_id]

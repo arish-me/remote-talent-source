@@ -18,7 +18,9 @@
                 <div class="my-3">
                     <p><i class="bi bi-briefcase-fill"></i> <%= @job.role_type.name.humanize%></p>
                     <p><i class="bi bi-geo-alt-fill"></i> <%= @job.preferred_location.location_type.name.capitalize%></p>
-                    <p><i class="bi bi-globe-americas"></i> <%= @job.country.name%></p>
+                    <p><i class="bi bi-globe-americas"></i>
+                      <%= @job.countries.pluck(:name).join(", ")%>
+                    </p>
                     <p><i class="bi bi-wallet-fill"></i> <%= salary_range %></p>
                 </div>
             </div>

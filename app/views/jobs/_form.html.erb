@@ -66,10 +66,20 @@
       </div>
 
       <div class="mb-3">
+      <%= form.label :world_wide, class: 'form-label' do %>
+        <div class="d-flex">Open Worldwide? </div>
+      <% end %>
+
+       <%= form.check_box :worldwide, class: "form-check-input"%>
+
+
+    </div>
+
+      <div class="mb-3">
         <%= form.label :country_id, class: "form-label" %>
-        <%= form.select :country_id,
+        <%= form.select :country_ids,
                 Country.all.map { |country| [country.name.humanize, country.id] },
-                {},
+                {multiple: true},
                 class: "form-control", data: { controller: "choices" } %>
       </div>
 
