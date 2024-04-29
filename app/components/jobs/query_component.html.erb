@@ -1,0 +1,114 @@
+<%= form_with url: talent_jobs_path, method: :get do |form| %>
+<div class="accordion overflow-hidden" id="accordionPanelsStayOpenExample">
+    <div class="mb-3">
+        <%= form.text_field :search_query,value: search_query, placeholder: "Title, company etc.", class: "form-control" %>
+    </div>
+  <div class="accordion-item border-0">
+    <h2 class="accordion-header bg-light" id="panelsStayOpen-headingOne">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#panelsStayOpen-collapseOne"
+        aria-expanded="true"
+        aria-controls="panelsStayOpen-collapseOne"
+      >
+        Job Types
+      </button>
+    </h2>
+    <div
+      id="panelsStayOpen-collapseOne"
+      class="accordion-collapse collapse show"
+      aria-labelledby="panelsStayOpen-headingOne"
+    >
+        <div class="accordion-body">
+          <div class="d-flex align-items-center">
+            <div class="mb-3">
+              <%= form.collection_check_boxes(:role_types, role_types, :first,
+              :last, {include_hidden: false}) do |fs| %>
+              <div class="form-check">
+                <%= fs.check_box(checked: role_type_selected?(fs.object), class:
+                "form-check-input") %> <%= fs.label(class: "form-check-label") do
+                %> <%= fs.text.titleize %> <% end %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="accordion-item border-0">
+      <h2 class="accordion-header bg-light" id="panelsStayOpen-headingTwo">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseTwo"
+          aria-expanded="true"
+          aria-controls="panelsStayOpen-collapseTwo"
+        >
+          Preferred Job Location Type
+        </button>
+      </h2>
+    <div
+      id="panelsStayOpen-collapseTwo"
+      class="accordion-collapse collapse show"
+      aria-labelledby="panelsStayOpen-headingTwo"
+    >
+        <div class="accordion-body">
+          <div class="d-flex align-items-center">
+            <div class="mb-3">
+              <%= form.collection_check_boxes(:preferred_locations, preferred_locations, :first,
+              :last, {include_hidden: false}) do |fs| %>
+              <div class="form-check">
+                <%= fs.check_box(checked: location_type_selected?(fs.object), class:
+                "form-check-input") %> <%= fs.label(class: "form-check-label") do
+                %> <%= fs.text.titleize %> <% end %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="accordion-item border-0">
+      <h2 class="accordion-header bg-light" id="panelsStayOpen-headingThree">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseThree"
+          aria-expanded="true"
+          aria-controls="panelsStayOpen-collapseThree"
+        >
+          Specific Country Jobs
+        </button>
+      </h2>
+    <div
+      id="panelsStayOpen-collapseThree"
+      class="accordion-collapse collapse show"
+      aria-labelledby="panelsStayOpen-headingThree"
+    >
+      <div class="accordion-body">
+        <%= form.select :countries,
+                options_for_select(countries, query.countries),
+                {multiple: true},
+                class: "form-control", data: { controller: "choices" } %>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="d-flex justify-content-between py-2">
+      <%= submit_tag "Apply", name: nil, class: "btn btn-block btn-md btn-dark" %>
+      <%= link_to "Clear", talent_jobs_path, class: "btn btn-block btn-md
+      btn-outline-dark" %>
+  </div>
+<%end%>

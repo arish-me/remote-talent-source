@@ -3,7 +3,7 @@
 module Admin
   module ServicesHelper
     def action_humanize(name)
-      %w[users employees companies].include?(name.to_s) ? 'Generate' : 'Delete'
+      %w[users employees companies jobs].include?(name.to_s) ? 'Generate' : 'Delete'
     end
   end
 end

@@ -15,9 +15,12 @@ module Admin
     ].freeze
 
     ROLE_TYPES = %w[
-      part_time_contract
-      full_time_contract
-      full_time_employment
+      full_time
+      part_time
+      contract
+      temporary
+      volunteer
+      internship
     ].freeze
 
     ROLE_LEVEL = %w[

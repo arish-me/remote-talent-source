@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_one :employee, dependent: :destroy
   has_one :company, dependent: :destroy
 
+  has_many :jobs, dependent: :destroy
+
   aasm column: 'current_state' do
     state :pending, initial: true
     state :active

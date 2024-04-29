@@ -1,14 +1,14 @@
 <div class="container bg-white my-4 shadow-sm overflow-auto rounded">
   <div class="pt-3 px-3 mb-3">
     <div class="d-md-flex justify-content-between align-items-center">
-      <h1 class="fs-2 fw-bold text-dark">Hire Next Level Talents</h1>
-      <%= render Employees::ProfileActionComponent.new(current_user) %>
+      <h1 class="fs-2 fw-bold text-dark">Find Next Level Jobs</h1>
+
     </div>
 
     <!-- Sort and mobile filter button -->
     <div class="d-md-flex justify-content-between align-items-center">
       <p class="mt-3 mb-4 text-muted">
-        Access a talent pool of 1200+ skilled engineers ready to bring their expertise to your projects. With talents spanning all levels, your search ends here.
+        Looking for the perfect job? Be found by top companies hiring right now.
       </p>
 
       <div class="d-none d-md-block">
@@ -23,12 +23,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          <%= render 'role_level_filter' %>
+
         </div>
       </div>
 
       <div class="d-flex justify-content-end align-items-center gap-2 d-md-none">
-        <%= render Employees::QuerySortButtonComponent.new(query: @query, user: current_user, form_id: "developer-filters-mobile", scope: "developer-filters-mobile") %>
+
           <button class="btn btn-primary mr-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <i class="fa-solid fa-filter"></i> Filters
           </button>
@@ -39,16 +39,16 @@
 
   <hr>
 
-  <div class="row">
+   <div class="row">
     <!-- Desktop and mobile filters -->
     <div class="col-12 col-md-3 mb-3">
       <div class="d-none d-md-block">
-        <%= render 'role_level_filter' %>
+        <%= render partial: 'job_filters' %>
       </div>
 
       <div class="d-md-none">
         <div id="filtersMobile" class="collapse">
-          <%= render 'role_level_filter' %>
+
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@
                 <%= render LoadingComponent.new %>
               </div>
             <% end %>
-            <%= render Employees::CardComponent.with_collection(@query.records.uniq) %>
+            <%= render Jobs::CardComponent.with_collection(@query.records.uniq) %>
           <% end %>
         <% end %>
       <% else %>

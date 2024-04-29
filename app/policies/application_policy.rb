@@ -52,6 +52,10 @@ class ApplicationPolicy
     user.employee?
   end
 
+  def job_access?
+    company? || admin?
+  end
+
   def company?
     user.company?
   end

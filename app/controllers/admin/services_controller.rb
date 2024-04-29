@@ -6,9 +6,11 @@ module Admin
       @hash = {
         users: User.count,
         employees: Employee.count,
-        companies: Company.count,
         demployees: 0,
-        dcompanies: 0
+        companies: Company.count,
+        dcompanies: 0,
+        jobs: Job.count,
+        djobs: 0
       }
     end
 
@@ -20,6 +22,10 @@ module Admin
         Admin::EmployeeService.new(5).call
       when 'companies'
         Admin::CompanyService.new(5).call
+      when 'jobs'
+        Admin::JobService.new(1).call
+      when 'djobs'
+        Job.destroy_all
       when 'demployees'
         Employee.destroy_all
       when 'dcompanies'

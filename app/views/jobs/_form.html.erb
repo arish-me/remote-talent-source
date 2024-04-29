@@ -1,0 +1,180 @@
+<% form_action = action == 'update' ? 'Update Job' : 'Publish Job'%>
+<div class="container overflow-hidden">
+  <%= form_with(model: job) do |form| %>
+  <div class="row gy-5">
+    <div class=" bg-white shadow rounded-3 overflow-hidden p-4 ">
+      <div class="d-flex justify-content-center">
+        <%= render AvatarComponent.new(avatarable: @company, variant:
+                    :medium, data: { "file-upload-target": "image" }) %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :title, class: 'form-label' do %>
+          Job Title
+          <span class="text-danger">*</span>
+        <% end %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.text_field :title,
+                        autofocus: true,
+                        autocomplete: "title",
+                        class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.fields_for :company_role do |role_type_form| %>
+            <%= role_type_form.label :job_type, class: "form-label" %>
+            <%= role_type_form.select :role_type_id,
+                    RoleType.all.map { |role_type| [role_type.name.humanize, role_type.id] },
+                    {},
+                    class: "form-control", data: { controller: "choices" } %>
+            <%= role_type_form.hidden_field :company_id, value: current_user.company.id %>
+        <% end %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :company, class: 'form-label' do %>
+          Company
+          <span class="text-danger">*</span>
+        <% end %>
+        <%= form.text_field :name, class: "form-control", value: @company.name, readOnly: true, disabled: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :company_website, class: 'form-label' do %>
+          Company Website
+          <span class="text-danger">*</span>
+        <% end %>
+        <%= form.text_field :company_website, class: "form-control", value: @company.website, readonly: true, disabled: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :company_email, class: 'form-label' do %>
+          Company Email
+          <span class="text-danger">*</span>
+        <% end %>
+        <%= form.text_field :company_email, class: "form-control", value: @company.company_email, readonly: true, disabled: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.fields_for :preferred_location do |location_type_form| %>
+            <%= location_type_form.label :preferred_location, class: "form-label" %>
+            <%= location_type_form.select :location_type_id,
+                    LocationType.all.map { |location_type| [location_type.name.humanize, location_type.id] },
+                    {},
+                    class: "form-control", data: { controller: "choices" } %>
+        <% end %>
+      </div>
+
+      <div class="mb-3">
+      <%= form.label :world_wide, class: 'form-label' do %>
+        <div class="d-flex">Open Worldwide? </div>
+      <% end %>
+
+       <%= form.check_box :worldwide, class: "form-check-input"%>
+
+
+    </div>
+
+      <div class="mb-3">
+        <%= form.label :country_id, class: "form-label" %>
+        <%= form.select :country_ids,
+                Country.all.map { |country| [country.name.humanize, country.id] },
+                {multiple: true},
+                class: "form-control", data: { controller: "choices" } %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :apply_type, class: 'form-label' do %>
+          <div class="d-flex">Apply Type</div>
+          <p class="text-sm text-secondary">Source of apply.</p>
+        <% end %>
+        <%= form.collection_radio_buttons(:apply_type, Job.apply_types.keys, :to_s, :titleize, class: "apply-type-radio") do |fs| %>
+          <div class="form-check form-check-inline">
+            <%= fs.radio_button(class: "form-check-input") %>
+            <%= fs.label(class: "form-check-label") do %>
+              <%= fs.text %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div id="applyUrlField" class="mb-3" style="display: none;">
+        <%= form.label :apply_url, class: 'form-label' do %>
+          Apply URL
+          <span class="text-danger">*</span>
+        <% end %>
+        <%= form.text_field :apply_url, class: "form-control" %>
+      </div>
+
+      <%= render partial: 'description', locals: { form: form } %>
+
+
+      <div class="mb-3">
+        <%= form.fields_for :salary do |salary_form| %>
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <%= salary_form.label :min, class: "form-label" %>
+              <%= salary_form.number_field :min, class: "form-control" %>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <%= salary_form.label :max, class: "form-label" %>
+              <%= salary_form.number_field :max,class: "form-control" %>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <%= salary_form.label :currency_id, class: "form-label" %>
+              <%= salary_form.select :currency_id,
+                                    options_for_select(currency_options, default_currency_id),
+                                    {},
+                                    class: "form-control", data: { controller: "choices" } %>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <%= salary_form.label :salary_type, class: "form-label" %>
+              <%= salary_form.select :salary_type,
+                    Salary.salary_types.keys.map { |key| [key.humanize, key] },
+                    {},
+                    class: "form-control", data: { controller: "choices" } %>
+
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="d-flex justify-content-end">
+      <%= form.submit form_action,
+                class: 'btn btn-block btn-md btn-dark',
+                data: {  controller: "forms--keyboard-submit", action: "form-submit#submit", form_submit_target: "submit" } %>
+      </div>
+
+
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var applyTypeRadios = document.querySelectorAll('.form-check-input');
+    var applyUrlField = document.getElementById('applyUrlField');
+
+    // Check if there is a previous selection saved in localStorage
+    var selectedApplyType = localStorage.getItem('selectedApplyType');
+    if (selectedApplyType === 'custom_ats') {
+      applyUrlField.style.display = 'block';
+    }
+
+    applyTypeRadios.forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        if (this.value === 'custom_ats') {
+          applyUrlField.style.display = 'block';
+          localStorage.setItem('selectedApplyType', 'custom_ats');
+        } else {
+          applyUrlField.style.display = 'none';
+          localStorage.removeItem('selectedApplyType');
+        }
+      });
+    });
+  });
+</script>

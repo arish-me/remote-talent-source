@@ -2,11 +2,17 @@
 
 Rails.application.routes.draw do
   resources :hiring
-  resources :companies
+  resources :talent_jobs
   resources :additional_informations
   resources :employees do
     resources :specialities
   end
+
+  resources :companies
+  resources :jobs do
+    post 'change_status', on: :member
+  end
+
   resources :skills
   get 'talentsource/:id', to: 'employees#public_profile', as: 'public_profile'
   get 'additional_information/:id/company', to: 'additional_information#company'

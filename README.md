@@ -1,72 +1,32 @@
+ Job:
+ title
+ type:
+  Full Time
+  part-time
+  contract
+  temporary
+  volunteer
+  internship
 
-Software Engineer:
+company_name:
+company_webiste
+logo
+job-location:
+  Remote
+  Onsite
+  Hybrid
 
-Frontend Developer
-Backend Developer
-Full-stack Developer
-DevOps Engineer
-Embedded Systems Developer
-Mobile App Developer
-Game Developer
-Machine Learning Engineer
-Data Engineer
-Quality Engineer:
+restricted_job_location:
+ contry dropdown or worldwide
 
-Manual Tester
-Automation Tester
-Performance Tester
-Security Tester
-Usability Tester
-Regression Tester
-Integration Tester
-Accessibility Tester
-Compatibility Tester
-Localization Tester
-Data Integrity Tester
-UI/UX:
+description: action_text
 
-UI Designer
-UX Designer
-Interaction Designer
-Visual Designer
-User Researcher
-Information Architect
-Usability Analyst
-Sales & Marketing:
+Salary:
+ min
+ max
+ currency
+ yearly, monthly,daily,weekly, hourly
 
-Sales Representative
-Marketing Specialist
-Digital Marketer
-Content Marketer
-Social Media Manager
-SEO Specialist
-Brand Manager
-Product Marketer
-
-
-Management:
-
-Project Manager
-Product Manager
-Scrum Master
-Team Lead
-Engineering Manager
-Operations Manager
-Business Development Manager
-Operations:
-
-Operations Analyst
-Business Analyst
-Process Analyst
-Supply Chain Analyst
-Logistics Coordinator
-Quality Assurance Analyst
-Analyst:
-
-Data Analyst
-Financial Analyst
-Market Analyst
-Business Analyst
-Operations Analyst
-Systems Analyst
-Research Analyst
+ apply_type:
+  talentsource_ats
+  apply_url:

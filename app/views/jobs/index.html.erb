@@ -1,0 +1,53 @@
+<%= render Admin::ContainerComponent.new do %>
+  <div class="card bg-light mt-5">
+    <div class="card-header">
+      <div class="d-flex justify-content-between">
+        <h5 class="card-title">Your Jobs</h5>
+        <%= link_to "Post Job", new_job_path, class: 'btn btn-sm btn-primary' %>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Current State</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%- @jobs.each_with_index do |job, index|%>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= job.title %></td>
+                <td>
+                  <span class="badge rounded-pill <%=job_status_class(job)%>"><%= job.current_state %></span>
+
+
+                </td>
+
+                <td class="d-flex gap-2">
+                  <%= link_to edit_job_path(job) do %>
+                    <i class="fas fa-pencil-alt"></i>
+                  <%end%>
+
+                  <%= link_to job_path(job) do %>
+                    <i class="fas fa-eye"></i>
+                  <%end%>
+                  <%= link_to job_path(job), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do %>
+                    <i class="fas fa-trash"></i>
+                  <%end%>
+                  <% if true_user.admin? %>
+                    <%= link_to "#{job_status(job)}", change_status_job_path(job), class: 'btn btn-primary btn.md', data: { turbo_method: :post } %>
+                  <%end%>
+                </td>
+              </tr>
+            <%end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>

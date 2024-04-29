@@ -92,6 +92,52 @@ module SeedsHelper
       end
     end
 
+    def create_jobs!
+      Company.all.each do |company|
+        user = company.user
+        title = Faker::Job.title
+        apply_type = Job.apply_types.keys.sample
+        apply_url = Faker::Internet.url
+        current_state = 'active'
+        countries = Country.order('RANDOM()').limit(2)
+        company_role = RoleType.all.sample
+        location_type = LocationType.all.sample
+        description_content = Faker::Lorem.paragraph(sentence_count: 50)
+        min = Faker::Number.decimal(l_digits: 3)
+        max = Faker::Number.decimal(l_digits: 5)
+        salary_type = Salary.salary_types.keys.sample
+        currency_id = Currency.all.sample.id
+        attributes = {
+          user:,
+          company:,
+          title:,
+          apply_type:,
+          apply_url:,
+          current_state:,
+          company_role_attributes: {
+            role_type_id: company_role.id,
+            company_id: company.id
+          },
+          country_ids: countries.ids,
+          preferred_location_attributes: {
+            location_type_id: location_type.id
+          },
+          salary_attributes: {
+            min:,
+            max:,
+            salary_type:,
+            currency_id:
+          }
+        }
+
+        Job.find_or_initialize_by(title:) do |job|
+          job.assign_attributes(attributes)
+          job.description = description_content
+          job.save
+        end
+      end
+    end
+
     def locations
       location_seeds.map do |name, attrs|
         [name.to_sym, Location.new(attrs)]

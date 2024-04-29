@@ -9,7 +9,6 @@ export default class extends Controller {
       searchFields: ['label'],
       searchEnabled: true,
       searchChoices: true,
-      maxItemCount: 3,
       editItems: false,
       allowHTML: true,
       removeItemButton: true,

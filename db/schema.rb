@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_424_133_607) do
+ActiveRecord::Schema[7.1].define(version: 20_240_429_142_626) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pgcrypto'
   enable_extension 'plpgsql'
@@ -86,6 +86,17 @@ ActiveRecord::Schema[7.1].define(version: 20_240_424_133_607) do
     t.index ['industry_id'], name: 'index_company_industries_on_industry_id'
   end
 
+  create_table 'company_roles', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'company_id', null: false
+    t.uuid 'job_id', null: false
+    t.uuid 'role_type_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['company_id'], name: 'index_company_roles_on_company_id'
+    t.index ['job_id'], name: 'index_company_roles_on_job_id'
+    t.index ['role_type_id'], name: 'index_company_roles_on_role_type_id'
+  end
+
   create_table 'company_specialities', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.uuid 'company_id', null: false
     t.uuid 'speciality_id', null: false
@@ -93,6 +104,24 @@ ActiveRecord::Schema[7.1].define(version: 20_240_424_133_607) do
     t.datetime 'updated_at', null: false
     t.index ['company_id'], name: 'index_company_specialities_on_company_id'
     t.index ['speciality_id'], name: 'index_company_specialities_on_speciality_id'
+  end
+
+  create_table 'countries', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.string 'name'
+    t.string 'emoji'
+    t.string 'iso2'
+    t.string 'iso3'
+    t.uuid 'currency_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['currency_id'], name: 'index_countries_on_currency_id'
+  end
+
+  create_table 'currencies', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.string 'name'
+    t.string 'symbol'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
   create_table 'employee_levels', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
@@ -136,6 +165,33 @@ ActiveRecord::Schema[7.1].define(version: 20_240_424_133_607) do
     t.datetime 'updated_at', null: false
   end
 
+  create_table 'job_countries', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'job_id', null: false
+    t.uuid 'country_id', null: false
+    t.index ['country_id'], name: 'index_job_countries_on_country_id'
+    t.index ['job_id'], name: 'index_job_countries_on_job_id'
+  end
+
+  create_table 'jobs', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.string 'title'
+    t.integer 'apply_type', default: 0
+    t.string 'apply_url'
+    t.boolean 'worldwide', default: true
+    t.uuid 'user_id', null: false
+    t.uuid 'company_id', null: false
+    t.string 'current_state'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['company_id'], name: 'index_jobs_on_company_id'
+    t.index ['user_id'], name: 'index_jobs_on_user_id'
+  end
+
+  create_table 'location_types', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
+
   create_table 'locations', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.string 'city', null: false
     t.string 'state', null: false
@@ -163,6 +219,16 @@ ActiveRecord::Schema[7.1].define(version: 20_240_424_133_607) do
     t.index ['primary_role_id'], name: 'index_open_roles_on_primary_role_id'
   end
 
+  create_table 'preferred_locations', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.string 'locatable_type', null: false
+    t.uuid 'locatable_id', null: false
+    t.uuid 'location_type_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index %w[locatable_type locatable_id], name: 'index_preferred_locations_on_locatable'
+    t.index ['location_type_id'], name: 'index_preferred_locations_on_location_type_id'
+  end
+
   create_table 'primary_roles', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.string 'name'
     t.datetime 'created_at', null: false
@@ -181,6 +247,19 @@ ActiveRecord::Schema[7.1].define(version: 20_240_424_133_607) do
     t.string 'name'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+  end
+
+  create_table 'salaries', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.string 'salable_type', null: false
+    t.uuid 'salable_id', null: false
+    t.decimal 'min', default: '0.0'
+    t.decimal 'max', default: '0.0'
+    t.integer 'salary_type', default: 0
+    t.uuid 'currency_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['currency_id'], name: 'index_salaries_on_currency_id'
+    t.index %w[salable_type salable_id], name: 'index_salaries_on_salable'
   end
 
   create_table 'skillables', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
@@ -252,17 +331,27 @@ ActiveRecord::Schema[7.1].define(version: 20_240_424_133_607) do
   add_foreign_key 'companies', 'users'
   add_foreign_key 'company_industries', 'companies'
   add_foreign_key 'company_industries', 'industries'
+  add_foreign_key 'company_roles', 'companies'
+  add_foreign_key 'company_roles', 'jobs'
+  add_foreign_key 'company_roles', 'role_types'
   add_foreign_key 'company_specialities', 'companies'
   add_foreign_key 'company_specialities', 'specialities'
+  add_foreign_key 'countries', 'currencies'
   add_foreign_key 'employee_levels', 'employees'
   add_foreign_key 'employee_levels', 'role_levels'
   add_foreign_key 'employee_roles', 'employees'
   add_foreign_key 'employee_roles', 'role_types'
   add_foreign_key 'employees', 'primary_roles'
   add_foreign_key 'employees', 'users'
+  add_foreign_key 'job_countries', 'countries'
+  add_foreign_key 'job_countries', 'jobs'
+  add_foreign_key 'jobs', 'companies'
+  add_foreign_key 'jobs', 'users'
   add_foreign_key 'open_roles', 'employees'
   add_foreign_key 'open_roles', 'primary_roles'
+  add_foreign_key 'preferred_locations', 'location_types'
   add_foreign_key 'primary_roles', 'categories'
+  add_foreign_key 'salaries', 'currencies'
   add_foreign_key 'skillables', 'skills'
   add_foreign_key 'skills', 'categories'
 end
