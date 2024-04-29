@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # config/initializers/default_meta.rb
 
 # Initialize default meta tags.

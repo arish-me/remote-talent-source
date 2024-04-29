@@ -45,7 +45,7 @@ class Job < ApplicationRecord
   }
 
   scope :filter_by_preferred_location, lambda { |location_type|
-    joins(:job_countries).where(preferred_location: { location_type_id: location_type })
+    joins(:preferred_location).where(preferred_location: { location_type_id: location_type })
   }
 
   scope :filter_by_countries, lambda { |country|

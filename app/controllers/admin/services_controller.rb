@@ -10,7 +10,11 @@ module Admin
         companies: Company.count,
         dcompanies: 0,
         jobs: Job.count,
-        djobs: 0
+        djobs: 0,
+        currencies: Currency.count,
+        dcurrencies: 0,
+        countries: Country.count,
+        dcountry: 0
       }
     end
 
@@ -24,6 +28,14 @@ module Admin
         Admin::CompanyService.new(5).call
       when 'jobs'
         Admin::JobService.new(1).call
+      when 'currencies'
+        system('bundle exec rake import:currencies')
+      when 'countries'
+        system('bundle exec rake import:countries')
+      when 'dcurrencies'
+        Currency.destroy_all
+      when 'dcountry'
+        Country.destroy_all
       when 'djobs'
         Job.destroy_all
       when 'demployees'
