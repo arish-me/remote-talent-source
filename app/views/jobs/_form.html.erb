@@ -33,6 +33,18 @@
         <%= form.text_field :name, class: "form-control", value: @company.name, readOnly: true %>
       </div>
 
+        <div class="mb-3">
+        <%= form.fields_for :preferred_location do |location_type_form| %>
+            <%= location_type_form.label :preferred_location, class: "form-label" %>
+            <%= location_type_form.select :location_type_id,
+                    LocationType.all.map { |location_type| [location_type.name.humanize, location_type.id] },
+                    {},
+                    class: "form-control", data: { controller: "choices" } %>
+        <% end %>
+      </div>
+
+
+
       <div class="d-flex justify-content-end">
       <%= form.submit "Publish Job",
                 class: 'btn btn-block btn-md btn-dark',

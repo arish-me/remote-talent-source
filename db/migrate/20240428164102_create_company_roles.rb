@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCompanyRoles < ActiveRecord::Migration[7.1]
   def change
     create_table :company_roles, id: :uuid do |t|

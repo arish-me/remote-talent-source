@@ -10,6 +10,7 @@ class JobsController < ApplicationController
   def new
     @job = @company.jobs.new
     @job.build_company_role
+    @job.build_preferred_location
   end
 
   def create
@@ -31,7 +32,8 @@ class JobsController < ApplicationController
     params.require(:job).permit(
       :title,
       :user_id,
-      company_role_attributes: %i[role_type_id company_id]
+      company_role_attributes: %i[role_type_id company_id],
+      preferred_location_attributes: %i[id name location_type_id]
     )
   end
 
