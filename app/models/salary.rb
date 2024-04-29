@@ -12,10 +12,9 @@ class Salary < ApplicationRecord
   private
 
   def validate_min_less_than_max
-    if min.present? && max.present? && min >= max
-      errors.add(:min, "should be less than max")
-      errors.add(:max, "should be greater than min")
-    end
-  end
+    return unless min.present? && max.present? && min >= max
 
+    errors.add(:min, 'should be less than max')
+    errors.add(:max, 'should be greater than min')
+  end
 end

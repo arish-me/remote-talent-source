@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   resources :hiring
+  resources :talent_jobs
   resources :additional_informations
   resources :employees do
     resources :specialities

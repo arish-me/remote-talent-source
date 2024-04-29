@@ -92,6 +92,10 @@ module SeedsHelper
       end
     end
 
+
+    def create_jobs!
+    end
+
     def locations
       location_seeds.map do |name, attrs|
         [name.to_sym, Location.new(attrs)]

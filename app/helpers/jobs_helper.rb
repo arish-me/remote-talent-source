@@ -24,7 +24,7 @@ module JobsHelper
 
   def default_currency_id
     default_currency = Currency.find_by(name: 'USD')
-    default_currency ? default_currency.id : nil
+    default_currency&.id
   end
 
   def job_status(job)

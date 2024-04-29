@@ -8,7 +8,7 @@ class Job < ApplicationRecord
   has_rich_text :description
 
   validates_length_of :title, in: 10..50
-  #validates :apply_url, presence: true, if: :custom_ats?
+  # validates :apply_url, presence: true, if: :custom_ats?
   validates_presence_of :description
 
   belongs_to :user
