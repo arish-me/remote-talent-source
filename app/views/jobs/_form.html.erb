@@ -33,7 +33,7 @@
         <%= form.text_field :name, class: "form-control", value: @company.name, readOnly: true %>
       </div>
 
-        <div class="mb-3">
+      <div class="mb-3">
         <%= form.fields_for :preferred_location do |location_type_form| %>
             <%= location_type_form.label :preferred_location, class: "form-label" %>
             <%= location_type_form.select :location_type_id,
