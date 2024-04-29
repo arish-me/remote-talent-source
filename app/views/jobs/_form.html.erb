@@ -2,6 +2,11 @@
   <%= form_with(model: job) do |form| %>
   <div class="row gy-5">
     <div class=" bg-white shadow rounded-3 overflow-hidden p-4 ">
+      <div class="d-flex justify-content-center">
+        <%= render AvatarComponent.new(avatarable: @company, variant:
+                    :medium, data: { "file-upload-target": "image" }) %>
+      </div>
+
       <div class="mb-3">
         <%= form.label :title, class: 'form-label' do %>
           Job Title
@@ -34,12 +39,72 @@
       </div>
 
       <div class="mb-3">
+        <%= form.label :company_website, class: 'form-label' do %>
+          Company Website
+          <span class="text-danger">*</span>
+        <% end %>
+        <%= form.text_field :company_website, class: "form-control", value: @company.website, readOnly: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :company_email, class: 'form-label' do %>
+          Company Email
+          <span class="text-danger">*</span>
+        <% end %>
+        <%= form.text_field :company_email, class: "form-control", value: @company.company_email, readOnly: true %>
+      </div>
+
+      <div class="mb-3">
         <%= form.fields_for :preferred_location do |location_type_form| %>
             <%= location_type_form.label :preferred_location, class: "form-label" %>
             <%= location_type_form.select :location_type_id,
                     LocationType.all.map { |location_type| [location_type.name.humanize, location_type.id] },
                     {},
                     class: "form-control", data: { controller: "choices" } %>
+        <% end %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :country_id, class: "form-label" %>
+        <%= form.select :country_id,
+                Country.all.map { |country| [country.name.humanize, country.id] },
+                {},
+                class: "form-control", data: { controller: "choices" } %>
+      </div>
+
+      <%= render partial: 'description', locals: { form: form } %>
+
+
+      <div class="mb-3">
+        <%= form.fields_for :salary do |salary_form| %>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <%= salary_form.label :min, class: "form-label" %>
+              <%= salary_form.text_field :min,class: "form-control" %>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <%= salary_form.label :max, class: "form-label" %>
+              <%= salary_form.text_field :max,class: "form-control" %>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <%= salary_form.label :currency_id, class: "form-label" %>
+              <%= salary_form.select :currency_id,
+                    Currency.all.map { |currency| [currency.name, currency.id] },
+                    {},
+                    class: "form-control", data: { controller: "choices" } %>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <%= salary_form.label :salary_type, class: "form-label" %>
+              <%= salary_form.select :salary_type,
+                    Salary.salary_types.keys.map { |key| [key.humanize, key] },
+                    {},
+                    class: "form-control", data: { controller: "choices" } %>
+
+            </div>
+          </div>
         <% end %>
       </div>
 

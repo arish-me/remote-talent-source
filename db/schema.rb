@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_29_073639) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_29_082102) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -170,7 +170,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_073639) do
     t.uuid "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "country_id", null: false
     t.index ["company_id"], name: "index_jobs_on_company_id"
+    t.index ["country_id"], name: "index_jobs_on_country_id"
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
@@ -235,6 +237,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_073639) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "salaries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "salable_type", null: false
+    t.uuid "salable_id", null: false
+    t.decimal "min"
+    t.decimal "max"
+    t.integer "salary_type", default: 0
+    t.uuid "currency_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["currency_id"], name: "index_salaries_on_currency_id"
+    t.index ["salable_type", "salable_id"], name: "index_salaries_on_salable"
   end
 
   create_table "skillables", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -319,11 +334,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_073639) do
   add_foreign_key "employees", "primary_roles"
   add_foreign_key "employees", "users"
   add_foreign_key "jobs", "companies"
+  add_foreign_key "jobs", "countries"
   add_foreign_key "jobs", "users"
   add_foreign_key "open_roles", "employees"
   add_foreign_key "open_roles", "primary_roles"
   add_foreign_key "preferred_locations", "location_types"
   add_foreign_key "primary_roles", "categories"
+  add_foreign_key "salaries", "currencies"
   add_foreign_key "skillables", "skills"
   add_foreign_key "skills", "categories"
 end
