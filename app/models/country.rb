@@ -2,4 +2,5 @@
 
 class Country < ApplicationRecord
   belongs_to :currency
+  has_many :jobs
 end

@@ -29,7 +29,7 @@ module Jobs
       job.preferred_location.location_type.name.capitalize
     end
 
-    def countries(limit=4)
+    def countries(limit = 4)
       words = job.countries.pluck(:name).take(limit)
       truncated_countries = words.join(', ')
       truncated_countries += '...' if job.countries.count > limit
@@ -37,7 +37,7 @@ module Jobs
     end
 
     def time_ago
-      time_ago_in_words(job.created_at).gsub('about ','')
+      time_ago_in_words(job.created_at).gsub('about ', '')
     end
 
     private

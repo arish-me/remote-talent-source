@@ -3,7 +3,7 @@
 # app/modes/job.rb
 class Job < ApplicationRecord
   include AASM
-
+  include PgSearch::Model
   enum apply_type: { custom_ats: 0, remote_talent_ATS: 1 }
   has_rich_text :description
 
@@ -16,6 +16,7 @@ class Job < ApplicationRecord
   has_one :company_role, dependent: :destroy
   has_one :role_type, through: :company_role
   has_one :preferred_location, as: :locatable
+  has_one :location_type, through: :preferred_location
   has_one :salary, as: :salable
   has_many :job_countries, dependent: :destroy
   has_many :countries, through: :job_countries
@@ -38,6 +39,21 @@ class Job < ApplicationRecord
       transitions from: %i[active], to: :inactive
     end
   end
+
+  scope :filter_by_role_types, lambda { |role_types|
+    joins(:company_role).where(company_role: { role_type_id: role_types })
+  }
+
+  scope :filter_by_preferred_location, lambda { |location_type|
+    joins(:job_countries).where(preferred_location: { location_type_id: location_type })
+  }
+
+  scope :filter_by_countries, lambda { |country|
+    joins(:job_countries).where(job_countries: { country: })
+  }
+
+  pg_search_scope :filter_by_search_query, against: [:title],
+                                           associated_against: { company: :name, rich_text_description: [:body] }
 
   def set_job_status
     case current_state

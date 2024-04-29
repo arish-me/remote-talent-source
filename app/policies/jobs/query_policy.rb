@@ -13,11 +13,9 @@ module Jobs
         :page,
         :include_not_interested,
         :sort,
-        { role_levels: [],
-          role_types: [],
-          badges: [],
-          utc_offsets: [],
-          categories: [],
+        :search_query,
+        { role_types: [],
+          preferred_locations: [],
           countries: [] }
       ]
     end

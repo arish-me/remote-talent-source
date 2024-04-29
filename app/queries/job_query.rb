@@ -10,11 +10,17 @@ class JobQuery
     @options = options
     @items_per_page = options.delete(:items_per_page)
     @sort = options.delete(:sort)
+    @role_types = options.delete(:role_types)
+    @preferred_locations = options.delete(:preferred_locations)
+    @countries = options.delete(:countries)
+    @search_query = options.delete(:search_query)
+    # @countries = options.delete(:countries)
+
     # @specialty_ids = options.delete(:specialty_ids)
     # @countries = options.delete(:countries)
     # @categories = options.delete(:categories)
     # @utc_offsets = options.delete(:utc_offsets)
-    # @role_types = options.delete(:role_types)
+
     # @role_levels = options.delete(:role_levels)
     # @badges = options.delete(:badges)
     # @include_not_interested = options.delete(:include_not_interested)
@@ -23,8 +29,7 @@ class JobQuery
   end
 
   def filters
-    @filters = { sort:, utc_offsets:, role_types:, role_levels:, include_not_interested:, search_query:, countries:,
-                 badges: }
+    @filters = { sort:, role_types:, preferred_locations:, countries: }
   end
 
   def pagy
@@ -48,31 +53,15 @@ class JobQuery
   end
 
   def countries
-    @countries.to_a.reject(&:blank?)
-  end
-
-  def categories
-    @categories.to_a.reject(&:blank?)
-  end
-
-  def specialty_ids
-    @specialty_ids.to_a.reject(&:blank?)
-  end
-
-  def utc_offsets
-    @utc_offsets.to_a.reject(&:blank?).map(&:to_f)
+    @countries.to_a.reject(&:blank?).map(&:to_sym)
   end
 
   def role_types
     @role_types.to_a.reject(&:blank?).map(&:to_sym)
   end
 
-  def role_levels
-    @role_levels.to_a.reject(&:blank?).map(&:to_sym)
-  end
-
-  def badges
-    @badges.to_a.reject(&:blank?).map(&:to_sym)
+  def preferred_locations
+    @preferred_locations.to_a.reject(&:blank?).map(&:to_sym)
   end
 
   def search_query
@@ -87,14 +76,15 @@ class JobQuery
 
   def query_and_paginate
     @_records = Job.includes(:role_type)
-    #sort_records
-    # country_filter_records
-    # utc_offset_filter_records
-    # role_type_filter_records
+    # sort_records
+    country_filter_records
+    role_type_filter_records
+    preferred_location_filter_records
+    search_query_filter_records
     # role_level_filter_records
     # category_filter_records
     # search_status_filter_records
-    # search_query_filter_records
+
     # badges_filter_records
     # specialty_filter_records
     @pagy, @records = build_pagy(@_records, items: items_per_page)
@@ -105,14 +95,10 @@ class JobQuery
   end
 
   def empty_search?
-    utc_offsets.empty? &&
-      role_types.empty? &&
-      role_levels.empty? &&
+    role_types.empty? &&
       search_query.blank? &&
-      countries.blank? &&
-      badges.blank? &&
-      specialty_ids.empty? &&
-      !include_not_interested
+      countries.empty? &&
+      preferred_locations.blank?
   end
 
   def badges_filter_records
@@ -130,12 +116,6 @@ class JobQuery
     end
   end
 
-  def specialty_filter_records
-    return unless specialty_ids.any?
-
-    @_records.merge!(Developer.with_specialty_ids(specialty_ids))
-  end
-
   def sort_records
     if sort == :relevance
       @_records.merge!(Employee.recently_updated_first)
@@ -145,33 +125,19 @@ class JobQuery
   end
 
   def country_filter_records
-    @_records.merge!(Employee.filter_by_countries(countries)) if countries.any?
-  end
-
-  def category_filter_records
-    @_records.merge!(Employee.filter_by_categories(categories)) if categories.any?
-  end
-
-  def utc_offset_filter_records
-    return unless utc_offsets.any?
-
-    @_records.merge!(Employee.filter_by_utc_offsets(utc_offsets))
+    @_records.merge!(Job.filter_by_countries(countries)) if countries.any?
   end
 
   def role_type_filter_records
-    @_records.merge!(Employee.filter_by_role_types(role_types)) if role_types.any?
+    @_records.merge!(Job.filter_by_role_types(role_types)) if role_types.any?
   end
 
-  def role_level_filter_records
-    @_records.merge!(Employee.filter_by_role_levels(role_levels)) if role_levels.any?
-  end
-
-  def search_status_filter_records
-    @_records.merge!(Developer.actively_looking.or(Developer.open)) unless include_not_interested
+  def preferred_location_filter_records
+    @_records.merge!(Job.filter_by_preferred_location(preferred_locations)) if preferred_locations.any?
   end
 
   def search_query_filter_records
-    @_records.merge!(Developer.filter_by_search_query(search_query)) unless search_query.empty?
+    @_records.merge!(Job.filter_by_search_query(search_query)) unless search_query.empty?
   end
 
   # Needed for #pagy (aliased to #build_pagy) helper.

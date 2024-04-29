@@ -22,3 +22,5 @@ puts 'Currencies imported successfully!'
 puts 'Importing countries...'
 system('bundle exec rake import:countries')
 puts 'Countries imported successfully!'
+
+Admin::JobService.new(2).call
