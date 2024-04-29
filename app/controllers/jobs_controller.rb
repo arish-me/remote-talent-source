@@ -3,13 +3,13 @@
 # app/controllers/jobs_controller.rb
 class JobsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_job, only: [:edit, :update, :show]
+  before_action :set_job, only: %i[edit update show]
 
   before_action :set_company
 
-
   def index
     @jobs = @company.jobs
+    authorize @jobs
   end
 
   def new
@@ -17,6 +17,8 @@ class JobsController < ApplicationController
     @job.build_company_role
     @job.build_preferred_location
     @job.build_salary
+
+    authorize @job
   end
 
   def edit; end
@@ -32,6 +34,7 @@ class JobsController < ApplicationController
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
+    authorize @job
   end
 
   def update
@@ -44,6 +47,7 @@ class JobsController < ApplicationController
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
+    authorize @job
   end
 
   def show; end
@@ -54,9 +58,11 @@ class JobsController < ApplicationController
     params.require(:job).permit(
       :title,
       :user_id,
+      :apply_type,
+      :apply_url,
       :description,
       :country_id,
-      company_role_attributes: %i[role_type_id company_id],
+      company_role_attributes: %i[id role_type_id company_id _destroy],
       preferred_location_attributes: %i[id name location_type_id],
       salary_attributes: %i[id min max salary_type currency_id]
     )

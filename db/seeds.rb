@@ -14,3 +14,11 @@ LOCATION_TYPE = %w[
 LOCATION_TYPE.each do |location_type|
   LocationType.find_or_create_by(name: location_type)
 end
+
+puts 'Importing currencies...'
+system('bundle exec rake import:currencies')
+puts 'Currencies imported successfully!'
+
+puts 'Importing countries...'
+system('bundle exec rake import:countries')
+puts 'Countries imported successfully!'

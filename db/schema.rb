@@ -164,10 +164,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_082102) do
 
   create_table "jobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
-    t.string "apply_type"
+    t.integer "apply_type", default: 0
     t.string "apply_url"
     t.uuid "user_id", null: false
     t.uuid "company_id", null: false
+    t.string "current_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "country_id", null: false
@@ -242,8 +243,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_082102) do
   create_table "salaries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "salable_type", null: false
     t.uuid "salable_id", null: false
-    t.decimal "min"
-    t.decimal "max"
+    t.decimal "min", default: "0.0"
+    t.decimal "max", default: "0.0"
     t.integer "salary_type", default: 0
     t.uuid "currency_id", null: false
     t.datetime "created_at", null: false

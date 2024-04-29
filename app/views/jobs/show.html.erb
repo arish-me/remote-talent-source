@@ -23,7 +23,11 @@
                 </div>
             </div>
             <div class="col-md-2 pb-2">
+              <%if current_user.company? && current_user == @job.user %>
+                <%= link_to "Edit Job", edit_job_path(@job), class: "btn btn-md btn-dark" %>
+              <% else %>
                 <button class="btn btn-md btn-danger " type="button">Apply now</button>
+              <% end %>
             </div>
         </div>
 

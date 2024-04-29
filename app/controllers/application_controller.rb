@@ -20,6 +20,8 @@ class ApplicationController < ActionController::Base
       dashboard_path
     elsif resource.employee && resource.active?
       employee_path(current_user.employee)
+    elsif resource.company && resource.active?
+      hiring_index_path
     end
   end
 end

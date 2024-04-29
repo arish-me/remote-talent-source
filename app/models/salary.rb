@@ -6,4 +6,16 @@ class Salary < ApplicationRecord
 
   belongs_to :salable, polymorphic: true
   belongs_to :currency
+
+  validate :validate_min_less_than_max
+
+  private
+
+  def validate_min_less_than_max
+    if min.present? && max.present? && min >= max
+      errors.add(:min, "should be less than max")
+      errors.add(:max, "should be greater than min")
+    end
+  end
+
 end

@@ -44,7 +44,7 @@
           Company Website
           <span class="text-danger">*</span>
         <% end %>
-        <%= form.text_field :company_website, class: "form-control", value: @company.website, readOnly: true %>
+        <%= form.text_field :company_website, class: "form-control", value: @company.website, readonly: true %>
       </div>
 
       <div class="mb-3">
@@ -52,7 +52,7 @@
           Company Email
           <span class="text-danger">*</span>
         <% end %>
-        <%= form.text_field :company_email, class: "form-control", value: @company.company_email, readOnly: true %>
+        <%= form.text_field :company_email, class: "form-control", value: @company.company_email, readonly: true %>
       </div>
 
       <div class="mb-3">
@@ -73,23 +73,46 @@
                 class: "form-control", data: { controller: "choices" } %>
       </div>
 
+      <div class="mb-3">
+        <%= form.label :apply_type, class: 'form-label' do %>
+          <div class="d-flex">Apply Type</div>
+          <p class="text-sm text-secondary">Source of apply.</p>
+        <% end %>
+        <%= form.collection_radio_buttons(:apply_type, Job.apply_types.keys, :to_s, :titleize, class: "apply-type-radio") do |fs| %>
+          <div class="form-check form-check-inline">
+            <%= fs.radio_button(class: "form-check-input") %>
+            <%= fs.label(class: "form-check-label") do %>
+              <%= fs.text %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div id="applyUrlField" class="mb-3" style="display: none;">
+        <%= form.label :apply_url, class: 'form-label' do %>
+          Apply URL
+          <span class="text-danger">*</span>
+        <% end %>
+        <%= form.text_field :apply_url, class: "form-control" %>
+      </div>
+
       <%= render partial: 'description', locals: { form: form } %>
 
 
       <div class="mb-3">
         <%= form.fields_for :salary do |salary_form| %>
           <div class="row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-3 mb-3">
               <%= salary_form.label :min, class: "form-label" %>
               <%= salary_form.number_field :min, class: "form-control" %>
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-3 mb-3">
               <%= salary_form.label :max, class: "form-label" %>
               <%= salary_form.number_field :max,class: "form-control" %>
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-3 mb-3">
               <%= salary_form.label :currency_id, class: "form-label" %>
               <%= salary_form.select :currency_id,
                     Currency.all.map { |currency| [currency.name, currency.id] },
@@ -97,7 +120,7 @@
                     class: "form-control", data: { controller: "choices" } %>
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-3 mb-3">
               <%= salary_form.label :salary_type, class: "form-label" %>
               <%= salary_form.select :salary_type,
                     Salary.salary_types.keys.map { |key| [key.humanize, key] },
@@ -109,17 +132,39 @@
         <% end %>
       </div>
 
-
-
       <div class="d-flex justify-content-end">
       <%= form.submit form_action,
                 class: 'btn btn-block btn-md btn-dark',
                 data: {  controller: "forms--keyboard-submit", action: "form-submit#submit", form_submit_target: "submit" } %>
-
-    </div>
+      </div>
 
 
     </div>
   </div>
   <% end %>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var applyTypeRadios = document.querySelectorAll('.form-check-input');
+    var applyUrlField = document.getElementById('applyUrlField');
+
+    // Check if there is a previous selection saved in localStorage
+    var selectedApplyType = localStorage.getItem('selectedApplyType');
+    if (selectedApplyType === 'custom_ats') {
+      applyUrlField.style.display = 'block';
+    }
+
+    applyTypeRadios.forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        if (this.value === 'custom_ats') {
+          applyUrlField.style.display = 'block';
+          localStorage.setItem('selectedApplyType', 'custom_ats');
+        } else {
+          applyUrlField.style.display = 'none';
+          localStorage.removeItem('selectedApplyType');
+        }
+      });
+    });
+  });
+</script>

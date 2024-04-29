@@ -11,6 +11,7 @@ class Employee < ApplicationRecord
   # validates :open_roles, presence: true
   validates :employee_roles, presence: true
   validates :employee_levels, presence: true
+  validate :bio_minimum_length
 
   after_create :update_role
   after_create :activate_user
@@ -69,8 +70,6 @@ class Employee < ApplicationRecord
 
   enum search_status: %i[ready_to_interview open_to_offers closed_to_offers not_interested invisible]
   has_rich_text :bio
-
-  validate :bio_minimum_length
 
   def name
     "#{first_name} #{last_name}"
