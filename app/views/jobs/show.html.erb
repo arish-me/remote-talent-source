@@ -1,1 +1,46 @@
-<h1>Show</h1>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8  bg-white box shadow px-4 py-4 my-4 my-2 ">
+
+      <div class="container">
+
+        <div class="row border-bottom my-4">
+            <div class="col-md-2 py-2">
+                <%= render AvatarComponent.new(avatarable: @company, variant:
+                        :medium, data: { "file-upload-target": "image" }) %>
+            </div>
+            <div class="col-md-8">
+                <!-- Job Title and Company Name -->
+                <h3><%= @job.title%></h3>
+                <p class="text-muted"><%= @job.company.name%></p>
+
+                <!-- Job Details Icons and Text -->
+                <div class="my-3">
+                    <p><i class="bi bi-briefcase-fill"></i> <%= @job.role_type.name.humanize%></p>
+                    <p><i class="bi bi-geo-alt-fill"></i> <%= @job.preferred_location.location_type.name.capitalize%></p>
+                    <p><i class="bi bi-globe-americas"></i> <%= @job.country.name%></p>
+                    <p><i class="bi bi-wallet-fill"></i> <%= salary_range %></p>
+                </div>
+            </div>
+            <div class="col-md-2 pb-2">
+                <button class="btn btn-md btn-danger " type="button">Apply now</button>
+            </div>
+        </div>
+
+        <%= @job.description%>
+
+
+        <div class="my-4">
+          <p><strong>Share this job:</strong></p>
+          <button class="btn btn-outline-primary btn-sm" type="button"><i class="bi bi-twitter"></i> Twitter</button>
+          <button class="btn btn-outline-primary btn-sm" type="button"><i class="bi bi-facebook"></i> Facebook</button>
+          <button class="btn btn-outline-primary btn-sm" type="button"><i class="bi bi-linkedin"></i> Linkedin</button>
+          <button class="btn btn-outline-primary btn-sm" type="button"><i class="bi bi-envelope-fill"></i> Email</button>
+        </div>
+      </div>
+
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+

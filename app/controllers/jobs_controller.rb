@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
+# app/controllers/jobs_controller.rb
 class JobsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
+  before_action :set_job, only: [:edit, :update, :show]
 
-  before_action :set_company, only: %i[new create]
+  before_action :set_company
 
-  def index; end
+
+  def index
+    @jobs = @company.jobs
+  end
 
   def new
     @job = @company.jobs.new
@@ -13,6 +18,8 @@ class JobsController < ApplicationController
     @job.build_preferred_location
     @job.build_salary
   end
+
+  def edit; end
 
   def create
     @job = @company.jobs.new(job_params)
@@ -27,12 +34,27 @@ class JobsController < ApplicationController
     end
   end
 
+  def update
+    respond_to do |format|
+      if @job.update(job_params)
+        format.html { redirect_to job_url(@job), notice: 'Job was successfully created.' }
+        format.json { render :show, status: :created, location: @job }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @job.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def show; end
+
   private
 
   def job_params
     params.require(:job).permit(
       :title,
       :user_id,
+      :description,
       :country_id,
       company_role_attributes: %i[role_type_id company_id],
       preferred_location_attributes: %i[id name location_type_id],
@@ -41,6 +63,10 @@ class JobsController < ApplicationController
   end
 
   def set_company
-    @company = current_user.company
+    @company = current_user&.company || @job.company
+  end
+
+  def set_job
+    @job = Job.find(params[:id])
   end
 end
