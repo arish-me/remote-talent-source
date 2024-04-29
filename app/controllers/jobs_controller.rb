@@ -3,7 +3,7 @@
 # app/controllers/jobs_controller.rb
 class JobsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_job, only: %i[edit update show]
+  before_action :set_job, only: %i[edit update show change_status]
 
   before_action :set_company
 
@@ -48,6 +48,11 @@ class JobsController < ApplicationController
       end
     end
     authorize @job
+  end
+
+  def change_status
+    @job.set_job_status
+    redirect_to jobs_path
   end
 
   def show; end

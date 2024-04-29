@@ -32,7 +32,18 @@ class Job < ApplicationRecord
     end
 
     event :deactivate do
-      transitions from: :active, to: :inactive
+      transitions from: %i[active], to: :inactive
+    end
+  end
+
+  def set_job_status
+    case current_state
+    when 'pending'
+      activate!
+    when 'inactive'
+      activate!
+    when 'active'
+      deactivate!
     end
   end
 

@@ -36,7 +36,7 @@
           Company
           <span class="text-danger">*</span>
         <% end %>
-        <%= form.text_field :name, class: "form-control", value: @company.name, readOnly: true %>
+        <%= form.text_field :name, class: "form-control", value: @company.name, readOnly: true, disabled: true %>
       </div>
 
       <div class="mb-3">
@@ -44,7 +44,7 @@
           Company Website
           <span class="text-danger">*</span>
         <% end %>
-        <%= form.text_field :company_website, class: "form-control", value: @company.website, readonly: true %>
+        <%= form.text_field :company_website, class: "form-control", value: @company.website, readonly: true, disabled: true %>
       </div>
 
       <div class="mb-3">
@@ -52,7 +52,7 @@
           Company Email
           <span class="text-danger">*</span>
         <% end %>
-        <%= form.text_field :company_email, class: "form-control", value: @company.company_email, readonly: true %>
+        <%= form.text_field :company_email, class: "form-control", value: @company.company_email, readonly: true, disabled: true %>
       </div>
 
       <div class="mb-3">
@@ -115,9 +115,9 @@
             <div class="col-md-3 mb-3">
               <%= salary_form.label :currency_id, class: "form-label" %>
               <%= salary_form.select :currency_id,
-                    Currency.all.map { |currency| [currency.name, currency.id] },
-                    {},
-                    class: "form-control", data: { controller: "choices" } %>
+                                    options_for_select(currency_options, default_currency_id),
+                                    {},
+                                    class: "form-control", data: { controller: "choices" } %>
             </div>
 
             <div class="col-md-3 mb-3">

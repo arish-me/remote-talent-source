@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   end
 
   resources :companies
-  resources :jobs
+  resources :jobs do
+    post 'change_status', on: :member
+  end
 
   resources :skills
   get 'talentsource/:id', to: 'employees#public_profile', as: 'public_profile'
