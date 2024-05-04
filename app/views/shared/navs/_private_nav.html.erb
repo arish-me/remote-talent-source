@@ -35,19 +35,40 @@
       <!-- Login and Signup Buttons -->
       <div class="d-flex">
         <ul class="navbar-nav mx-auto text-center gap-3">
-
-          <li class="nav-item">
-          <%= link_to notifications_path, class: "nav-link relative text-gray-400", title: t(".view_notifications") do %>
-              <span class="position-relative"><i class="bi bi-bell-fill"></i>
-              <% if current_user.notifications.unread.any?%>
+        <li class="nav-item dropdown mt-2">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="position-relative">
+              <i class="bi bi-bell-fill"></i>
+              <% if current_user.notifications.unread.any? %>
                 <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle" style="width: 0.75rem; height: 0.75rem;">
-                    <span class="visually-hidden">New alerts</span>
+                  <span class="visually-hidden">New alerts</span>
                 </span>
               <% end %>
             </span>
+          </a>
 
-          <% end %>
-          </li>
+          <ul class="dropdown-menu">
+            <li>
+              <ol class="list-group">
+                <% current_user.user_notifications.each do |notification| %>
+                  <%= render partial: 'shared/navs/header_notification', locals: { notification:   notification, header: true }%>
+                <% end %>
+              </ol>
+            </li>
+            <li>
+              <div class="d-flex justify-content-center">
+                <%= link_to "View All", notifications_path, class: "dropdown-item" %>
+              </div>
+            </li>
+          </ul>
+        </li>
+
 
           <li class="nav-item dropdown">
             <a

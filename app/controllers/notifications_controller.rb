@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# app/controllers/notifications_controller.rb
 class NotificationsController < ApplicationController
   include Pagy::Backend
 
@@ -11,7 +12,7 @@ class NotificationsController < ApplicationController
 
   def show
     @notification = current_user.notifications.find(params[:id])
-#    notification.mark_as_read!
+    @notification.mark_as_read!
   end
 
   def mark_all_as_read

@@ -38,4 +38,9 @@ class User < ApplicationRecord
     left_outer_joins(:employee, :company)
       .where('email ILIKE ?', query)
   }
+
+
+  def user_notifications
+    notifications.newest_first.limit(5)
+  end
 end
