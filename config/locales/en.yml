@@ -51,6 +51,13 @@ en:
     cta: Sign out
     title: Signed in as %{email}
   employee_bio_placeholder: Share a bit about your work experience, Projects you have completed, and area of expertise.
+  employee_mailer:
+    celebration_promotion:
+      subject: How's your conversation going with %{contact} at %{company}?
+    first_message:
+      subject: Tips on responding to your first message on RailsDevs
+    welcome:
+      subject: "Welcome to Remote Talent Source 👋"
   admin:
     users:
       index:
