@@ -8,8 +8,11 @@ Rails.application.routes.draw do
     resources :specialities
   end
 
-  resources :read_notifications, only: %i[index create], path: '/notifications/read'
-  resources :notifications, only: %i[index show]
+  resources :notifications, only: %i[index show] do
+    collection do
+      post :mark_all_as_read
+    end
+  end
 
   resources :companies
   resources :jobs do
