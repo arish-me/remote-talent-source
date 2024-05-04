@@ -1,0 +1,7 @@
+<a href="#" class='list-group-item list-group-item-action mb-1 <%= notification.unread? ? "list-group-item-secondary" : '' %>' aria-current="true">
+  <div class="d-flex w-100 justify-content-between">
+    <h6 class="mb-1"><%= notification.message %></h6>
+    <small><%= time_ago_in_words(notification.created_at) %> ago </small>
+  </div>
+  <small class="mb-1"><%= truncate(notification.content, length: 100, omission: '...') %></small>
+</a>

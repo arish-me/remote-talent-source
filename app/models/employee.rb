@@ -75,6 +75,10 @@ class Employee < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def send_welcome_email
+    EmployeeNotifier.with(employee: self).deliver(user)
+  end
+
   private
 
   def bio_minimum_length

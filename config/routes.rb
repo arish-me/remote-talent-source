@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     resources :specialities
   end
 
+  resources :read_notifications, only: %i[index create], path: '/notifications/read'
+  resources :notifications, only: %i[index show]
+
   resources :companies
   resources :jobs do
     post 'change_status', on: :member

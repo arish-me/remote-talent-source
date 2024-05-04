@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-12 box shadow px-4 py-4 my-4 my-2 bg-light ">
+    <div class="d-flex justify-content-between">
+      <h5 class=" fw-bold">Notifications</h5>
+      <%= button_to 'Mark All as Read', read_notifications_path, class: "btn btn-primary"%>
+    </div>
+    <div class="my-5">
+
+      <ol class="list-group">
+        <%= render PagyPaginatorComponent.new(id: "notifications", pagy: @pagy, url_array: [:notifications]) do |component| %>
+          <% @notifications.each do |notification| %>
+            <%= render partial: 'notification', locals: { notification:   notification }%>
+          <% end %>
+        <% end %>
+        </div>
+      </ol>
+
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
