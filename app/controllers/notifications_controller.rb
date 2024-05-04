@@ -10,14 +10,8 @@ class NotificationsController < ApplicationController
   end
 
   def show
-    notification = current_user.notifications.find(params[:id])
-    notification.mark_as_read!
-
-    if (url = notification.to_notification.url)
-      redirect_to url
-    else
-      redirect_to notifications_path, notice: t('.notice')
-    end
+    @notification = current_user.notifications.find(params[:id])
+#    notification.mark_as_read!
   end
 
   def mark_all_as_read

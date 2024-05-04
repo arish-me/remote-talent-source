@@ -12,11 +12,12 @@ class EmployeeNotifier < ApplicationNotifier
       "Welcome to Remote Talent source #{params[:employee].name}"
     end
 
-    def content
+    def content(type = :html)
       ApplicationController.render(
         template: 'employee_mailer/welcome',
         assigns: { employee: params[:employee] },
-        layout: false
+        layout: false,
+        formats: [type]
       )
     end
   end

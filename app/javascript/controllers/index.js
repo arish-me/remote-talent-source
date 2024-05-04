@@ -14,6 +14,10 @@ import DialogController from "./dialog_controller.js"
 
 application.register('dialog', DialogController)
 
+import ModalController from "./modal_controller.js"
+
+application.register('modal', ModalController)
+
 import AccessibilityController from "./accessibility_controller.js"
 application.register("accessibility", AccessibilityController)
 
