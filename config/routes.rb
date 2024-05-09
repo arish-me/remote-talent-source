@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     post 'change_status', on: :member
   end
 
+  post 'send_notification/:id', to: 'employees#send_notification', as: 'send_notification'
+
   resources :skills
   get 'talentsource/:id', to: 'employees#public_profile', as: 'public_profile'
   get 'additional_information/:id/company', to: 'additional_information#company'

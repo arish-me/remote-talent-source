@@ -1,0 +1,3 @@
+<%= turbo_stream_from current_user, "notifications_header_list_#{current_user.id}" %>
+<%= turbo_stream_from current_user, "notifications_index_list_#{current_user.id}" %>
+<%= turbo_stream_from current_user, "notifications_index_#{current_user.id}" %>

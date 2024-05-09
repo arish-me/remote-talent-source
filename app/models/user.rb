@@ -39,7 +39,6 @@ class User < ApplicationRecord
       .where('email ILIKE ?', query)
   }
 
-
   def user_notifications
     notifications.newest_first.limit(5)
   end

@@ -9,7 +9,7 @@ module ApplicationHelper
     end
   end
 
-  def render_modal(title: "", body: "", footer: "")
-    render(partial: '/shared/modal', locals: { title: title, body: body, footer: footer })
+  def render_modal(title: '', body: '', footer: '')
+    render(partial: '/shared/modal', locals: { title:, body:, footer: })
   end
 end

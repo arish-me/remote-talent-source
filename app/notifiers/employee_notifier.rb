@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 # notifier/employee_notifier.rb
-class EmployeeNotifier < ApplicationNotifier
+class EmployeeNotifier < Noticed::Event
+  deliver_by :turbo_stream, class: 'DeliveryMethods::TurboStream'
   deliver_by :email do |config|
     config.mailer = 'EmployeeMailer'
     config.method = 'welcome'

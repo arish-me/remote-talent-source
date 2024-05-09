@@ -8,6 +8,8 @@ class NotificationsController < ApplicationController
 
   def index
     @pagy, @notifications = pagy(current_user.notifications.includes(event: :record).newest_first)
+
+    # @notifications = current_user.notifications.unread
   end
 
   def show
