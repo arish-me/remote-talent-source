@@ -44,20 +44,15 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <span class="position-relative">
-              <i class="bi bi-bell-fill"></i>
-              <% if current_user.notifications.unread.any? %>
-                <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle" style="width: 0.75rem; height: 0.75rem;">
-                  <span class="visually-hidden">New alerts</span>
-                </span>
-              <% end %>
-            </span>
+          <%= turbo_frame_tag "notification_bell" do %>
+            <%= render partial: 'shared/navs/notification_bell', locals: { unread: current_user.notifications.unread.any? }%>
+          <% end %>
           </a>
 
           <ul class="dropdown-menu">
             <li>
               <ol class="list-group">
-                <%= turbo_frame_tag "notifications"%>
+                <%= turbo_frame_tag "notifications_header"%>
                 <% current_user.user_notifications.each do |notification| %>
                     <%= render partial: 'shared/navs/header_notification', locals: { notification: notification, header: true }%>
                 <% end %>

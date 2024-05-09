@@ -7,11 +7,12 @@ module Noticed
     extend ActiveSupport::Concern
 
     def broadcast_update_to_bell
-      broadcast_update_to(
-        "notifications_#{recipient.id}",
+      broadcast_replace_to(
+        recipient, # we add this because stream to user
+        "notifications_bell_#{recipient.id}",
         target: 'notification_bell',
-        partial: 'navbar/notifications/bell',
-        locals: { user: recipient }
+        partial: 'shared/navs/notification_bell',
+        locals: { unread: recipient.reload.notifications.unread.any? }
       )
     end
 
