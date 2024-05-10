@@ -19,6 +19,12 @@ class Company < ApplicationRecord
 
   has_many :company_specialities, dependent: :destroy
   has_many :specialities, through: :company_specialities
+  # Relationships
+  has_many :follows, dependent: :destroy
+  has_many :followers, through: :follows, source: :employee
+
+  has_many :connection_requests, dependent: :destroy
+  has_many :connected_employees, through: :connection_requests, source: :employee
 
   has_many :jobs, dependent: :destroy
 

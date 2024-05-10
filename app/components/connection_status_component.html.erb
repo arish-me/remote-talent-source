@@ -1,0 +1,5 @@
+<%unless accepted? %>
+  <span class="badge <%= classes %>"><%= request_status %></span>
+<% else %>
+  <button class="btn btn-outline-primary btn-sm">Message</button>
+<% end %>

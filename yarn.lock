@@ -197,6 +197,11 @@
   resolved "https://registry.yarnpkg.com/@stimulus-components/dialog/-/dialog-1.0.1.tgz#879452b4efb817e16f44c09ac920ae618d12591e"
   integrity sha512-7cpazrXeFKVmmuGnJOrykEvjRNRTOhLuI7SzgDdAlKWxM8ivBKziBHwjJGR96vCvSkoKwlGMGRcDzXgVRnr/7w==
 
+"@stimulus-components/remote-rails@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/remote-rails/-/remote-rails-5.0.0.tgz#af004044542bf3ccd2ffd9da95d2fc8d7cdc2654"
+  integrity sha512-suKrPRVeNyEu8z5ejYpPxuBbDZgNwzfKqWruAEMPak2jrqAmfRremikDyvPO4FR1GJDVDlpKd0aWql3poGTyQA==
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"

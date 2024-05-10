@@ -4,6 +4,8 @@
 
 import { application } from "./application"
 
+import RemoteRails from '@stimulus-components/remote-rails'
+application.register('remote', RemoteRails)
 
 import PlacesAutocomplete from 'stimulus-places-autocomplete'
 import Dialog from '@stimulus-components/dialog'

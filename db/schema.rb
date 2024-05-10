@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
+ActiveRecord::Schema[7.1].define(version: 20_240_510_115_618) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pgcrypto'
   enable_extension 'plpgsql'
@@ -106,6 +106,16 @@ ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
     t.index ['speciality_id'], name: 'index_company_specialities_on_speciality_id'
   end
 
+  create_table 'connection_requests', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'employee_id', null: false
+    t.uuid 'company_id', null: false
+    t.integer 'status', default: 0
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['company_id'], name: 'index_connection_requests_on_company_id'
+    t.index ['employee_id'], name: 'index_connection_requests_on_employee_id'
+  end
+
   create_table 'countries', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.string 'name'
     t.string 'emoji'
@@ -157,6 +167,15 @@ ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
     t.datetime 'updated_at', null: false
     t.index ['primary_role_id'], name: 'index_employees_on_primary_role_id'
     t.index ['user_id'], name: 'index_employees_on_user_id'
+  end
+
+  create_table 'follows', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'employee_id', null: false
+    t.uuid 'company_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['company_id'], name: 'index_follows_on_company_id'
+    t.index ['employee_id'], name: 'index_follows_on_employee_id'
   end
 
   create_table 'industries', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
@@ -360,6 +379,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
   add_foreign_key 'company_roles', 'role_types'
   add_foreign_key 'company_specialities', 'companies'
   add_foreign_key 'company_specialities', 'specialities'
+  add_foreign_key 'connection_requests', 'companies'
+  add_foreign_key 'connection_requests', 'employees'
   add_foreign_key 'countries', 'currencies'
   add_foreign_key 'employee_levels', 'employees'
   add_foreign_key 'employee_levels', 'role_levels'
@@ -367,6 +388,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
   add_foreign_key 'employee_roles', 'role_types'
   add_foreign_key 'employees', 'primary_roles'
   add_foreign_key 'employees', 'users'
+  add_foreign_key 'follows', 'companies'
+  add_foreign_key 'follows', 'employees'
   add_foreign_key 'job_countries', 'countries'
   add_foreign_key 'job_countries', 'jobs'
   add_foreign_key 'jobs', 'companies'

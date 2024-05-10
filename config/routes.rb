@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   end
 
   resources :companies
+
+  resources :connections
+
   resources :jobs do
     post 'change_status', on: :member
   end

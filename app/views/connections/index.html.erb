@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12 box shadow px-4 py-4 my-4 my-2 bg-light ">
+    <div class="d-flex justify-content-between">
+      <h5 class=" fw-bold">Connections</h5>
+    </div>
+    <div class="my-5">
+      <% @connection_requests.each do |connection_request| %>
+      <div class="row">
+          <div class="col-12">
+              <div class="card mb-3">
+                  <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <%if current_user.employee? %>
+                          <%= render partial: 'company_view', locals: { connection_request: connection_request }%>
+                        <%else%>
+                        <%= render partial: 'employee_view', locals: { connection_request: connection_request }%>
+                        <%end%>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+
+
+
+

@@ -33,11 +33,7 @@
                 <i class="fas fa-lock text-secondary"></i>
                 Private Information
               </button>
-              <%= link_to "Hire Me", @employee, class: 'btn btn-block btn-md
-              btn-dark' %>
-
-              <!-- Placeholder for Private Information Button -->
-
+              <%= render partial: 'hire_connect', locals: { company: current_user&.company, employee: @employee }%>
             </div>
           </div>
           <div
