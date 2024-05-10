@@ -42,5 +42,8 @@ module RemoteTalentSource
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.to_prepare do
+      Noticed::Notification.include Noticed::NotificationExtensions
+    end
   end
 end

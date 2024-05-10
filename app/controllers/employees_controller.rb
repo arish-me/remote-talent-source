@@ -2,7 +2,7 @@
 
 class EmployeesController < ApplicationController
   before_action :authenticate_user!, except: %i[public_profile]
-  before_action :set_employee, only: %i[show edit update destroy public_profile]
+  before_action :set_employee, only: %i[show edit update destroy public_profile send_notification]
   before_action :build_associations, only: %i[edit]
 
   # GET /employees or /employees.json
@@ -14,6 +14,10 @@ class EmployeesController < ApplicationController
   # GET /employees/1 or /employees/1.json
   def show
     authorize @employee
+  end
+
+  def send_notification
+    @employee.send_welcome_email
   end
 
   # GET /employees/new

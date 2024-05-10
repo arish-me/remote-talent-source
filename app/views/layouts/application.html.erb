@@ -26,6 +26,7 @@
   </head>
 
   <body class="sb-nav-fixed bg-light ">
+    <%= turbo_frame_tag "modal" %>
     <%= render ImpersonatingBannerComponent.new %>
     <%= render partial: 'shared/header/header' %>
 

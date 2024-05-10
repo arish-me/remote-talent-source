@@ -1,0 +1,7 @@
+<%= link_to notification_path(notification), data: { turbo: true, turbo_frame: 'modal' }, class: "list-group-item list-group-item-action mb-2 #{notification.unread? ? 'list-group-item-secondary' : ''} dropdown-item", aria_current: true do %>
+  <div class="d-flex w-100 justify-content-between">
+    <h6 class="mb-1"><%= truncate(notification.message, length: 10, omission: '...') %></h6>
+    <small><%= time_ago_in_words(notification.created_at) %> ago </small>
+  </div>
+  <small class="mb-1"><%= truncate(ActionView::Base.full_sanitizer.sanitize(notification.content), length: 50, omission: '...') %></small>
+<% end %>

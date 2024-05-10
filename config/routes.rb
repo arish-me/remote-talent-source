@@ -8,10 +8,18 @@ Rails.application.routes.draw do
     resources :specialities
   end
 
+  resources :notifications, only: %i[index show] do
+    collection do
+      post :mark_all_as_read
+    end
+  end
+
   resources :companies
   resources :jobs do
     post 'change_status', on: :member
   end
+
+  post 'send_notification/:id', to: 'employees#send_notification', as: 'send_notification'
 
   resources :skills
   get 'talentsource/:id', to: 'employees#public_profile', as: 'public_profile'

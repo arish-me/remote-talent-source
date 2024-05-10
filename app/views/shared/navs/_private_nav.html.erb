@@ -1,3 +1,4 @@
+<%= render partial: 'shared/turbo_stream' %>
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container">
     <a href="<%=root_path%>" class="navbar-brand py-2">
@@ -28,11 +29,45 @@
           </li>
         <% end %>
 
+
+
       </ul>
 
       <!-- Login and Signup Buttons -->
       <div class="d-flex">
         <ul class="navbar-nav mx-auto text-center gap-3">
+        <li class="nav-item dropdown mt-2">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+          <%= turbo_frame_tag "notification_bell" do %>
+            <%= render partial: 'shared/navs/notification_bell', locals: { unread: current_user.notifications.unread.any? }%>
+          <% end %>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <ol class="list-group">
+                <%= turbo_frame_tag "notifications_header"%>
+                <% current_user.user_notifications.each do |notification| %>
+                    <%= render partial: 'shared/navs/header_notification', locals: { notification: notification, header: true }%>
+                <% end %>
+
+              </ol>
+            </li>
+            <li>
+              <div class="d-flex justify-content-center">
+                <%= link_to "View All", notifications_path, class: "dropdown-item" %>
+              </div>
+            </li>
+          </ul>
+        </li>
+
+
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"

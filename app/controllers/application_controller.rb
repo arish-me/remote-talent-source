@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
+  before_action :turbo_frame_request_variant
   impersonates :user
 
   def user_not_authorized
@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
     redirect_back_or_to root_path, allow_other_host: false
   rescue ActionController::Redirecting::UnsafeRedirectError
     redirect_to root_path
+  end
+
+  def turbo_frame_request_variant
+    request.variant = :turbo_frame if turbo_frame_request?
   end
 
   def after_sign_in_path_for(resource)

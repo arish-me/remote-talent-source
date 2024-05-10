@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_one :employee, dependent: :destroy
   has_one :company, dependent: :destroy
 
+  has_many :notifications, as: :recipient, dependent: :destroy, class_name: 'Noticed::Notification'
+  has_many :notification_mentions, as: :record, class_name: 'Noticed::Event'
+
   has_many :jobs, dependent: :destroy
 
   aasm column: 'current_state' do
@@ -35,4 +38,8 @@ class User < ApplicationRecord
     left_outer_joins(:employee, :company)
       .where('email ILIKE ?', query)
   }
+
+  def user_notifications
+    notifications.newest_first.limit(5)
+  end
 end
