@@ -19,6 +19,12 @@ class User < ApplicationRecord
 
   has_many :jobs, dependent: :destroy
 
+  has_many :conversations, lambda { |user|
+    unscope(where: :user_id)
+      .left_joins(:company, :employee)
+      .where('companies.user_id = ? OR employees.user_id = ?', user.id, user.id)
+  }
+
   aasm column: 'current_state' do
     state :pending, initial: true
     state :active

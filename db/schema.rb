@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_10_115618) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_11_091755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -111,6 +111,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_10_115618) do
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_connection_requests_on_company_id"
     t.index ["employee_id"], name: "index_connection_requests_on_employee_id"
+  end
+
+  create_table "conversations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "employee_id", null: false
+    t.uuid "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_conversations_on_company_id"
+    t.index ["employee_id"], name: "index_conversations_on_employee_id"
   end
 
   create_table "countries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -226,6 +235,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_10_115618) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["locatable_type", "locatable_id"], name: "index_locations_on_locatable"
+  end
+
+  create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "conversation_id"
+    t.string "sender_type"
+    t.uuid "sender_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["sender_type", "sender_id"], name: "index_messages_on_sender"
   end
 
   create_table "noticed_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -380,6 +400,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_10_115618) do
   add_foreign_key "company_specialities", "specialities"
   add_foreign_key "connection_requests", "companies"
   add_foreign_key "connection_requests", "employees"
+  add_foreign_key "conversations", "companies"
+  add_foreign_key "conversations", "employees"
   add_foreign_key "countries", "currencies"
   add_foreign_key "employee_levels", "employees"
   add_foreign_key "employee_levels", "role_levels"

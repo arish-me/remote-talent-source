@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :additional_informations
   resources :employees do
     resources :specialities
+    resources :messages, except: %i[index]
   end
 
   resources :notifications, only: %i[index show] do
@@ -17,6 +18,10 @@ Rails.application.routes.draw do
   resources :companies
 
   resources :connections
+
+  resources :conversations do
+    resources :messages, except: %i[index]
+  end
 
   resources :jobs do
     post 'change_status', on: :member

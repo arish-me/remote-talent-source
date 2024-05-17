@@ -12,7 +12,7 @@ class Company < ApplicationRecord
 
   after_create :update_role
   after_create :activate_user
-
+  has_many :conversations
   has_one :location, as: :locatable, dependent: :destroy
   has_one :company_industry, dependent: :destroy
   has_one :industry, through: :company_industry
