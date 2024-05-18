@@ -7,8 +7,8 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params.merge(conversation:, sender:))
-    debugger
     if @message.save
+      @message.do_broadcast
       respond_to do |format|
         format.turbo_stream { @new_message = conversation.messages.build }
         format.html { redirect_to conversation }
@@ -19,11 +19,11 @@ class MessagesController < ApplicationController
   end
 
   def conversation
-    @conversation ||= Conversation.find_or_initialize_by(employee:, company:)
+    @conversation ||= Conversation.find(params[:conversation_id])
   end
 
   def employee
-    @employee ||= Employee.find(params[:employee_id])
+    @employee ||= current_user.employee
   end
 
   def company

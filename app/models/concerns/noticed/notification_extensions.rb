@@ -47,5 +47,3 @@ module Noticed
     end
   end
 end
-
-# /Users/arish/galaxy/remote-talent-source/app/views/employee_notifier/notifications/_notification.html.erb

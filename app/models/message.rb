@@ -11,4 +11,16 @@ class Message < ApplicationRecord
   def sender?(user)
     [user.employee, user.company].include?(sender)
   end
+
+  def recipient
+    if sender == employee
+      company
+    elsif sender == company
+      employee
+    end
+  end
+
+  def do_broadcast
+    broadcast_append_to conversation, locals: { message: self }
+  end
 end

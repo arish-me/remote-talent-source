@@ -1,3 +1,13 @@
+<%if false %>
+  <%= form_with model: [conversation, message], data: {controller: "forms--keyboard-submit"}, class: "relative" do |form| %>
+      <%= render "messages/form", form: form %>
+  <% end %>
+<% end %>
+
 <%= form_with model: [conversation, message], data: {controller: "forms--keyboard-submit"}, class: "relative" do |form| %>
-    <%= render "messages/form", form: form %>
+  <%= form.text_field :content, class: "form-control", aria: {label: "message"}, placeholder: "Write message…" %>
+  <% form.hidden_field :employee_id, value: current_user&.employee&.id %>
+  <%= form.submit do %>
+    <i class="fa fa-paper-plane" aria-hidden="true"></i> Send
+  <% end %>
 <% end %>
