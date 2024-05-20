@@ -4,6 +4,9 @@ class Message < ApplicationRecord
   has_one :employee, through: :conversation
   has_one :company, through: :conversation
 
+  validates :content, presence: true
+  validates :agree_terms, acceptance: true
+
   def deleted_sender?
     sender.nil?
   end

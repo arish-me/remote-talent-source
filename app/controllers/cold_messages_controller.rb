@@ -70,6 +70,6 @@ class ColdMessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :agree_terms)
   end
 end
