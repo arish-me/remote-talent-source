@@ -4,8 +4,8 @@ class ColdMessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :require_business!
   before_action :require_new_conversation!
-  #before_action :require_active_subscription!
-  #before_action :require_signed_hiring_agreement!
+  # before_action :require_active_subscription!
+  # before_action :require_signed_hiring_agreement!
 
   def new
     message = Message.new(conversation:)
@@ -62,7 +62,7 @@ class ColdMessagesController < ApplicationController
   end
 
   def employee
-    @developer ||= Employee.find(params[:employee_id])
+    @employee ||= Employee.find(params[:employee_id])
   end
 
   def company

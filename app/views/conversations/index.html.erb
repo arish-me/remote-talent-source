@@ -1,3 +1,4 @@
+<%if false %>
 <div class="row">
   <div class="col-md-12 box shadow px-4 py-4 my-4 my-2 bg-light ">
     <div class="d-flex justify-content-between">
@@ -19,4 +20,22 @@
   </div>
   <div class="col-md-2"></div>
 </div>
+<%end %>
+
+<section class="message-area bg-light shadow-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="chat-area">
+                    <%= render partial: 'messages/chat_list'%>
+                    <div class="chatbox">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
 

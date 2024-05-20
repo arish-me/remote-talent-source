@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Conversation < ApplicationRecord
   belongs_to :employee
   belongs_to :company
