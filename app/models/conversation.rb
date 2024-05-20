@@ -1,7 +1,7 @@
 class Conversation < ApplicationRecord
   belongs_to :employee
   belongs_to :company
-  has_many :messages, dependent: :destroy
+  has_many :messages, -> { order(:created_at) }, dependent: :destroy
 
   validates_uniqueness_of :employee, scope: :company
 

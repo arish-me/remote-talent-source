@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :talent_jobs
   resources :additional_informations
   resources :employees do
+    resources :messages, only: %i[new create], controller: :cold_messages
     resources :specialities
     resources :messages, except: %i[index]
   end
@@ -19,8 +20,12 @@ Rails.application.routes.draw do
 
   resources :connections
 
-  resources :conversations do
-    resources :messages, except: %i[index]
+  # resources :conversations do
+  #   resources :messages, except: %i[index]
+  # end
+
+  resources :conversations, only: %i[index show] do
+    resources :messages, only: :create
   end
 
   resources :jobs do
