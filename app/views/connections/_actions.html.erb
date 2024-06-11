@@ -5,9 +5,9 @@
 
     <%= button_to 'Accept', connection_path(connection_request, connection_request: { status: 'accepted' }), method: :put, form: { data: { turbo_frame: 'status_frame' } }, class: "btn btn-outline-primary btn-sm" %>
   <% elsif connection_request.status == 'declined' %>
-      <span class="badge text-bg-danger"><%= connection_request.status%></span>
+      <%= render ConnectionStatusComponent.new(connection: connection_request)%>
   <% elsif connection_request.status == 'accepted' %>
-      <button class="btn btn-outline-primary btn-sm">Message</button>
+        <span class="badge bg-success"><%= connection_request.status.capitalize %></span>
   <% end %>
 </turbo-frame>
 

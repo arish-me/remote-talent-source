@@ -34,8 +34,16 @@
                 Private Information
               </button>
               <%= render partial: 'hire_connect', locals: { company: current_user&.company, employee: @employee }%>
-              <%= link_to 'Message', new_employee_message_path(@employee),
-              class: "btn btn-sm btn-outline-secondary" %>
+              <% if current_user&.company %>
+                <% status = current_user.company.employee_response_requests(@employee)&.status%>
+                <%if status == 'accepted'%>
+                  <%= link_to 'Message', new_employee_message_path(@employee),
+                  class: "btn btn-block btn-md btn-outline-secondary" %>
+                <% end %>
+              <% end %>
+
+
+
             </div>
           </div>
           <div

@@ -41,6 +41,10 @@ class Company < ApplicationRecord
     5 => 'More than 100'
   }.freeze
 
+  def employee_response_requests(employee)
+    connection_requests.find_by(employee_id: employee.id)
+  end
+
   private
 
   def update_role

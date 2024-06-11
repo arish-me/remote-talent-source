@@ -7,7 +7,7 @@ class Conversation < ApplicationRecord
 
   validates_uniqueness_of :employee, scope: :company
 
-  # after_create_commit { broadcast_append_to 'conversations' }
+  scope :between, -> (employee, company) { where(employee: employee, company: company) }
 
   def deleted_business_or_developer?
     employee.nil? || company.nil?

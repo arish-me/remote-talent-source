@@ -17,12 +17,12 @@ class ConnectionsController < ApplicationController
 
   def create
     employee = Employee.find(params[:employee_id])
-    request = @company.connection_requests.new(employee:, status: 'pending')
+    request = @resource.connection_requests.new(employee:, status: 'pending')
     if request.save
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace('status_frame', partial: 'employees/hire_connect',
-                                                                    locals: { company: @company, employee: }, status: :created)
+                                                                    locals: { company: @resource, employee: }, status: :created)
         end
         format.html { redirect_to employee_path(request.employee), notice: 'Connection request updated.' }
       end
@@ -37,7 +37,7 @@ class ConnectionsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace('actions_frame', partial: 'connection_requests/actions',
+        render turbo_stream: turbo_stream.replace('actions_frame', partial: 'connections/actions',
                                                                    locals: { connection_request: request }, status: :created)
       end
       format.html { redirect_to connection_request_path, notice: 'Connection request updated.' }

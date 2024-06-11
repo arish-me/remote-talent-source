@@ -71,7 +71,7 @@ module Employees
 
     def company_path
       {
-        path: connection_path(company, employee_id: employee.id),
+        path: connections_path(employee_id: employee.id),
         method: :post
       }
     end
