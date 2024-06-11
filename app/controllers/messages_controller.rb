@@ -9,13 +9,11 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params.merge(conversation:, sender:))
-    # @message = conversation.messages.build(message_params)
     @message.sender = current_user.company || current_user.employee
-    recipient = @message.recipient.user
     if @message.save
-      # @message.do_broadcast(recipient)
+      @message.do_broadcast
       respond_to do |format|
-        # format.turbo_stream { @new_message = conversation.messages.build }
+        format.turbo_stream { @new_message = conversation.messages.build }
         format.html { redirect_to conversation }
       end
     else

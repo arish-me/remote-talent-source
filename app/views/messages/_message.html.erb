@@ -1,9 +1,7 @@
-
 <div id="<%= dom_id message %>">
-<%= puts "#{current_user.email} ============================"%>
-<li class="<%=message.sender?(current_user) ?  'repaly' : 'sender'%>">
-    <p> <%= message.content %> </p>
-    <span class="time"><%= display_time(message.created_at)%></span>
-</li>
+  <li class="<%=message.sender?(current_user) ?  'repaly' : 'sender'%>">
+      <p> <%= message.content %> </p>
+      <span class="time"><%= display_time(message.created_at)%></span>
+  </li>
 </div>
 

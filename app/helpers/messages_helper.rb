@@ -5,7 +5,7 @@ module MessagesHelper
     time_diff = Time.now - time
 
     if time_diff < 1.minute
-      "a few seconds ago"
+      'a few seconds ago'
     elsif time.to_date == Date.today
       "Today at #{time.strftime('%I:%M %p')}"
     elsif time.to_date == Date.yesterday

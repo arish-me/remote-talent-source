@@ -42,13 +42,13 @@
                                 <div class="modal-body">
                                     <div class="msg-body">
                                         <%= turbo_stream_from @conversation %>
-                                        <%= turbo_frame_tag @conversation do %>
+
                                         <ul id="messages" class="mt-8 space-y-2">
 
-                                            <%= render @conversation.messages, user: current_user %>
+                                            <%= render @conversation.messages %>
 
                                         </ul>
-                                        <% end %>
+
                                     </div>
 
                                 </div>

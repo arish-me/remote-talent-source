@@ -3,7 +3,6 @@
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
   include Turbo::Streams::ActionHelper
-
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   before_action :turbo_frame_request_variant
   impersonates :user
@@ -21,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def render_turbo_stream_with_user(user, &block)
     renderer = ApplicationController.renderer.new(
-      "warden" => warden_proxy(user)
+      'warden' => warden_proxy(user)
     )
     renderer.render(&block)
   end
