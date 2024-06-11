@@ -25,7 +25,7 @@ class Message < ApplicationRecord
     end
   end
 
-  def do_broadcast
-    broadcast_append_to conversation, locals: { message: self }
+  def do_broadcast(user)
+    broadcast_append_to conversation, target: "messages", partial: "messages/message", locals: { message: self, current_user: user }
   end
 end

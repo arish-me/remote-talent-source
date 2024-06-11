@@ -14,4 +14,8 @@ module MessagesHelper
       time.strftime('%b %d, %Y at %I:%M %p')
     end
   end
+
+  def message_class(message, user)
+    message.sender?(user) ?  'repaly' : 'sender'
+  end
 end

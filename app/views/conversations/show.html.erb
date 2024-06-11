@@ -45,7 +45,7 @@
                                         <%= turbo_frame_tag @conversation do %>
                                         <ul id="messages" class="mt-8 space-y-2">
 
-                                            <%= render @conversation.messages %>
+                                            <%= render @conversation.messages, user: current_user %>
 
                                         </ul>
                                         <% end %>
