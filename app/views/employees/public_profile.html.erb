@@ -33,10 +33,16 @@
                 <i class="fas fa-lock text-secondary"></i>
                 Private Information
               </button>
-              <%= link_to "Hire Me", @employee, class: 'btn btn-block btn-md
-              btn-dark' %>
+              <%= render partial: 'hire_connect', locals: { company: current_user&.company, employee: @employee }%>
+              <% if current_user&.company %>
+                <% status = current_user.company.employee_response_requests(@employee)&.status%>
+                <%if status == 'accepted'%>
+                  <%= link_to 'Message', new_employee_message_path(@employee),
+                  class: "btn btn-block btn-md btn-outline-secondary" %>
+                <% end %>
+              <% end %>
 
-              <!-- Placeholder for Private Information Button -->
+
 
             </div>
           </div>

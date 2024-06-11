@@ -1,0 +1,16 @@
+<%if current_user.employee? %>
+<turbo-frame id="actions_frame">
+  <%if connection_request.status == 'pending'%>
+    <%= button_to 'Ignore', connection_path(connection_request, connection_request: { status: 'declined' }), method: :put, form: { data: { turbo_frame: 'status_frame' } }, class: "btn btn-outline-primary btn-sm" %>
+
+    <%= button_to 'Accept', connection_path(connection_request, connection_request: { status: 'accepted' }), method: :put, form: { data: { turbo_frame: 'status_frame' } }, class: "btn btn-outline-primary btn-sm" %>
+  <% elsif connection_request.status == 'declined' %>
+      <%= render ConnectionStatusComponent.new(connection: connection_request)%>
+  <% elsif connection_request.status == 'accepted' %>
+        <span class="badge bg-success"><%= connection_request.status.capitalize %></span>
+  <% end %>
+</turbo-frame>
+
+<% else %>
+  <%= render ConnectionStatusComponent.new(connection: connection_request)%>
+<% end %>

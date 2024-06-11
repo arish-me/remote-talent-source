@@ -1,0 +1,10 @@
+<div class="d-flex align-items-center">
+    <%= render AvatarComponent.new(avatarable: connection_request.company, variant: :medium, classes: 'h-30 rounded-circle') %>
+    <div class="ms-3">
+        <h5 class="mb-0"><%= connection_request.company.name %></h5>
+        <small><%= connection_request.company.tagline%></small>
+    </div>
+</div>
+<div>
+  <%= render partial: 'actions', locals: { connection_request: connection_request } %>
+</div>

@@ -1,0 +1,7 @@
+<%= form_with model: [conversation, message], data: {controller: "forms--keyboard-submit"}, class: "relative" do |form| %>
+  <%= form.text_field :content, class: "form-control", aria: {label: "message"}, placeholder: "Write message…" %>
+  <% form.hidden_field :employee_id, value: current_user&.employee&.id %>
+  <%= form.button class: 'btn btn-dark' do %>
+    <i class="fa fa-paper-plane" aria-hidden="true"></i> Send
+  <% end %>
+<% end %>

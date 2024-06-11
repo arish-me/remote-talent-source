@@ -4,7 +4,6 @@
 
 import { application } from "./application"
 
-
 import PlacesAutocomplete from 'stimulus-places-autocomplete'
 import Dialog from '@stimulus-components/dialog'
 

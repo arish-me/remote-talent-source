@@ -25,12 +25,28 @@
           </li>
 
           <li class="nav-item">
-              <%=link_to 'Your Jobs', jobs_path, class: "p-2 text-dark nav-link"%>
+              <%=link_to 'My Jobs', jobs_path, class: "p-2 text-dark nav-link"%>
+          </li>
+
+          <li class="nav-item">
+              <%=link_to 'My Network', connections_path, class: "p-2 text-dark nav-link"%>
+          </li>
+          <li class="nav-item">
+              <%=link_to 'Messages', conversations_path, class: "p-2 text-dark nav-link"%>
           </li>
         <% end %>
+        <%if current_user.employee? %>
+          <li class="nav-item">
+              <%=link_to 'Jobs', talent_jobs_path, class: "p-2 text-dark nav-link"%>
+          </li>
+          <li class="nav-item">
+              <%=link_to 'My Network', connections_path, class: "p-2 text-dark nav-link"%>
+          </li>
 
-
-
+          <li class="nav-item">
+              <%=link_to 'Messages', conversations_path, class: "p-2 text-dark nav-link"%>
+          </li>
+        <% end %>
       </ul>
 
       <!-- Login and Signup Buttons -->

@@ -12,4 +12,10 @@ module ApplicationHelper
   def render_modal(title: '', body: '', footer: '')
     render(partial: '/shared/modal', locals: { title:, body:, footer: })
   end
+
+  def current_company
+    return unless current_user&.company?
+
+    current_user.company
+  end
 end

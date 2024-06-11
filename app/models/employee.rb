@@ -36,6 +36,8 @@ class Employee < ApplicationRecord
   has_many :skillables, as: :skillable
   has_many :skills, through: :skillables
 
+  has_many :connection_requests, dependent: :destroy
+
   accepts_nested_attributes_for :open_roles, allow_destroy: true
   accepts_nested_attributes_for :employee_roles, allow_destroy: true
   accepts_nested_attributes_for :employee_levels, allow_destroy: true

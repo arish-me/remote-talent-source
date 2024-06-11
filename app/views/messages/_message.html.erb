@@ -1,0 +1,7 @@
+<div id="<%= dom_id message %>">
+  <li class="<%=message.sender?(current_user) ?  'repaly' : 'sender'%>">
+      <p> <%= message.content %> </p>
+      <span class="time"><%= display_time(message.created_at)%></span>
+  </li>
+</div>
+

@@ -1,0 +1,73 @@
+<div class="chatlist">
+<div class="modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="chat-header">
+            <div class="msg-search">
+                <%if false %>
+                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" aria-label="search">
+
+                  <a class="add" href="#"><img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/add.svg" alt="add"></a>
+                <% end  %>
+            </div>
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="Open-tab" data-bs-toggle="tab" data-bs-target="#Open" type="button" role="tab" aria-controls="Open" aria-selected="true">Open</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="Closed-tab" data-bs-toggle="tab" data-bs-target="#Closed" type="button" role="tab" aria-controls="Closed" aria-selected="false">Closed</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="modal-body">
+            <div class="chat-lists">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="Open" role="tabpanel" aria-labelledby="Open-tab">
+                        <div class="chat-list pt-4">
+                            <%- @user_conversations.each do |conv| %>
+                              <% active_class = (conv == @conversation) ? 'bg-light' : '' %>
+                              <%= link_to conversation_path(conv), class: "d-flex align-items-center #{active_class} text-decoration-none" do %>
+                                  <% data = conv.other_recipient(current_user) %>
+                                  <div class="flex-shrink-0">
+                                    <%= render AvatarComponent.new(avatarable: data[:object], variant: :medium, classes: "h-9 w-9 rounded-circle") %>
+                                  </div>
+                                  <div class="flex-grow-1 ms-3">
+                                    <h3><%= data[:name]%></h3>
+                                    <%if conv.messages.blank? %>
+                                      <p><%= data[:heading]%></p>
+                                    <% else %>
+                                      <small class="d-flex justify-content-between text-dark mb-1 ">
+                                      <span class="text-muted">  <%= truncate(ActionView::Base.full_sanitizer.sanitize(conv.messages&.last&.content), length: 15, omission: '...') %></span>
+                                      <span class="text-muted"><%= time_ago_in_words(conv.messages&.last&.created_at) %> ago </span>
+                                      </small>
+                                    <% end %>
+                                  </div>
+                              <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="Closed" role="tabpanel" aria-labelledby="Closed-tab">
+                        <div class="chat-list">
+                            <a href="#" class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img class="img-fluid" src="https://mehedihtml.com/chatbox/assets/img/user.png" alt="user img">
+                                    <span class="active"></span>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h3>Mehedi Hasan</h3>
+                                    <p>front end developer</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>

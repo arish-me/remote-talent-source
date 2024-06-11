@@ -12,13 +12,19 @@ class Company < ApplicationRecord
 
   after_create :update_role
   after_create :activate_user
-
+  has_many :conversations
   has_one :location, as: :locatable, dependent: :destroy
   has_one :company_industry, dependent: :destroy
   has_one :industry, through: :company_industry
 
   has_many :company_specialities, dependent: :destroy
   has_many :specialities, through: :company_specialities
+  # Relationships
+  has_many :follows, dependent: :destroy
+  has_many :followers, through: :follows, source: :employee
+
+  has_many :connection_requests, dependent: :destroy
+  has_many :connected_employees, through: :connection_requests, source: :employee
 
   has_many :jobs, dependent: :destroy
 
@@ -34,6 +40,10 @@ class Company < ApplicationRecord
     4 => '50-100',
     5 => 'More than 100'
   }.freeze
+
+  def employee_response_requests(employee)
+    connection_requests.find_by(employee_id: employee.id)
+  end
 
   private
 

@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
+  include Turbo::Streams::ActionHelper
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   before_action :turbo_frame_request_variant
   impersonates :user
@@ -17,6 +18,13 @@ class ApplicationController < ActionController::Base
     request.variant = :turbo_frame if turbo_frame_request?
   end
 
+  def render_turbo_stream_with_user(user, &block)
+    renderer = ApplicationController.renderer.new(
+      'warden' => warden_proxy(user)
+    )
+    renderer.render(&block)
+  end
+
   def after_sign_in_path_for(resource)
     if resource.pending?
       new_additional_information_path
@@ -27,5 +35,11 @@ class ApplicationController < ActionController::Base
     elsif resource.company && resource.active?
       hiring_index_path
     end
+  end
+
+  private
+
+  def warden_proxy(user)
+    Warden::Proxy.new({}, Warden::Manager.new({})).tap { |proxy| proxy.set_user(user, scope: :user) }
   end
 end

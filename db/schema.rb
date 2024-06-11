@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
+ActiveRecord::Schema[7.1].define(version: 20_240_511_091_755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pgcrypto'
   enable_extension 'plpgsql'
@@ -106,6 +106,25 @@ ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
     t.index ['speciality_id'], name: 'index_company_specialities_on_speciality_id'
   end
 
+  create_table 'connection_requests', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'employee_id', null: false
+    t.uuid 'company_id', null: false
+    t.integer 'status', default: 0
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['company_id'], name: 'index_connection_requests_on_company_id'
+    t.index ['employee_id'], name: 'index_connection_requests_on_employee_id'
+  end
+
+  create_table 'conversations', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'employee_id', null: false
+    t.uuid 'company_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['company_id'], name: 'index_conversations_on_company_id'
+    t.index ['employee_id'], name: 'index_conversations_on_employee_id'
+  end
+
   create_table 'countries', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.string 'name'
     t.string 'emoji'
@@ -150,6 +169,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
     t.string 'heading'
     t.string 'phone'
     t.string 'public_url'
+    t.string 'badges', default: [], null: false, array: true
     t.integer 'search_status', default: 0
     t.uuid 'primary_role_id', null: false
     t.uuid 'user_id', null: false
@@ -157,6 +177,15 @@ ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
     t.datetime 'updated_at', null: false
     t.index ['primary_role_id'], name: 'index_employees_on_primary_role_id'
     t.index ['user_id'], name: 'index_employees_on_user_id'
+  end
+
+  create_table 'follows', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'employee_id', null: false
+    t.uuid 'company_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['company_id'], name: 'index_follows_on_company_id'
+    t.index ['employee_id'], name: 'index_follows_on_employee_id'
   end
 
   create_table 'industries', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
@@ -177,6 +206,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
     t.integer 'apply_type', default: 0
     t.string 'apply_url'
     t.boolean 'worldwide', default: true
+    t.string 'badges', default: [], null: false, array: true
     t.uuid 'user_id', null: false
     t.uuid 'company_id', null: false
     t.string 'current_state'
@@ -208,6 +238,17 @@ ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index %w[locatable_type locatable_id], name: 'index_locations_on_locatable'
+  end
+
+  create_table 'messages', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'conversation_id'
+    t.string 'sender_type'
+    t.uuid 'sender_id'
+    t.text 'content'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['conversation_id'], name: 'index_messages_on_conversation_id'
+    t.index %w[sender_type sender_id], name: 'index_messages_on_sender'
   end
 
   create_table 'noticed_events', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
@@ -360,6 +401,10 @@ ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
   add_foreign_key 'company_roles', 'role_types'
   add_foreign_key 'company_specialities', 'companies'
   add_foreign_key 'company_specialities', 'specialities'
+  add_foreign_key 'connection_requests', 'companies'
+  add_foreign_key 'connection_requests', 'employees'
+  add_foreign_key 'conversations', 'companies'
+  add_foreign_key 'conversations', 'employees'
   add_foreign_key 'countries', 'currencies'
   add_foreign_key 'employee_levels', 'employees'
   add_foreign_key 'employee_levels', 'role_levels'
@@ -367,6 +412,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_504_130_047) do
   add_foreign_key 'employee_roles', 'role_types'
   add_foreign_key 'employees', 'primary_roles'
   add_foreign_key 'employees', 'users'
+  add_foreign_key 'follows', 'companies'
+  add_foreign_key 'follows', 'employees'
   add_foreign_key 'job_countries', 'countries'
   add_foreign_key 'job_countries', 'jobs'
   add_foreign_key 'jobs', 'companies'
