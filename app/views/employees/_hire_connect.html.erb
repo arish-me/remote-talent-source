@@ -1,3 +1,7 @@
-<turbo-frame id="status_frame">
+<%if current_user %>
+  <turbo-frame id="status_frame">
+    <%= render Employees::HireConnectComponent.new(company: company, employee: employee)%>
+  </turbo-frame>
+<% else  %>
   <%= render Employees::HireConnectComponent.new(company: company, employee: employee)%>
-</turbo-frame>
+<% end %>

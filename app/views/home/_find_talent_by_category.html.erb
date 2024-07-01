@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12 mb-4">
             <h2>Popular services</h2>
-            <%= link_to 'Find Jobs', 'Looking for work? Browse jobs', class: "text-decoration-none" %>
+            <%= link_to 'Find Jobs', talent_jobs_path, class: "text-decoration-none" %>
         </div>
 
         <%- Category.all.each do |category|%>
