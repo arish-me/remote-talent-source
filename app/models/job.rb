@@ -11,8 +11,8 @@ class Job < ApplicationRecord
   # validates :apply_url, presence: true, if: :custom_ats?
   validates_presence_of :description
 
-  belongs_to :user
-  belongs_to :company
+  belongs_to :user, optional: true
+  belongs_to :company, optional: true
   has_one :company_role, dependent: :destroy
   has_one :role_type, through: :company_role
   has_one :preferred_location, as: :locatable

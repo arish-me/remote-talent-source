@@ -11,6 +11,10 @@ class CreateJobs < ActiveRecord::Migration[7.1]
       t.references :user, null: false, foreign_key: true, type: :uuid
       t.references :company, null: false, foreign_key: true, type: :uuid
       t.string :current_state
+      t.string :slug, unique: true
+      t.datetime :publish_date
+      t.integer :job_type
+      t.string :position
       t.timestamps
     end
   end
