@@ -22,7 +22,15 @@ module Jobs
     end
 
     def role_type
-      job.role_type.name.humanize
+      job.role_type&.name&.humanize
+    end
+
+    def company_name
+      if job.talentsource?
+        job.company.name
+      else
+        job.source_name
+      end
     end
 
     def preferred_location

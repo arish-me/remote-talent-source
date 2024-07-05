@@ -6,17 +6,21 @@
 
         <div class="row border-bottom my-4">
             <div class="col-md-2 py-2">
+                <%if @job.talentsource? %>
                 <%= render AvatarComponent.new(avatarable: @company, variant:
                         :medium, data: { "file-upload-target": "image" }) %>
+                <% else %>
+                <img src="<%= @job.source_logo %>" alt="<%= @job.title %> logo" loading="lazy" />
+                <% end %>
             </div>
             <div class="col-md-8">
                 <!-- Job Title and Company Name -->
                 <h3><%= @job.title%></h3>
-                <p class="text-muted"><%= @job.company.name%></p>
+                <p class="text-muted"><%= @job&.company&.name%></p>
 
                 <!-- Job Details Icons and Text -->
                 <div class="my-3">
-                    <p><i class="bi bi-briefcase-fill"></i> <%= @job.role_type.name.humanize%></p>
+                    <p><i class="bi bi-briefcase-fill"></i> <%= @job&.role_type&.name&.humanize || @job&.position %></p>
                     <p><i class="bi bi-geo-alt-fill"></i> <%= @job.preferred_location.location_type.name.capitalize%></p>
                     <p><i class="bi bi-globe-americas"></i>
                       <%= @job.countries.pluck(:name).join(", ")%>
@@ -35,7 +39,7 @@
 
         <%= @job.description%>
 
-
+        <%if false %>
         <div class="my-4">
           <p><strong>Share this job:</strong></p>
           <button class="btn btn-outline-primary btn-sm" type="button"><i class="bi bi-twitter"></i> Twitter</button>
@@ -43,6 +47,7 @@
           <button class="btn btn-outline-primary btn-sm" type="button"><i class="bi bi-linkedin"></i> Linkedin</button>
           <button class="btn btn-outline-primary btn-sm" type="button"><i class="bi bi-envelope-fill"></i> Email</button>
         </div>
+        <% end  %>
       </div>
 
   </div>

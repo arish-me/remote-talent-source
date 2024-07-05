@@ -2,7 +2,7 @@
 
 class ColdMessagesController < ApplicationController
   before_action :authenticate_user!
-  #before_action :require_business!
+  # before_action :require_business!
   before_action :require_new_conversation!
   # before_action :require_active_subscription!
   # before_action :require_signed_hiring_agreement!
@@ -31,7 +31,7 @@ class ColdMessagesController < ApplicationController
   def require_business!
     return if company.present?
 
-    #store_location!
+    # store_location!
     redirect_to new_company_path, notice: I18n.t('errors.business_blank')
   end
 

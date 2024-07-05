@@ -77,6 +77,8 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    acts-as-taggable-on (10.0.0)
+      activerecord (>= 6.1, < 7.2)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
@@ -102,6 +104,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    down (5.4.2)
+      addressable (~> 2.8)
     drb (2.2.1)
     erb-formatter (0.7.2)
       syntax_tree (~> 6.0)
@@ -109,6 +113,8 @@ GEM
     faker (3.3.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     geocoder (1.8.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -306,18 +312,22 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  acts-as-taggable-on
   bootsnap
   cssbundling-rails
   debug
   devise (~> 4.9)
+  down
   erb-formatter (~> 0.7.2)
   faker
+  friendly_id
   geocoder
   image_processing
   inline_svg
   jbuilder
   jsbundling-rails
   letter_opener
+  mini_magick
   noticed (~> 2.2, >= 2.2.2)
   pagy
   pg (~> 1.1)

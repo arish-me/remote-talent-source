@@ -41,6 +41,7 @@ gem 'redis', '>= 4.0.1'
 gem 'geocoder'
 gem 'noticed', '~> 2.2', '>= 2.2.2'
 gem 'sidekiq'
+gem 'friendly_id'
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
@@ -51,9 +52,12 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+gem 'acts-as-taggable-on'
+gem 'down'
 gem 'faker'
 gem 'image_processing'
 gem 'inline_svg'
+gem 'mini_magick'
 gem 'pagy'
 gem 'pg_search'
 gem 'pretender'

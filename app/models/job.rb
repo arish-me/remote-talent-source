@@ -2,17 +2,20 @@
 
 # app/modes/job.rb
 class Job < ApplicationRecord
+  extend FriendlyId
   include AASM
   include PgSearch::Model
   enum apply_type: { custom_ats: 0, remote_talent_ATS: 1 }
+  enum job_type: { talentsource: 0, remoteok: 1 }
+
   has_rich_text :description
 
   validates_length_of :title, in: 10..50
   # validates :apply_url, presence: true, if: :custom_ats?
   validates_presence_of :description
 
-  belongs_to :user
-  belongs_to :company
+  belongs_to :user, optional: true
+  belongs_to :company, optional: true
   has_one :company_role, dependent: :destroy
   has_one :role_type, through: :company_role
   has_one :preferred_location, as: :locatable
@@ -25,6 +28,10 @@ class Job < ApplicationRecord
   accepts_nested_attributes_for :preferred_location, allow_destroy: true
   accepts_nested_attributes_for :salary, allow_destroy: true
   accepts_nested_attributes_for :job_countries, allow_destroy: true
+
+  acts_as_taggable_on :tags
+
+  friendly_id :slug, use: :slugged
 
   aasm column: 'current_state' do
     state :pending, initial: true
@@ -51,6 +58,9 @@ class Job < ApplicationRecord
   scope :filter_by_countries, lambda { |country|
     joins(:job_countries).where(job_countries: { country: })
   }
+
+  scope :newest_first, -> { order(created_at: :desc) }
+  scope :recently_updated_first, -> { order(updated_at: :desc) }
 
   pg_search_scope :filter_by_search_query, against: [:title],
                                            associated_against: { company: :name, rich_text_description: [:body] }

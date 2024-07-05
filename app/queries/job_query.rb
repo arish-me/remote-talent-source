@@ -76,7 +76,7 @@ class JobQuery
 
   def query_and_paginate
     @_records = Job.includes(:role_type)
-    # sort_records
+    sort_records
     country_filter_records
     role_type_filter_records
     preferred_location_filter_records
@@ -118,9 +118,9 @@ class JobQuery
 
   def sort_records
     if sort == :relevance
-      @_records.merge!(Employee.recently_updated_first)
+      @_records.merge!(Job.recently_updated_first)
     else
-      @_records.merge!(Employee.newest_first)
+      @_records.merge!(Job.newest_first)
     end
   end
 
