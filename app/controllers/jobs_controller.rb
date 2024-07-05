@@ -78,6 +78,6 @@ class JobsController < ApplicationController
   end
 
   def set_job
-    @job = Job.find(params[:id])
+    @job = Job.friendly.find(params[:id])
   end
 end

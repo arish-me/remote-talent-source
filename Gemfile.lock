@@ -113,6 +113,8 @@ GEM
     faker (3.3.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     geocoder (1.8.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -318,6 +320,7 @@ DEPENDENCIES
   down
   erb-formatter (~> 0.7.2)
   faker
+  friendly_id
   geocoder
   image_processing
   inline_svg

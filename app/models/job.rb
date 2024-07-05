@@ -2,6 +2,7 @@
 
 # app/modes/job.rb
 class Job < ApplicationRecord
+  extend FriendlyId
   include AASM
   include PgSearch::Model
   enum apply_type: { custom_ats: 0, remote_talent_ATS: 1 }
@@ -29,6 +30,8 @@ class Job < ApplicationRecord
   accepts_nested_attributes_for :job_countries, allow_destroy: true
 
   acts_as_taggable_on :tags
+
+  friendly_id :slug, use: :slugged
 
   aasm column: 'current_state' do
     state :pending, initial: true
