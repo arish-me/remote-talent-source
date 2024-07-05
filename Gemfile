@@ -52,9 +52,11 @@ gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'acts-as-taggable-on'
+gem 'down'
 gem 'faker'
 gem 'image_processing'
 gem 'inline_svg'
+gem 'mini_magick'
 gem 'pagy'
 gem 'pg_search'
 gem 'pretender'

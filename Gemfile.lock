@@ -104,6 +104,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    down (5.4.2)
+      addressable (~> 2.8)
     drb (2.2.1)
     erb-formatter (0.7.2)
       syntax_tree (~> 6.0)
@@ -313,6 +315,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise (~> 4.9)
+  down
   erb-formatter (~> 0.7.2)
   faker
   geocoder
@@ -321,6 +324,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   letter_opener
+  mini_magick
   noticed (~> 2.2, >= 2.2.2)
   pagy
   pg (~> 1.1)

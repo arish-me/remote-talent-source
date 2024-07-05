@@ -21,7 +21,7 @@ module Jobs
     end
 
     def countries
-      JobCountry.includes(:country).map { |object| [object.country.name.titleize, object.country.id] }
+      JobCountry.includes(:country).map { |object| [object.country.name.titleize, object.country.id] }.uniq
     end
 
     def role_type_selected?(role_type_pair)
