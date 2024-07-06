@@ -1,0 +1,44 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h4 class="fw-bold text-start"><%= t('hero.section_top_talent.heading') %></h4>
+            </div>
+            <% Employee.limit(4).each do |employee| %>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 category-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <%= image_tag employee.image_url, alt: "User Avatar", class: 'img-fluid rounded-start me-3', style: "max-width: 80px;" %>
+                            <h5 class="card-title mb-0 fw-bold"><%= employee.heading %></h5>
+                        </div>
+                        <p class="card-text fw-bold"></p>
+                        <p class="card-text"><%= truncate(employee.bio.body.to_plain_text, length: 150) %></p>
+
+                    </div>
+                    <div class='card-footer bg-transparent'>
+                        <div class="d-flex justify-content-between">
+                        <div class="text-center">
+                            <%= render Employees::SearchStatusComponent.new(employee: employee) %>
+                          </div>
+                          <div>
+                            <%= link_to public_profile_path(employee), class: "btn btn-primary", target: "_blank" do %>
+                              <%= t(:hire_me) %>
+                            <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+            <%= link_to hiring_index_path, class: "btn btn-outline-primary", target: "_blank" do %>
+                <%= t('hero.section_top_talent.see_all_talents') %>
+            <% end %>
+        </div>
+    </div>
+</section>
+
+
+

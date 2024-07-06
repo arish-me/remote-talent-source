@@ -1,20 +1,19 @@
-<div class="px-4 py-5 text-center bg-white">
-  <div class="col-lg-6 mx-auto">
-    <h1 class="display-5 py-4 fw-bold mx-auto">Empowering Talent Connections</h1>
-    <p class="lead mb-4">
-      At RemoteTalentsource, we empower both employers and developers alike.
-      Whether you're seeking top talent for your projects or searching for your
-      next career-defining opportunity, our platform offers unparalleled
-      resources and support. Best of all, our services are provided at no cost
-      to developers, ensuring accessibility and inclusivity for all.
-    </p>
-    <p class="lead mb-4">
-      Join RemoteTalentsource today and unlock a world of possibilities in the
-      remote work landscape.
-    </p>
-    <div class="d-grid gap-4 d-sm-flex justify-content-sm-center">
-      <%= link_to 'Start Hiring Free', hiring_index_path, class: "btn btn-primary btn-md px-4 gap-3" %>
-      <%= link_to 'Find Jobs', talent_jobs_path, class: "btn btn-outline-secondary btn-md px-4" %>
+<div class="container-fluid bg-light text-center py-5 hero-background">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 mx-auto">
+      <h2 class="py-4 fw-bold mx-auto"><%= t('hero.heading') %></h2>
+      <p class="lead mb-4 fw-medium">
+        <%= t('hero.subheading') %>
+      </p>
+      <p class="lead mb-4 fw-medium">
+        <%= t('hero.subheading2') %>
+      </p>
+      <div class="d-grid gap-4 d-sm-flex justify-content-sm-center">
+        <%= link_to t('hero.hiring_button'), hiring_index_path, class: "btn btn-primary btn-md px-4 gap-3" %>
+        <%= link_to t('hero.find_jobs'), talent_jobs_path, class: "btn btn-outline-secondary btn-md px-4" %>
+      </div>
     </div>
   </div>
 </div>
+
+

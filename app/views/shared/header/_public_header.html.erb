@@ -1,36 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light bg-white  shadow-sm">
   <div class="container">
-        <a href="<%=root_path%>" class='navbar-brand py-2'>
-      <span>
-         <%=image_tag 'remotetalentsource.svg'%>
-      </span>
+    <a href="<%= root_path %>" class="navbar-brand py-2">
+      <%= image_tag 'remotetalentsource.svg' %>
     </a>
-
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- Navigation Links -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mx-auto text-center gap-3">
         <li class="nav-item">
-          <%=link_to 'Find Talent', hiring_index_path, class: "p-2 text-dark nav-link"%>
+          <%= link_to t('find_talent'), hiring_index_path, class: "nav-link p-2 text-dark" %>
         </li>
         <li class="nav-item">
-          <%=link_to 'Find Jobs', talent_jobs_path, class: "p-2 text-dark nav-link"%>
+          <%= link_to t('hero.find_jobs'), talent_jobs_path, class: "nav-link p-2 text-dark" %>
         </li>
-
       </ul>
-
-      <!-- Login and Signup Buttons -->
       <div class="d-flex">
         <% if user_signed_in? %>
-          <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-danger me-2" %>
+          <%= link_to t(:logout), destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-danger me-2" %>
         <% else %>
-          <%= link_to "Get Started", new_user_registration_path, class: "btn btn-dark" %>
+          <%= link_to t(:get_started), new_user_registration_path, class: "btn btn-dark" %>
         <% end %>
       </div>
     </div>
   </div>
 </nav>
 
-<%= yield %>
+
+  <%= yield %>

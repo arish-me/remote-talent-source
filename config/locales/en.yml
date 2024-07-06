@@ -66,3 +66,23 @@ en:
         email: Email
         impersonate: Impersonate
         title: Users
+
+  hero:
+    heading: Find Your Dream Job or Hire Exceptional Talent Remotely
+    subheading: Remote Talent Source is where top talents and leading companies connect for seamless, fully remote job opportunities and hiring solutions.
+    subheading2: Join RemoteTalentsource today and unlock a world of possibilities in the
+        remote work landscape.
+    hiring_button: Start Hiring Free
+    find_jobs: Find Jobs
+    find_talents: Find Talents
+    section_top_talent:
+      heading: Top Talents
+      see_all_talents: See All Talents
+    section_job:
+      heading: Various Career Opportunities Waiting for You
+      see_all_jobs: See All Jobs
+  find_talent: Find Talent
+  get_started: Get Started
+  logout: Logout
+  apply_now: Apply Now
+  hire_me: Hire me
