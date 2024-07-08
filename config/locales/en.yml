@@ -81,6 +81,23 @@ en:
     section_job:
       heading: Various Career Opportunities Waiting for You
       see_all_jobs: See All Jobs
+  footer:
+    remote_source: Remote Source
+    talents: Talents
+    terms_services: Terms of Service
+    privacy_policy: Privacy Policy
+    find_sources: Find Sources
+    job_search_tips: Job Search Tips
+    talent_search_tips: Talent Search Tips
+    talent_salaries: Talent Salaries
+    own_careersites: Own CareerSites
+    quick_access: Quick Access
+    job_search: Job Search
+    talent_search: Talent Search
+
+  all_rights: All Rights Reserved.
+  contact: Contact
+  about: About
   find_talent: Find Talent
   get_started: Get Started
   logout: Logout
