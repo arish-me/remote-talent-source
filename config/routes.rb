@@ -60,6 +60,10 @@ Rails.application.routes.draw do
     resources :services
   end
 
+  get 'about', to: 'about#index', as: 'about'
+  get 'terms_services', to: 'about#terms_services', as: 'terms_services'
+  get 'privacy_policy', to: 'about#privacy_policy', as: 'privacy_policy'
+
   root 'home#index'
   get 'up' => 'rails/health#show', as: :rails_health_check
 end

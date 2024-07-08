@@ -1,0 +1,115 @@
+<header class="hero-section">
+        <div class="container">
+            <h2>How Remote Talent Source Works</h2>
+            <p class="lead">We believe that remote work is the future of work. Remote Talent Source connects top talents with leading companies for seamless, fully remote job opportunities.</p>
+        </div>
+    </header>
+
+    <main class="container my-5 ">
+        <section class="px-4">
+            <h3 class="section-title">Our Story</h3>
+            <p>Remote Talent Source has been a pioneer in promoting remote work. We've been at this for a decade, helping millions of professionals find their dream remote jobs and aiding companies in discovering exceptional remote talent.</p>
+        </section>
+
+        <section class="px-4">
+            <h3 class="section-title">Top Talents</h3>
+            <p>At Remote Talent Source, we connect you with top-tier remote professionals. With over 10 years of experience, we excel at matching exceptional talent with leading companies.</p>
+        </section>
+        <section class="px-4">
+            <h3 class="section-title">Top Quality Remote Jobs</h3>
+            <p>We curate every remote job we publish. With 10+ years of experience, we know how to share great job descriptions as soon as they go live.</p>
+        </section>
+
+        <section class="px-4">
+            <h3 class="section-title">Features</h3>
+            <ul class="feature-list">
+                <li><strong>Advanced filters:</strong> Find remote jobs tailored just for you. Using our filter lets you pick the right job title and location.</li>
+                <li><strong>Wonderful support:</strong> Any questions? Just ask away, drop us a line over at hello@remotetalentsource.com - we’d love to hear from you.</li>
+                <li><strong>Indie team:</strong> Our bootstrapped team is laser-focused on delivering you the best remote jobs. That’s all we do and we love it.</li>
+            </ul>
+        </section>
+
+        <section class="px-4 text-center">
+            <%= link_to t(:join_remote_talent), new_user_registration_path, class: "btn btn-primary btn-lg" %>
+
+        </section>
+
+        <section class="px-4">
+            <h3 class="section-title">How & Why Remote Talent Source Started</h3>
+            <p>Our mission is to help tech professionals go remote. As of today, over 500,000 people follow our journey on various social networks. Remote Talent Source was created in 2014 by Rodolphe Dutel, who began advocating for remote work at Google in 2011.</p>
+            <p>Tech companies thought the future of work meant keeping employees in offices. Remote Talent Source has a different vision. For us, the future of work means:</p>
+            <ul class="feature-list">
+                <li>Get kids from school every day</li>
+                <li>Exercise when you feel like it</li>
+                <li>Be at home when UPS rings</li>
+                <li>Shop outside of peak hours</li>
+                <li>Avoid water-cooler drama</li>
+                <li>More time with your pet</li>
+                <li>Ten-second commute</li>
+                <li>Post-lunch naps</li>
+                <li>No interruptions</li>
+            </ul>
+            <p>Remote Talent Source grew in popularity, winning awards and acclaim before COVID forced many of us to work from home. Today, Remote Talent Source is the #1 destination to find a remote job. Visit Remote Talent Source Accelerator to learn more!</p>
+        </section>
+
+        <section class="px-4">
+            <h3 class="section-title">Who Should Use Remote Talent Source</h3>
+            <p>Anyone who wants to work remotely, really!</p>
+            <ul class="feature-list">
+                <li>People interested in working from home</li>
+                <li>Anyone looking for a career-oriented part-time job (remote).</li>
+                <li>Anyone who wants to ditch their commute.</li>
+                <li>Parents wanting to be more flexible for their kids and families.</li>
+                <li>People looking for alternative schedules.</li>
+            </ul>
+        </section>
+    </main>
+
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            margin-bottom: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .testimonial {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: .5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "\2713";
+            color: #6e8efb;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+    </style>

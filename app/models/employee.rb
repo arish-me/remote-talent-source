@@ -2,6 +2,7 @@
 
 class Employee < ApplicationRecord
   include Avatarable
+  include Rails.application.routes.url_helpers
   include Employees::HasOnlineProfiles
   # include Employees::RichText
   include PgSearch::Model
@@ -79,6 +80,10 @@ class Employee < ApplicationRecord
 
   def send_welcome_email
     EmployeeNotifier.with(employee: self).deliver(user)
+  end
+
+  def image_url
+    rails_blob_path(avatar, only_path: true) if avatar.attached?
   end
 
   private

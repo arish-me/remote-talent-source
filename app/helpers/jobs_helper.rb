@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module JobsHelper
-  def salary_range
+  def salary_range(job: nil)
+    @job ||= job
     min_salary = number_with_precision(@job.salary.min, unit: '')
     max_salary = number_to_currency(@job.salary.max, unit: '')
     "#{salary_symbol}#{formatted_salary(min_salary)} -
@@ -15,7 +16,7 @@ module JobsHelper
   end
 
   def formatted_salary(value)
-    number_with_delimiter(value, delimiter: ',')
+    number_with_delimiter(value.to_i, delimiter: ',')
   end
 
   def currency_options
