@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Jobs
   class SortButtonComponent < ApplicationComponent
     attr_reader :title, :sort_type

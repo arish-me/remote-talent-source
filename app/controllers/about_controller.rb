@@ -1,12 +1,9 @@
+# frozen_string_literal: true
+
 class AboutController < ApplicationController
- def index
- end
+  def index; end
 
- def terms_services
+  def terms_services; end
 
- end
-
- def privacy_policy
-
- end
+  def privacy_policy; end
 end
