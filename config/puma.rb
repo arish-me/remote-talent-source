@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'puma/daemon'
 # This configuration file will be evaluated by Puma. The top-level methods that
 # are invoked here are part of Puma's configuration DSL. For more information
 # about methods provided by the DSL, see https://puma.io/puma/Puma/DSL.html.
@@ -33,5 +33,7 @@ environment ENV.fetch('RAILS_ENV', 'development')
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch('PIDFILE', 'tmp/pids/server.pid')
 
+daemonize
+stdout_redirect '/var/www/remote-talent-source/log/puma.stdout.log', '/var/www/remote-talent-source/log/puma.stderr.log', true
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
