@@ -33,7 +33,6 @@ gem 'cssbundling-rails'
 gem 'jbuilder'
 
 # Use Redis adapter to run Action Cable in production
-gem 'puma-daemon'
 gem 'pundit'
 gem 'redis', '>= 4.0.1'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
@@ -67,7 +66,9 @@ gem 'pretender'
 gem 'redcarpet'
 gem 'timezone_finder'
 gem 'view_component'
-
+group :production do
+  gem 'puma-daemon'
+end
 group :development, :test do
   gem 'rubocop'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
