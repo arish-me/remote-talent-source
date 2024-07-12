@@ -33,13 +33,6 @@ environment ENV.fetch('RAILS_ENV', 'development')
 
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch('PIDFILE', 'tmp/pids/server.pid')
-
-if ENV['RAILS_ENV'] == 'production'
-  require 'puma/daemon'
-  daemonize
-  stdout_redirect '/var/www/remote-talent-source/log/puma.stdout.log',
-                  '/var/www/remote-talent-source/log/puma.stderr.log', true
-end
-
+#bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart

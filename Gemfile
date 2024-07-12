@@ -66,9 +66,6 @@ gem 'pretender'
 gem 'redcarpet'
 gem 'timezone_finder'
 gem 'view_component'
-group :production do
-  gem 'puma-daemon'
-end
 group :development, :test do
   gem 'rubocop'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
