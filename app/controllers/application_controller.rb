@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   include Turbo::Streams::ActionHelper
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   before_action :turbo_frame_request_variant
+  before_action :set_feature_flags
   impersonates :user
 
   def user_not_authorized
@@ -41,5 +42,9 @@ class ApplicationController < ActionController::Base
 
   def warden_proxy(user)
     Warden::Proxy.new({}, Warden::Manager.new({})).tap { |proxy| proxy.set_user(user, scope: :user) }
+  end
+
+  def set_feature_flags
+    @shadcn_redesign_enabled = Flipper.enabled?(:shadcn, current_user)
   end
 end

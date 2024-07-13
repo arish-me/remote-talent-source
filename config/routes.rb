@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   authenticate :user, lambda(&:admin?) do
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
+    mount Flipper::UI.app(Flipper) => '/flipper'
   end
 
   resources :hiring

@@ -37,6 +37,10 @@ gem 'pundit'
 gem 'redis', '>= 4.0.1'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
+gem 'flipper'
+gem 'flipper-active_record'
+gem 'flipper-ui'
+
 gem 'friendly_id'
 gem 'geocoder'
 gem 'noticed', '~> 2.2', '>= 2.2.2'
@@ -89,3 +93,7 @@ end
 
 gem 'devise', '~> 4.9'
 gem 'dotenv'
+
+gem "shadcn-ui", "~> 0.0.13"
+
+gem "tailwindcss-rails", "~> 2.6"
