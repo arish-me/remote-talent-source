@@ -34,10 +34,10 @@ class RemoteOkService
     processed_jobs_count = 0
     saved_jobs_count = 0
     @last_updated = Time.at(jobs.first['last_updated'])
-
+    last_run_at = @board.last_run_at || Time.at(0)
     Rails.logger.info("Job Board Last Updated Time #{@board.name} : #{@last_updated}")
 
-    return if @last_updated < @board.last_run_at
+    return if @last_updated < last_run_at
 
     jobs.each_with_index do |job_data, _index|
       next if avoid_loop(job_data)

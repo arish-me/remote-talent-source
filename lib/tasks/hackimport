@@ -1,0 +1,36 @@
+# Run this in your Rails console (rails console)
+
+# Fetch all countries from the database
+currencies = Currency.all
+
+# Convert countries data to an array of hashes excluding 'id'
+currencies_data = currencies.map { |country| country.attributes.except('id') }
+
+# Save data to a JSON file
+File.open('currencies.json', 'w') do |file|
+  file.write(JSON.pretty_generate(currencies_data))
+end
+
+puts "Exported #{currencies_data.size} currencies to currencies.json"
+
+
+json_data.each do |currency_data|
+ currency = Currency.find_or_initialize_by(name: currency_data['name'])
+ currency.symbol = currency_data['symbol']
+ currency.save
+end
+
+
+countries = Country.all
+countries_data = countries.map { |country| country.attributes.except('id', 'created_at', 'updated_at', 'currency_id') }
+
+countries_data.each do |country_data|
+ currency = Country.find_or_initialize_by(name: country_data['name'])
+ currency.symbol = currency_data['symbol']
+ currency.save
+end
+
+
+def currency(name)
+  Currency.find_by_name(name)
+end
