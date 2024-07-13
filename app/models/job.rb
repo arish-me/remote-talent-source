@@ -6,7 +6,7 @@ class Job < ApplicationRecord
   include AASM
   include PgSearch::Model
   enum apply_type: { custom_ats: 0, remote_talent_ATS: 1 }
-  enum job_type: { talentsource: 0, remoteok: 1 }
+  enum job_type: { talentsource: 0, job_board: 1 }
 
   has_rich_text :description
 
@@ -14,6 +14,7 @@ class Job < ApplicationRecord
   # validates :apply_url, presence: true, if: :custom_ats?
   validates_presence_of :description
 
+  belongs_to :job_board, optional: true
   belongs_to :user, optional: true
   belongs_to :company, optional: true
   has_one :company_role, dependent: :destroy

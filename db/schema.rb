@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_702_053_746) do
+ActiveRecord::Schema[7.1].define(version: 20_240_713_050_258) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pgcrypto'
   enable_extension 'plpgsql'
@@ -194,6 +194,18 @@ ActiveRecord::Schema[7.1].define(version: 20_240_702_053_746) do
     t.datetime 'updated_at', null: false
   end
 
+  create_table 'job_boards', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.string 'name'
+    t.string 'api_url'
+    t.string 'logo_url'
+    t.string 'api_key'
+    t.string 'api_token'
+    t.datetime 'last_run_at'
+    t.datetime 'last_updated_at'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
+
   create_table 'job_countries', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.uuid 'job_id', null: false
     t.uuid 'country_id', null: false
@@ -219,7 +231,9 @@ ActiveRecord::Schema[7.1].define(version: 20_240_702_053_746) do
     t.string 'position'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.uuid 'job_board_id', null: false
     t.index ['company_id'], name: 'index_jobs_on_company_id'
+    t.index ['job_board_id'], name: 'index_jobs_on_job_board_id'
     t.index ['user_id'], name: 'index_jobs_on_user_id'
   end
 
@@ -456,6 +470,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_702_053_746) do
   add_foreign_key 'job_countries', 'countries'
   add_foreign_key 'job_countries', 'jobs'
   add_foreign_key 'jobs', 'companies'
+  add_foreign_key 'jobs', 'job_boards'
   add_foreign_key 'jobs', 'users'
   add_foreign_key 'open_roles', 'employees'
   add_foreign_key 'open_roles', 'primary_roles'

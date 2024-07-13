@@ -170,5 +170,9 @@ module Admin
       'Life Sciences',
       'Healthcare'
     ].freeze
+
+    JOB_BOARDS = [
+      remoteok: {}
+    ].freeze
   end
 end
