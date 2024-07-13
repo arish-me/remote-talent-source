@@ -4,9 +4,21 @@ require 'net/http'
 require 'json'
 
 class RemoteOkService
-  REMOTE_OK_API_URL = 'https://remoteok.com/api'
+  def find_board
+    @board = JobBoard.find_by(name: 'Remote OK')
+  end
+
+  def initialize
+    @last_updated = Time.now.utc
+  end
+
+  def call
+    find_board
+    fetch_jobs
+  end
+
   def fetch_jobs
-    uri = URI(REMOTE_OK_API_URL)
+    uri = URI(@board.api_url)
     response = Net::HTTP.get(uri)
     response = JSON.parse(response)
     save_jobs(response)
@@ -21,6 +33,12 @@ class RemoteOkService
   def save_jobs(jobs)
     processed_jobs_count = 0
     saved_jobs_count = 0
+    @last_updated = Time.at(jobs.first['last_updated'])
+
+    Rails.logger.info("Job Board Last Updated Time #{@board.name} : #{@last_updated}")
+
+    return if @last_updated < @board.last_run_at
+
     jobs.each_with_index do |job_data, _index|
       next if avoid_loop(job_data)
 
@@ -36,7 +54,7 @@ class RemoteOkService
         worldwide: job_data['location'].blank? || job_data['location'].downcase == 'worldwide',
         source_name: job_data['company'],
         source_logo: process_company_logo(job_data['logo']),
-
+        job_board_id: @board.id,
         # badges: job_data['tags'] || [],
 
         publish_date: DateTime.parse(job_data['date']),
@@ -68,6 +86,7 @@ class RemoteOkService
         puts "Failed to save job #{job_data['id']}: #{e.message}"
       end
     end
+    update_job_board
     puts "Total jobs processed: #{processed_jobs_count}"
     puts "Total jobs saved: #{saved_jobs_count}"
   rescue StandardError => e
@@ -78,6 +97,10 @@ class RemoteOkService
     job_data['id'].nil? ||
       job_data['salary_min'].to_i <= 0 || job_data['salary_max'].to_i <= 0 ||
       job_data['logo'].blank? || process_company_logo(job_data['logo']).nil?
+  end
+
+  def update_job_board
+    @board.update(last_updated_at: @last_updated, last_run_at: Time.now.utc)
   end
 
   def process_company_logo(url)
