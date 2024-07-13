@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  authenticate :user, lambda(&:admin?) do
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   resources :hiring
   resources :talent_jobs
   resources :additional_informations
