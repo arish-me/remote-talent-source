@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def devise_controller?
+    devise_controllers = ["sessions", "registrations", "confirmations", "unlocks", "passwords"]
+    devise_controllers.include?(controller_name)
+  end
+
   def profile_link
     if current_user.employee?
       edit_employee_path(current_user.employee)

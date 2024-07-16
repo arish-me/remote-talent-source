@@ -1,3 +1,6 @@
+<%if @shadcn_enabled %>
+  <%= render partial: 'new', locals: {resource: resource } %>
+<%else%>
 <div class="bg-light py-3 py-md-5 h-100">
   <div class="container">
     <div class="row justify-content-md-center">
@@ -49,3 +52,4 @@
     </div>
   </div>
 </div>
+<%end%>

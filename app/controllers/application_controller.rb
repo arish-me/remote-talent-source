@@ -45,6 +45,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_feature_flags
-    @shadcn_redesign_enabled = Flipper.enabled?(:shadcn, current_user)
+    @shadcn_enabled = Flipper.enabled?(:shadcn)
   end
 end

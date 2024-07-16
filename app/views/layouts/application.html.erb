@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="light">
   <head>
     <title>
         <%=meta_title%>
@@ -11,10 +11,12 @@
     <meta name="author" content="<%=meta_title%>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%if true %>
+      <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <% else %>
+      <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <% end %>
+      <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <link href="https://fonts.googleapis.com/css2?family=Castoro&family=Ubuntu&display=swap" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
@@ -23,14 +25,28 @@
       defer
     ></script>
   </head>
+  <%if true %>
+    <body>
+      <div>
+      <%= turbo_frame_tag "modal" %>
+      <%= render ImpersonatingBannerComponent.new %>
 
-  <body class="sb-nav-fixed bg-light ">
-    <%= turbo_frame_tag "modal" %>
-    <%= render ImpersonatingBannerComponent.new %>
-    <%= render partial: 'shared/header/header' %>
+        <%= render partial: 'shared/header/header' %>
 
-  <% if controller_name == "home" && action_name == "index" %>
-    <%= render partial: 'shared/footer/footer' %>
-  <% end %>
+      <% if controller_name == "home" && action_name == "index" %>
+        <%= render partial: 'shared/footer/footer' %>
+      <% end %>
+      </div>
   </body>
+  <% else %>
+    <body class="sb-nav-fixed bg-light ">
+      <%= turbo_frame_tag "modal" %>
+      <%= render ImpersonatingBannerComponent.new %>
+      <%= render partial: 'shared/header/header' %>
+
+    <% if controller_name == "home" && action_name == "index" %>
+      <%= render partial: 'shared/footer/footer' %>
+    <% end %>
+  <% end %>
+
 </html>
