@@ -26,22 +26,18 @@
           <h3 class="text-3xl font-extrabold mb-12 text-center">
             Get Started
           </h3>
-
           <%= render "devise/shared/error_messages", resource: resource %>
-
           <div>
-             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm', placeholder: "Enter your email address" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm', placeholder: "Enter your email address" %>
           </div>
           <div>
             <%= f.password_field :password, autocomplete: "current-password", class: "appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",
                             placeholder:"Enter your password" %>
           </div>
-
           <div>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",
                             placeholder:"Confirm password" %>
           </div>
-
           <div class="text-sm text-right">
             <%= link_to "Forgot password?", new_password_path(resource_name), class: 'text-black-300 font-normal hover:underline' %>
           </div>
