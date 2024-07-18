@@ -1,5 +1,5 @@
 <%= form_with(model: employee, data: { controller: "places", action: "google-maps-callback@window->places#initAutocomplete" }, class: 'mx-auto mt-16 max-w-xl sm:mt-20') do |form| %>
-  <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+  <div class="grid grid-cols-1 gap-x-8 gap-y-6 ">
     <div>
       <%= form.label :first_name, class: 'block text-sm font-semibold leading-6 text-gray-900' do %>
         First Name
@@ -23,17 +23,27 @@
                         class: "block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
       </div>
     </div>
-    <div>
+    <div class="relative">
       <%= form.label :primary_role_id, class: 'block text-sm font-medium mb-2 dark:text-white' do %>
         Primary Role
         <span class="text-danger">*</span>
       <% end %>
-<%= form.select :primary_role_id,
+      <%= form.select :primary_role_id,
                 grouped_options_for_select(primary_roles_grouped),
                 {},
-                class: "select select-bordered w-full max-w-xs choices", data: { controller: "choices" } %>
-
-
+                class: "mb-4  select select-bordered w-full  choices", data: { controller: "choices" } %>
+    </div>
+    <div>
+      <%= form.label :heading, class: 'block text-sm font-semibold leading-6 text-gray-900' do %>
+        Profile heading
+        <span class="text-red-400">*</span>
+      <% end %>
+      <div class="mt-2.5">
+        <%= form.text_field :heading,
+                        autocomplete: "last_name",
+                        class: "block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+      </div>
+      <em class="text-sm">Summarize your career highlights.</em>
     </div>
   </div>
   <div class="mt-10">

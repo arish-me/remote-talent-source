@@ -19,6 +19,7 @@
     "sass": "^1.71.1",
     "stimulus-places-autocomplete": "^0.5.0",
     "tailwindcss-animate": "^1.0.7",
+    "tailwindcss-stimulus-components": "^5.1.1",
     "trix": "^2.1.0"
   },
   "scripts": {

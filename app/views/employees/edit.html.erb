@@ -1,4 +1,7 @@
-<div class="row">
+<%if @shadcn_enabled %>
+  <%= render partial: "employees/new_ui/edit", employee: @employee %>
+<% else %>
+  <div class="row">
   <div class="col-md-12 box shadow px-4 py-4 my-4 my-2 bg-light ">
     <div class="d-flex justify-content-between">
       <h5 class=" fw-bold">Update your talent profile</h5>
@@ -12,5 +15,6 @@
   </div>
   <div class="col-md-2"></div>
 </div>
+<% end %>
 
 

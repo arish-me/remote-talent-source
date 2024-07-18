@@ -1,4 +1,8 @@
-<%= render partial: 'shared/turbo_stream' %>
+
+  <%if @shadcn_enabled %>
+    <%= render partial: 'shared/navs/new_sidebar' %>
+  <% else %>
+  <%= render partial: 'shared/turbo_stream' %>
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container">
     <a href="<%=root_path%>" class="navbar-brand py-2">
@@ -116,3 +120,5 @@
     </div>
   </div>
 </nav>
+
+  <% end %>

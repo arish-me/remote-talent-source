@@ -1,0 +1,93 @@
+<div class="flex flex-1 min-h-screen bg-gray-50">
+  <div class="hidden md:flex md:w-64 md:flex-col fixed shadow">
+    <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-white">
+      <div class="flex items-center flex-shrink-0 px-4">
+        <%=image_tag 'remotetalentsource.svg', class: 'w-auto h-8' %>
+      </div>
+      <div class="px-4 mt-6">
+        <hr class="border-gray-200" />
+      </div>
+      <div class="flex flex-col flex-1 px-3 mt-6 min-h-screen">
+        <div class="space-y-4">
+          <nav class="flex-1 space-y-2">
+            <a href="#" title="" class="flex items-center px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 bg-black hover:bg-gray-600 rounded-lg group">
+              <i class="w-5 h-5 mr-4 text-white fa-solid fa-suitcase"></i>
+              Job Posts
+            </a>
+            <a href="#" class="flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 text-gray-900 hover:text-white rounded-lg hover:bg-black group">
+              <i class="fa-solid fa-print w-5 h-5 mr-4"></i>
+              Applied
+            </a>
+            <a href="#" class="flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 text-gray-900 hover:text-white rounded-lg hover:bg-black group">
+              <i class="fa-solid fa-file-contract w-5 h-5 mr-4"></i>
+              Contracts
+            </a>
+            <a href="#" class="flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 text-gray-900 hover:text-white rounded-lg hover:bg-black group">
+              <i class="fa-solid fa-message w-5 h-5 mr-4"></i>
+              Messages
+              <svg class="w-4 h-6 ml-auto text-gray-400 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+          </nav>
+          <hr class="border-gray-200" />
+          <nav class="flex-1 space-y-2">
+            <a href="#" class="flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 text-gray-900 hover:text-white rounded-lg hover:bg-black group">
+              <i class="fa-solid fa-gear w-5 h-5 mr-4"></i>
+              Settings
+              <svg class="w-4 h-6 ml-auto text-gray-400 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+          </nav>
+        </div>
+        <div class="pb-4 mt-20">
+          <button type="button" class="flex items-center justify-between w-full px-4 py-3 text-sm font-medium text-gray-900 transition-all duration-200 rounded-lg hover:bg-gray-100">
+            <img class="flex-shrink-0 object-cover w-6 h-6 mr-3 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/vertical-menu/2/avatar-male.png" alt="" />
+            Jacob Jones
+            <svg class="w-5 h-5 ml-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Main Content -->
+  <div class="flex flex-col flex-1 md:pl-64">
+    <!-- Top Navbar -->
+    <div class="sticky top-0 z-10 flex flex-shrink-0 h-16 bg-white shadow fixed">
+      <button class="px-4 text-gray-500 border-r border-gray-200 md:hidden focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600">
+        <span class="sr-only">Open sidebar</span>
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+      <div class="flex justify-between flex-1 px-4">
+        <div class="flex items-center flex-1">
+          <div class="px-4">
+            <label for="" class="sr-only"> Search </label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </div>
+              <input type="search" name="" id="" class="block w-full py-2 pl-10 border border-gray-300 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm" placeholder="Search here" />
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center ml-4 md:ml-6">
+          <button class="p-1 text-black-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+            <span class="sr-only">View notifications</span>
+            <i class="fas fa-bell w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Page Content -->
+    <main class="flex-1 p-6">
+        <%= yield %>
+    </main>
+  </div>
+</div>

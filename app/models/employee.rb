@@ -8,7 +8,7 @@ class Employee < ApplicationRecord
   include PgSearch::Model
   validates_length_of :first_name, :last_name, in: 3..30
 
-  validates_length_of :heading, in: 0..200, on: :update
+  validates_length_of :heading, in: 0..200
   # validates :open_roles, presence: true
   validates :employee_roles, presence: true, on: :update
   validates :employee_levels, presence: true, on: :update
@@ -17,7 +17,7 @@ class Employee < ApplicationRecord
   after_create :update_role
   after_create :activate_user
 
-  belongs_to :primary_role, optional: true
+  belongs_to :primary_role
   belongs_to :user, dependent: :destroy
 
   has_many :open_roles, dependent: :destroy

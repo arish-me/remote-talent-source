@@ -11,6 +11,7 @@ export default class extends Controller {
       searchChoices: true,
       editItems: false,
       allowHTML: true,
+      position: 'bottom',
       removeItemButton: true,
     });
   }

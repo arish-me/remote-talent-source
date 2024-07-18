@@ -7,15 +7,19 @@ import { application } from "./application"
 import PlacesAutocomplete from 'stimulus-places-autocomplete'
 import Dialog from '@stimulus-components/dialog'
 
+import { Modal } from "tailwindcss-stimulus-components"
+
 application.register('places', PlacesAutocomplete)
 
-import DialogController from "./dialog_controller.js"
+// import DialogController from "./dialog_controller.js"
 
-application.register('dialog', DialogController)
+// application.register('dialog', DialogController)
 
-import ModalController from "./modal_controller.js"
+// import ModalController from "./modal_controller.js"
 
-application.register('modal', ModalController)
+// application.register('modal', ModalController)
+
+application.register('modal', Modal)
 
 import AccessibilityController from "./accessibility_controller.js"
 application.register("accessibility", AccessibilityController)
@@ -41,4 +45,7 @@ application.register("choices", ChoicesController)
 
 import SkillsController from "./skills_controller.js"
 application.register("skills", SkillsController)
+
+import ProfileController from "./employees/profile_controller.js"
+application.register("profile", ProfileController)
 
