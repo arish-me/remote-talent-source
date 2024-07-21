@@ -1,0 +1,50 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div>
+    <h5 class="text-lg font-semibold">Work preferences</h5>
+    <p class="text-gray-500 text-sm">What kind of work are you looking for next?</p>
+  </div>
+  <div class="md:col-span-2 space-y-4">
+    <div>
+      <%= form.label :search_status, class: 'block font-medium text-gray-700' do %>
+        <div class="flex items-center">Job Search Status</div>
+        <p class="text-sm text-gray-500">Select the search status.</p>
+      <% end %>
+      <%= form.collection_radio_buttons(:search_status, Employee.search_statuses.keys, :to_s, :titleize) do |fs| %>
+        <div class="flex items-center mb-2">
+          <%= fs.radio_button(class: "form-radio text-indigo-600") %>
+          <%= fs.label(class: "ml-2 text-gray-700") do %>
+            <%= fs.text %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <%= form.label :role_types, class: 'block font-medium text-gray-700' do %>
+        <div class="flex items-center">Open to the following job types</div>
+        <p class="text-sm text-gray-500">Select all roles that you would consider taking.</p>
+      <% end %>
+      <%= form.collection_check_boxes(:role_type_ids, RoleType.all, :id, :name) do |fs| %>
+        <div class="flex items-center mb-2">
+          <%= fs.check_box(class: "form-checkbox text-indigo-600") %>
+          <%= fs.label(class: "ml-2 text-gray-700") do %>
+            <%= fs.text.titleize %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <%= form.label :employee_levels, class: 'block font-medium text-gray-700' do %>
+        <div class="flex items-center">Job Level</div>
+        <p class="text-sm text-gray-500">Select all levels that you would consider taking.</p>
+      <% end %>
+      <%= form.collection_check_boxes(:role_level_ids, RoleLevel.all, :id, :name) do |fs| %>
+        <div class="flex items-center mb-2">
+          <%= fs.check_box(class: "form-checkbox text-indigo-600") %>
+          <%= fs.label(class: "ml-2 text-gray-700") do %>
+            <%= fs.text.titleize %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

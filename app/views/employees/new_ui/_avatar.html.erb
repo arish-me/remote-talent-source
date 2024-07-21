@@ -1,0 +1,17 @@
+<div data-controller="file-upload" data-file-upload-visibility-class="hidden" data-file-upload-loading-class="opacity-50">
+  <div class="mt-1 flex items-center">
+    <div class="relative">
+      <%= render AvatarComponent.new(avatarable: employee, variant: :medium, data: {"file-upload-target": "image"}) %>
+      <div data-file-upload-target="activity" class="absolute inset-0 flex items-center justify-center opacity-0">
+        <%= inline_svg_tag "icons/outline/refresh.svg", class: "w-8 h-8 text-gray-900 animate-spin", title: t(".loading") %>
+      </div>
+    </div>
+
+    <%= form.hidden_field :avatar, value: form.object.avatar.signed_id, id: "employee_avatar_hidden" if form.object.avatar.attached? %>
+    <%= form.file_field :avatar, direct_upload: true, accept: "image/png, image/jpg, image/jpeg", data: { action: "file-upload#select direct-upload:initialize->file-upload#start direct-upload:error->file-upload#error" }, class: "hidden" %>
+    <%= form.label :avatar, t(".profile.change"), class: "cursor-pointer ml-3 bg-gray-100 border border-gray-300 text-gray-700 rounded-md px-3 py-1 text-sm", role: "button" %>
+  </div>
+  <div data-file-upload-target="error" class="hidden alert alert-danger mt-3" role="alert">
+    <p class="mb-0 text-red-600"><%= t(".profile.avatar_error_text") %></p>
+  </div>
+</div>

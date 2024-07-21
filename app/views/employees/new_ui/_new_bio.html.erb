@@ -1,0 +1,11 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div>
+    <h5 class="text-lg font-semibold">Bio</h5>
+    <p class="text-gray-500 text-sm">
+      Share a few paragraphs on what makes you unique as a developer. This is your chance to market yourself to potential employers – sell yourself a little!
+    </p>
+  </div>
+  <div class="md:col-span-2 space-y-4">
+    <%= form.rich_text_area :bio, class: 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50', data: { controller: "action-text" }, rows: 15 %>
+  </div>
+</div>

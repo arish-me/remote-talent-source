@@ -1,6 +1,3 @@
-<%if @shadcn_enabled %>
-<%= render "new", locals: { employee: @employee } %>
-<% else  %>
   <div class="container overflow-hidden">
   <%= form_with(model: employee, data: { controller: "places", action: "google-maps-callback@window->places#initAutocomplete" }) do |form| %>
   <div class="row gy-5">
@@ -28,5 +25,5 @@
     </div></div>
   <% end %>
 </div>
-<% end %>
+
 

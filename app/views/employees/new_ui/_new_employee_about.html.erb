@@ -1,0 +1,87 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div>
+    <h5 class="text-lg font-semibold">About</h5>
+    <p class="text-gray-500 text-sm">
+      Tell us about yourself so startups know who you are.
+    </p>
+  </div>
+  <div class="md:col-span-2 space-y-4">
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= render partial: 'employees/new_ui/avatar', locals: {form: form, employee: employee } %>
+
+    <div class="mb-4">
+      <%= form.label :first_name, class: 'block text-sm font-medium text-gray-700' do %>
+        First Name
+        <span class="text-red-500">*</span>
+      <% end %>
+      <%= form.text_field :first_name,
+                          autofocus: true,
+                          autocomplete: "first_name",
+                          class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :last_name, class: 'block text-sm font-medium text-gray-700' do %>
+        Last Name
+        <span class="text-red-500">*</span>
+      <% end %>
+      <%= form.text_field :last_name,
+                          autofocus: true,
+                          autocomplete: "last_name",
+                          class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :heading, class: 'block text-sm font-medium text-gray-700' do %>
+        Profile Heading
+        <span class="text-red-500">*</span>
+      <% end %>
+      <%= form.text_field :heading,
+                          autocomplete: "heading",
+                          class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      <em class="text-gray-500 text-xs">Summarize yourself as a developer in a few words.</em>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="mb-4">
+        <%= form.label :primary_role_id, class: 'block text-sm font-medium text-gray-700' do %>
+          Primary Role
+          <span class="text-red-500">*</span>
+        <% end %>
+        <%= form.select :primary_role_id,
+                        grouped_options_for_select(primary_roles_grouped),
+                        {},
+                        class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      <div class="mb-4">
+        <%= form.label :experience, class: 'block text-sm font-medium text-gray-700' do %>
+          Experience
+        <% end %>
+        <%= form.select :experience,
+                        Employee::EXPERIENCE.map { |exp, index| [exp.humanize, index] },
+                        {},
+                        class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :open_roles, class: 'block text-sm font-medium text-gray-700' do %>
+        Open to the following roles
+        <p class="text-xs text-gray-500">Select at most 3 roles that you would consider taking.</p>
+      <% end %>
+      <div data-controller="skills">
+        <%= form.select :primary_role_ids,
+                        grouped_options_for_select(primary_roles_grouped, employee.primary_role_ids),
+                        {},
+                        { multiple: true, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", data: { controller: 'choices skills', target: "skills.openRoles", action: "change->skills#onChange" } } %>
+      </div>
+    </div>
+
+    <turbo-frame id="skills-frame">
+      <%= render partial: "skills/skills", locals: { skills: employee.skills, form: form } %>
+    </turbo-frame>
+
+    <div class="mb-4">
+      <%= render partial: "location", locals: { form: form } %>
+    </div>
+  </div>
+</div>
