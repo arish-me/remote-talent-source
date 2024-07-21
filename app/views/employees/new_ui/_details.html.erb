@@ -1,0 +1,25 @@
+<h2 class="sr-only"><%= t(".title") %></h2>
+<div class="space-y-5 divide-y divide-gray-200">
+  <%= render RenderableComponent.new("space-y-3") do %>
+    <%= render Employees::SearchStatusComponent.new(employee: employee) %>
+  <% end %>
+  <%= render RenderableComponent.new("space-y-5 pt-4") do %>
+    <%= render RoleTypes::Component.new(employee.role_types) %>
+  <% end %>
+
+  <%= render RenderableComponent.new("space-y-5 pt-4") do %>
+    <%= render RoleLevels::Component.new(employee.role_levels) %>
+  <% end %>
+  <%= render RenderableComponent.new("space-y-3 pt-4") do %>
+    <%= render Employees::SocialLinkComponent.new(employee.social_link&.github, :github) %>
+    <%= render Employees::SocialLinkComponent.new(employee.social_link&.linkedin, :linkedin) %>
+    <%= render Employees::SocialLinkComponent.new(employee.social_link&.twitter, :twitter) %>
+    <%= render Employees::SocialLinkComponent.new(employee.social_link&.website, :website) %>
+    <%= render Employees::SocialLinkComponent.new(employee&.scheduling_link, :calendar) %>
+  <% end %>
+
+  <%= render RenderableComponent.new("space-y-3 pt-4") do %>
+    <%= render Locations::Component.new(employee.location) %>
+    <%= render Locations::TimeZoneComponent.new(employee.location) %>
+  <% end %>
+</div>

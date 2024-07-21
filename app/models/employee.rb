@@ -6,6 +6,7 @@ class Employee < ApplicationRecord
   include Employees::HasOnlineProfiles
   # include Employees::RichText
   include PgSearch::Model
+  has_one_attached :cover_image
   validates_length_of :first_name, :last_name, in: 3..30
 
   validates_length_of :heading, in: 0..200

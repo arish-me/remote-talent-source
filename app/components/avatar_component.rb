@@ -16,9 +16,8 @@ class AvatarComponent < ViewComponent::Base
 
   def classes
     [
-      @classes || 'h-32 w-32 rounded-circle',
-      'object-fit-cover',
-      'bg-gray-300'
+      @classes || 'h-24 w-24 sm:h-32 sm:w-32 ring-4 ring-white',
+      'object-cover rounded-full bg-gray-300',
     ]
   end
 

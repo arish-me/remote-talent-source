@@ -1,5 +1,6 @@
-<h6 class="text-secondary fw-medium">Timezone</h6>
-<div class="d-flex align-items-center">
-  <i class="fas fa-clock" title="Timezone"></i>
-  <span class="fw-medium ms-2"><%= time_zone %> (<%= render UtcOffsets::Component.new(utc_offset) %>)</span>
+<div class="flex items-center space-x-2">
+  <i class="fas fa-clock h-5 w-5 text-gray-400" title="Timezone"></i>
+  <span class="text-gray-900 text-sm font-medium">
+    <%= time_zone %> (<%= render UtcOffsets::Component.new(utc_offset) %>)
+  </span>
 </div>
